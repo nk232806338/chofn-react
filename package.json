@@ -1,0 +1,41 @@
+{
+  "name": "chofn-workspace",
+  "version": "1.0.0",
+  "description": "a ui demo library by React 基于React的UI组件库,提供基础表单组件,仅提供行为和交互,样式上需要使用者根据项目设计自行修改",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "console-polyfill": "^0.2.2",
+    "es5-shim": "^4.5.9",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "css-loader": "^0.23.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nk232806338/chofn-react.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "niekai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nk232806338/chofn-react/issues"
+  },
+  "homepage": "https://github.com/nk232806338/chofn-react#readme"
+}

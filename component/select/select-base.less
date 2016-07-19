@@ -1,0 +1,60 @@
+.Select {
+  position: relative;
+  .Select-control {
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    border-color: #d9d9d9 #ccc #b3b3b3;
+    color: #333;
+    display: table;
+    border-spacing: 0;
+    border-collapse: separate;
+    height: 36px;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    .Select-value {
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      color: #aaa;
+      line-height: 34px;
+      padding-left: 10px;
+      padding-right: 10px;
+      position: absolute;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .Select-children {
+    position: absolute;
+    left: 0;
+    top: 36px;
+    width: 100%;
+    max-height: 300px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-color: #d9d9d9 #ccc #b3b3b3;
+    overflow-y: auto;
+    .option-item {
+      padding-left: 10px;
+      height: 30px;
+      line-height: 30px;
+      border-bottom: 1px solid gainsboro;
+      &:hover {
+        background-color: beige;
+      }
+    }
+    &.unfold-up {
+      transform: translate3d(0,-100%,0);
+      top: 0;
+    }
+  }
+
+}
