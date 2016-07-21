@@ -2,9 +2,10 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var InputBase = require('../../form/input-base');
 var SelectBase = require('../../select/select-base.jsx');
+var TableBase = require('../../table/table-base');
+var Pagination = require('../../pagination/pagination-base');
 require('../../form/form.less');
 var ContractAgent = React.createClass({
-
   render() {
     return (<div>
       <Formsy.Form onSubmit={this.submit} ref="form">
@@ -70,7 +71,16 @@ var ContractAgent = React.createClass({
           </div>
         </div>
       </Formsy.Form>
+
+      <TableBase hasIndex>
+        <TableBase.Column header={{cell: '', name: 'id'}} td={{cell: '', key: 'id'}} onEvents={this.onTableEvents} />
+        <TableBase.Column header={{cell: '', name: 'name'}} td={{cell: '', key: 'name'}} onEvents={this.onTableEvents} />
+      </TableBase>
+
+      <Pagination />
     </div>);
+  },
+  onTableEvents() {
   }
 });
 
