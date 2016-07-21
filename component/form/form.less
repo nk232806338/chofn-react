@@ -1,27 +1,63 @@
 .Form-item {
+  font-size: 12px;
+  margin-bottom: 10px;
   label {
     display: block;
     float: left;
-    height: 42px;
+    height: 30px;
     width: 65px;
     margin-right: 10px;
-    line-height: 42px;
-    font-size: 14px;
+    line-height: 30px;
+    font-size: 12px;
     color: #666;
     font-weight: 700;
     text-align: right
   }
-  .Input-base {
+  .Input-base,.Select-base  {
     position: relative;
+    width: 328px;
     float: left;
     .tips-wrapper {
       font-size: 12px;
       color: grey;
       position: absolute;
-      right: -300px;
-      top: 12px;
+      right: -310px;
+      top: 9px;
       width: 300px;
       text-align: left;
+    }
+    &.is-focused {
+      input {
+        border-color: #488ee7;
+      }
+    }
+    &.error {
+      input {
+        border-color: #fc4343;
+      }
+      .tips-wrapper {
+        span {
+          height: 15px;
+          line-height: 15px;
+          display: block;
+          color: #fc4343;
+          text-indent: 20px;
+          background: url("../../assets/img/err_small.png") 0 0 no-repeat;
+        }
+      }
+    }
+    &.required {
+      input {
+        //border-color: yellow;
+      }
+    }
+    &.async-loading {
+      border-color: transparent;
+    }
+  }
+  &.small {
+    .Input-base,.Select-base {
+      width: 140px;
     }
   }
 }

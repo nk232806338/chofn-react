@@ -1,11 +1,9 @@
-* {
-    padding: 0;
-    margin: 0;
+.btn {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    outline: none !important;
+    font-size: 12px;
 }
-.clearfix:after {
-    content: " "; /* Older browser do not support empty content */
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
+.glyphicon {
+ vertical-align: text-top;
 }
