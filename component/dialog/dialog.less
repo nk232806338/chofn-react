@@ -1,0 +1,51 @@
+.Dialog-base {
+  .Dialog-overlayer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(235, 235, 235, 0.5);
+    z-index: 10;
+  }
+  .Dialog-box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    background-color: #fff;
+    z-index: 100;
+    .panel {
+      margin-bottom: 0;
+    }
+    .panel-heading {
+      i {
+        position: absolute;
+        right: 8px;
+        top: 6px;
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .panel-title {
+        .title-content {
+          font-size: 12px;
+          font-weight: 800;
+        }
+      }
+    }
+  }
+
+  &.top {
+    .Dialog-box {
+      top: 20px;
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+}

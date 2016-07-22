@@ -2,25 +2,23 @@ var React = require('react');
 var _ = require('underscore');
 var classNames = require('classnames');
 require('./select-base.less');
-var testData = [
-  {id: 1, name: '北京2', value: 1},
-  {id: 2, name: '上海4', value: 2},
-  {id: 3, name: '广州', value: 3},
-  {id: 4, name: '深圳', value: 4},
-  {id: 5, name: '辽宁', value: 5},
-  {id: 6, name: '辽宁', value: 5},
-  {id: 7, name: '辽宁', value: 5},
-  {id: 8, name: '辽宁', value: 5},
-  {id: 9, name: '辽宁', value: 5},
-  {id: 10, name: '辽宁', value: 5},
-  {id: 11, name: '辽宁', value: 5},
-];
+
 var SelectBase = React.createClass({
+  propTypes: {
+    data: React.PropTypes.any,
+    keyName: React.PropTypes.string,
+    onSelect: React.PropTypes.func,
+    defaultSelect: React.PropTypes.any,
+  },
   getInitialState() {
+    var { data, defaultSelect } = this.props;
+    _.each(data, item => {
+      if (!item.id) item.id = _.uniqueId('select-data-id');
+    });
     return {
       showChild: false,
-      data: testData,
-      selectedItem: null,
+      data,
+      selectedItem: defaultSelect ?  data[0] : _.find(data, {active: true}),
       unfoldUp: false
     };
   },
@@ -55,17 +53,27 @@ var SelectBase = React.createClass({
       selectedItem: item,
       showChild: false
     });
+    var { onSelect } = this.props;
+    if (onSelect) onSelect(item);
   },
   render() {
+    var { keyName, defaultSelect } = this.props;
     var { showChild, data, selectedItem, unfoldUp } = this.state;
     return (<div className="Select-base" ref="select_mod">
       <div className="Select-control" onClick={this.toggle}>
         <div className="Select-value">
-          {selectedItem ? <span>{selectedItem.name}</span> : <span>请选择</span>}
+          {selectedItem ? <span>{selectedItem[keyName]}</span> : <span>请选择</span>}
         </div>
+        <span className={classNames('glyphicon', {'glyphicon-triangle-bottom': !showChild, 'glyphicon-triangle-top': showChild})} />
       </div>
       { showChild ? <div className={classNames('Select-children', {'unfold-up': unfoldUp})}>
-        {data.map(item => <div className="option-item" onClick={event => this.onSelect(item, event)} key={item.id}>{item.name}</div>)}
+        {data && data.map(item =>
+          <div
+            className={classNames('option-item', {active: selectedItem && selectedItem.id == item.id})}
+            onClick={event => this.onSelect(item, event)} key={item.id}>
+            {item[keyName]}
+          </div>
+        )}
       </div> : null}
     </div>);
   }

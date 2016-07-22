@@ -1,5 +1,6 @@
 .Select-base {
   position: relative;
+  font-size: 12px;
   .Select-control {
     box-sizing: border-box;
     background-color: #fff;
@@ -29,16 +30,24 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    .glyphicon {
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      color: grey;
+    }
   }
   .Select-children {
     position: absolute;
+    z-index: 5;
     left: 0;
-    top: 36px;
+    top: 31px;
     width: 100%;
     max-height: 300px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-color: #d9d9d9 #ccc #b3b3b3;
+    background-color: white;
     overflow-y: auto;
     .option-item {
       padding-left: 10px;
@@ -48,11 +57,19 @@
       &:hover {
         background-color: beige;
       }
+      &.active {
+        background-color: darkgray;
+        color: #fff;
+      }
     }
     &.unfold-up {
       transform: translate3d(0,-100%,0);
       top: 0;
     }
   }
-
+  &:hover {
+    .glyphicon {
+      color: #333;
+    }
+  }
 }

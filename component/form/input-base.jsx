@@ -54,8 +54,7 @@ var InputBase = React.createClass({
     return (
       <div className={'Input-base clearfix' + className}>
         <input
-          placeholder="mail" {...others}
-          type={type ? type : 'text'} onChange={this.changeValue} value={this.getValue()}
+          {...others} type={type ? type : 'text'} onChange={this.changeValue} value={this.getValue()}
           onFocus={this.handleFocus} onBlur={this.handleBlur} />
         <div className="tips-wrapper">
           <span>

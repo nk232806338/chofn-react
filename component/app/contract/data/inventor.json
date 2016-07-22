@@ -1,0 +1,55 @@
+{
+  "header": {
+    "code": 104,
+    "msg": "\u64cd\u4f5c\u6210\u529f"
+  },
+  "body": {
+    "status": 1,
+    "desc": "",
+    "data": {
+      "rows": [
+        {
+          "id": "37",
+          "customer_id": "1382474",
+          "name": "\u6d4b\u8bd5\u5bf9\u63a5\u7b2c\u4e00\u53d1\u660e\u4eba",
+          "name_en": "",
+          "country_id": "1",
+          "province_id": "0",
+          "city_id": "0",
+          "area_id": "0",
+          "address": "",
+          "address_en": "",
+          "is_first_inventor": "1",
+          "card_type": "\u8eab\u4efd\u8bc1",
+          "cardno": "511011196632014785",
+          "tel": "",
+          "mobile": "",
+          "email": "",
+          "qq": "",
+          "remark": "",
+          "is_main": "1",
+          "update_user_id": "1",
+          "update_time": "0",
+          "create_time": "1464611115",
+          "deleted": "0",
+          "serializeinfo": {
+            "attachment": {
+              "idCard": [
+                {
+                  "filename": "\u590d\u5370\u4ef6.png",
+                  "filesize": 111933,
+                  "filetype": "png",
+                  "filepath": "http:\/\/demo.chofn.com:88\/uploads\/documents\/2016\/05\/30\/74c8fb02c5ae2c4a.png",
+                  "id": 2707
+                }
+              ]
+            }
+          },
+          "card_type_id": "1",
+          "country_name": "\u4e2d\u56fd"
+        }
+      ],
+      "total": 1
+    }
+  }
+}

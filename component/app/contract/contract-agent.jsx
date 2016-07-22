@@ -5,6 +5,19 @@ var SelectBase = require('../../select/select-base.jsx');
 var TableBase = require('../../table/table-base');
 var Pagination = require('../../pagination/pagination-base');
 require('../../form/form.less');
+var testData = [
+  {id: 1, name: '北京2', value: 1, active: true},
+  {id: 2, name: '上海4', value: 2},
+  {id: 3, name: '广州', value: 3},
+  {id: 4, name: '深圳', value: 4},
+  {id: 5, name: '辽宁', value: 5},
+  {id: 6, name: '辽宁', value: 5},
+  {id: 7, name: '辽宁', value: 5},
+  {id: 8, name: '辽宁', value: 5},
+  {id: 9, name: '辽宁', value: 5},
+  {id: 10, name: '辽宁', value: 5},
+  {id: 11, name: '辽宁', value: 5},
+];
 var ContractAgent = React.createClass({
   render() {
     return (<div>
@@ -26,7 +39,7 @@ var ContractAgent = React.createClass({
             <div className="col-sm-3">
               <div className="Form-item clearfix small">
                 <label>合同状态</label>
-                <SelectBase />
+                <SelectBase data={testData}/>
               </div>
             </div>
             <div className="col-sm-3">

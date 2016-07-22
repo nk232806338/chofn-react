@@ -1,0 +1,29 @@
+{
+  "header": {
+    "code": 104,
+    "msg": "\u64cd\u4f5c\u6210\u529f"
+  },
+  "body": {
+    "status": 1,
+    "desc": "",
+    "data": [
+      {
+        "contactId": "1084332",
+        "customerId": "1382474",
+        "contactName": "\u4e09\u5927\u5b9d\u5927\u95f9\u597d\u83b1\u575e",
+        "contactMobile": "13655858547",
+        "contactTel": "028-99658547",
+        "contactEmail": "xitongceshi321@163.com",
+        "contactSex": "1",
+        "contactSexName": "\u7537",
+        "contactSexCall": "\u5148\u751f",
+        "mailCountryId": "1",
+        "mailProvinceId": "112",
+        "mailCityId": "326",
+        "mailAreaId": "729",
+        "mailAddress": "\u8349\u5e02\u8857123\u53f7",
+        "contactWholeAddress": "\u56db\u5ddd\u7701\u6210\u90fd\u5e02\u9752\u7f8a\u533a\u8349\u5e02\u8857123\u53f7"
+      }
+    ]
+  }
+}

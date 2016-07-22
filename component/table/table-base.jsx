@@ -1,28 +1,34 @@
 var React = require('react');
 var _ = require('underscore');
+var classNames = require('classnames');
 require('./table-base.less');
-var TestData = [
-  {id: 1, name: '用户1', status: 1},
-  {id: 2, name: '用户2', status: 1},
-  {id: 3, name: '用户3', status: 1},
-  {id: 4, name: '用户4', status: 1},
-  {id: 5, name: '用户5', status: 1},
-  {id: 6, name: '用户6', status: 1},
-  {id: 7, name: '用户7', status: 1},
-];
 
 var TableBase = React.createClass({
   propTypes: {
-    hasIndex: React.PropTypes.bool
+    hasIndex: React.PropTypes.bool,
+    data: React.PropTypes.array,
+    onSelect: React.PropTypes.func,
+    onDoubleClick: React.PropTypes.func
+  },
+  getDefaultProps() {
+    onDoubleClick: () => {}
   },
   getInitialState() {
     return {
-      data: TestData
+      data: this.props.data
     };
+  },
+  activeTr(tr, event) {
+    var { data } = this.state;
+    var { onSelect } = this.props;
+    _.each(data, trData => trData.active = false);
+    tr.active = true;
+    if (onSelect) onSelect(tr);
+    this.setState({data});
   },
   render() {
     var { data } = this.state;
-    var { children, hasIndex } = this.props;
+    var { children, hasIndex, onDoubleClick } = this.props;
     return (<div className="Table-base">
       <table className="table table-hover">
         <thead>
@@ -40,7 +46,9 @@ var TableBase = React.createClass({
         {
           data.map((tr, index) => {
             return (
-              <tr key={tr.id}>
+              <tr
+                className={classNames({selected: tr.active})}
+                key={tr.id} onClick={event => this.activeTr(tr, event)}>
                 {hasIndex ? <th scope='row'>{index + 1}</th> : null}
                 {children.map(Column => {
                   var td = Column.props.td;
