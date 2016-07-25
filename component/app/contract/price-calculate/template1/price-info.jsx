@@ -6,6 +6,7 @@ var PriceInfo = React.createClass({
     return (<div>
 
       PriceInfo
+      <div style={{height: '300px'}}></div>
 
     </div>);
   }

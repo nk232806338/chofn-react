@@ -1,6 +1,6 @@
 var React = require('react');
 var Formsy = require('formsy-react');
-var InputBase = require('../form/input-base');
+var InputBase = require('../form/Form-item-base');
 var InputAsyncValid = require('../form/input-async-valid');
 require('../form/form.less');
 var Register = React.createClass({

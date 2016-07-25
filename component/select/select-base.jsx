@@ -9,6 +9,12 @@ var SelectBase = React.createClass({
     keyName: React.PropTypes.string,
     onSelect: React.PropTypes.func,
     defaultSelect: React.PropTypes.any,
+    onToggleShow: React.PropTypes.func,
+  },
+  getDefaultProps() {
+    return {
+      keyName: 'name'
+    };
   },
   getInitialState() {
     var { data, defaultSelect } = this.props;
@@ -23,18 +29,21 @@ var SelectBase = React.createClass({
     };
   },
   toggle(action) {
+    var { onToggleShow } = this.props;
+    var result;
     this.showUpOrDown();
     if (Object.prototype.toString.call(action) == '[object Boolean]') {
+      result = action;
       this.setState({
         showChild: action
       });
     } else {
-      this.setState(function (previousState, currentProps) {
-        return {
-          showChild: !previousState.showChild
-        }
+      result = !this.state.showChild;
+      this.setState({
+        showChild: result
       });
     }
+    if (onToggleShow) onToggleShow(result);
   },
   showUpOrDown() {
     var selectDOM = this.refs.select_mod;
@@ -51,8 +60,7 @@ var SelectBase = React.createClass({
   onSelect(item) {
     this.setState({
       selectedItem: item,
-      showChild: false
-    });
+    }, () => this.toggle(false));
     var { onSelect } = this.props;
     if (onSelect) onSelect(item);
   },

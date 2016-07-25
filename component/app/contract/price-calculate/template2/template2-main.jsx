@@ -1,14 +1,23 @@
 var React = require('react');
 var NavTab = require('../NavTab');
-var BaseInfo = require('./base-info');
-var PersonInfo = require('./person-info');
-var PriceInfo = require('./price-info');
 var Registry = {};
-Registry[NavTab.BASE] = BaseInfo;
-Registry[NavTab.PERSON] = PersonInfo;
-Registry[NavTab.PRICE] = PriceInfo;
+Registry[NavTab.BASE] = React.createClass({
+  render() {
+    return (<div>base form Template2</div>);
+  }
+});
+Registry[NavTab.PERSON] = React.createClass({
+  render() {
+    return (<div>PERSON form Template2</div>);
+  }
+});
+Registry[NavTab.PRICE] = React.createClass({
+  render() {
+    return (<div>PRICE form Template2</div>);
+  }
+});
 
-var Template1Main = React.createClass({
+var Template2Main = React.createClass({
   propTypes: {
     infoType: React.PropTypes.string,
   },
@@ -34,4 +43,4 @@ var Template1Main = React.createClass({
   }
 });
 
-module.exports = Template1Main;
+module.exports = Template2Main;

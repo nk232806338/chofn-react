@@ -13,10 +13,17 @@
     font-weight: 700;
     text-align: right
   }
-  .Input-base,.Select-base  {
+  .Form-item-base {
     position: relative;
     width: 328px;
     float: left;
+    &.small {
+      width: 140px;
+    }
+    textarea {
+      width: 100%;
+      resize: none;
+    }
     .tips-wrapper {
       font-size: 12px;
       color: grey;
@@ -27,7 +34,7 @@
       text-align: left;
     }
     &.is-focused {
-      input {
+      input, textarea, .Select-control {
         border-color: #488ee7;
       }
     }
@@ -53,11 +60,6 @@
     }
     &.async-loading {
       border-color: transparent;
-    }
-  }
-  &.small {
-    .Input-base,.Select-base {
-      width: 140px;
     }
   }
 }

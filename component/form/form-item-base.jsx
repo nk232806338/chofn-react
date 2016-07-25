@@ -1,7 +1,7 @@
 var React = require('react');
 var Formsy = require('formsy-react');
-require('./input-base.less');
-var InputBase = React.createClass({
+require('./Form-item-base.less');
+var FormItemBase = React.createClass({
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
   propTypes: {
@@ -15,18 +15,18 @@ var InputBase = React.createClass({
   },
   // setValue() will set the value of the component, which in
   // turn will validate it and the rest of the form
-  changeValue(event) {
-    this.setValue(event.currentTarget.value);
+  changeValue(value) {
+    this.setValue(value);
   },
   handleFocus() {
     this.setState({
       isFocused: true
     });
   },
-  handleBlur(event) {
+  handleBlur(value) {
     var { handleBlur } = this.props;
     if (handleBlur) {
-      handleBlur(event.target.value, this.isValid());
+      handleBlur(value, this.isValid());
     }
     this.setState({
       isFocused: false
@@ -34,7 +34,7 @@ var InputBase = React.createClass({
   },
   render() {
     var { isFocused } = this.state;
-    var { tips, type, required, ...others } = this.props;
+    var { tips, type, required, children, ...others } = this.props;
     // Set a specific className based on the validation
     // state of this component. showRequired() is true
     // when the value is empty and the required prop is
@@ -51,11 +51,30 @@ var InputBase = React.createClass({
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
     const errorMessage = this.getErrorMessage();
+    if (children) {
+      return (<div className={'Form-item-base clearfix' + className}>
+        {React.cloneElement(children, {
+          handleBlur: this.handleBlur,
+          handleFocus: this.handleFocus,
+          changeValue: this.changeValue,
+          test: 'test'
+        })}
+        <div className="tips-wrapper">
+          <span>
+            { isFocused || ifRequired ? tips : errorMessage}
+          </span>
+        </div>
+      </div>);
+    }
+    var Component = 'input';
+    if (type == 'textarea') {
+      Component = 'textarea';
+    }
     return (
-      <div className={'Input-base clearfix' + className}>
-        <input
-          {...others} type={type ? type : 'text'} onChange={this.changeValue} value={this.getValue()}
-          onFocus={this.handleFocus} onBlur={this.handleBlur} />
+      <div className={'Form-item-base clearfix' + className}>
+        <Component
+          {...others} type={type ? type : 'text'} onChange={event => this.changeValue(event.currentTarget.value, event)} value={this.getValue()}
+          onFocus={this.handleFocus} onBlur={event => this.handleBlur(event.target.value, event)} />
         <div className="tips-wrapper">
           <span>
             { isFocused || ifRequired ? tips : errorMessage}
@@ -66,4 +85,4 @@ var InputBase = React.createClass({
   }
 });
 
-module.exports = InputBase;
+module.exports = FormItemBase;

@@ -1,6 +1,6 @@
 var React = require('react');
 var classNames = require('classnames');
-var InputBase = require('../form/input-base');
+var InputBase = require('./Form-item-base');
 var loadingIcon = require('../../assets/img/loading.gif');
 require('./input-async-valid.less');
 var STATUS = {

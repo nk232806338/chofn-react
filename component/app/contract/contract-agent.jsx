@@ -1,6 +1,6 @@
 var React = require('react');
 var Formsy = require('formsy-react');
-var InputBase = require('../../form/input-base');
+var InputBase = require('../../form/Form-item-base');
 var SelectBase = require('../../select/select-base.jsx');
 var TableBase = require('../../table/table-base');
 var Pagination = require('../../pagination/pagination-base');

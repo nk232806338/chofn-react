@@ -7,7 +7,7 @@ var PersonInfo = React.createClass({
     return (<div>
 
       PersonInfo
-
+      <div style={{height: '300px'}}></div>
     </div>);
   }
 });
