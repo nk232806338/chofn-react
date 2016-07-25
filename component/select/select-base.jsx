@@ -65,9 +65,9 @@ var SelectBase = React.createClass({
     if (onSelect) onSelect(item);
   },
   render() {
-    var { keyName, defaultSelect } = this.props;
+    var { keyName, defaultSelect, ...others } = this.props;
     var { showChild, data, selectedItem, unfoldUp } = this.state;
-    return (<div className="Select-base" ref="select_mod">
+    return (<div className="Select-base" ref="select_mod" {...others}>
       <div className="Select-control" onClick={this.toggle}>
         <div className="Select-value">
           {selectedItem ? <span>{selectedItem[keyName]}</span> : <span>请选择</span>}
