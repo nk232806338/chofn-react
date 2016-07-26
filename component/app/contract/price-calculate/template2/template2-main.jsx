@@ -37,6 +37,7 @@ var Template2Main = React.createClass({
     return (<div>
       <NavTab onTabChange={this.onTabChange} activeNav={activeNav}/>
       <div className="content-for-info">
+        
         <Component />
       </div>
     </div>);

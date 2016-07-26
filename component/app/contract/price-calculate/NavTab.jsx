@@ -22,7 +22,7 @@ var NavTabs = React.createClass({
           <a>基本信息</a>
         </li>
         <li role="presentation"  className={classNames({active : activeNav == TAB_TYPE.PRICE})}
-            onClick={event => {onTabChange(TAB_TYPE.PRICE, event)}}><a>费用信息</a></li>
+            onClick={event => {onTabChange(TAB_TYPE.PRICE, event)}}><a>费用信息1</a></li>
         <li role="presentation"  className={classNames({active : activeNav == TAB_TYPE.PERSON})}
             onClick={event => {onTabChange(TAB_TYPE.PERSON, event)}}><a>申请人信息</a></li>
       </ul>

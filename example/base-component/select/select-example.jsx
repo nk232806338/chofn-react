@@ -21,13 +21,24 @@ var data2 = [
   {id: 8, name: '商品8'},
 ];
 var SelectExample = React.createClass({
-  onSelect1() {
-
+  getInitialState() {
+    return {
+      select1: null,
+      select2: null,
+    };
   },
-  onSelect2() {
-
+  onSelect1(item) {
+    this.setState({
+      select1: item
+    });
+  },
+  onSelect2(item) {
+    this.setState({
+      select2: item
+    });
   },
   render() {
+    var { select1, select2 } = this.state;
     return (
       <div>
         <div className="panel panel-default">
@@ -36,9 +47,11 @@ var SelectExample = React.createClass({
             <div className="row">
               <div className="col-sm-3">
                 <SelectBase data={data} onSelect={this.onSelect1} />
+                { select1 ? <span>用户选择了: {select1.name}</span> : null}
               </div>
               <div className="col-sm-3">
                 <SelectBase data={data2} onSelect={this.onSelect2} />
+                { select2 ? <span>用户选择了: {select2.name}</span> : null}
               </div>
               <div className="col-sm-3">
               </div>
