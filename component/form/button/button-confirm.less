@@ -1,0 +1,25 @@
+.Btn-confirm {
+  position: relative;
+  button, .confirm-wrapper {
+    float: left;
+  }
+  .confirm-trans {
+    width: 0px;
+    overflow: hidden;
+    background-color: aliceblue;
+    -o-transition: all 0.22s ease,0.22s ease;
+    -ms-transition: all 0.22s ease,0.22s ease;
+    -moz-transition: all 0.22s ease,0.22s ease;
+    -webkit-transition: all 0.22s ease,0.22s ease;
+    &.show {
+      width: 140px;
+    }
+  }
+  .confirm-wrapper {
+    width: 140px;
+    margin-left: 10px;
+    .btn {
+      margin-right: 10px;
+    }
+  }
+}

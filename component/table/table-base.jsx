@@ -25,7 +25,7 @@ var TableBase = React.createClass({
     tr.active = true;
     if (onSelect) onSelect(tr);
     this.setState({data});
-  },
+  },  
   render() {
     var { data } = this.state;
     var { children, hasIndex, onDoubleClick } = this.props;

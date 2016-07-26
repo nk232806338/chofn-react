@@ -2,10 +2,13 @@ var webpack = require('webpack');
 var path = require('path');
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 module.exports = {
-  entry: "./main.jsx",
+  entry: {
+    app: "./main.jsx",
+    example: "./example/main.jsx"
+  },
   output: {
     path: 'built',
-    filename: "bundle.js"
+    filename: "[name].bundle.js"
   },
   devtool: 'eval',
   module: {

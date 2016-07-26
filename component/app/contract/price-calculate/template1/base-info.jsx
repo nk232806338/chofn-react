@@ -1,7 +1,6 @@
 var React = require('react');
 var Formsy = require('formsy-react');
 var InputBase = require('../../../../form/Form-item-base');
-var InputAsyncValid = require('../../../../form/input-async-valid');
 require('../../../../form/form.less');
 var Select = require('../../../../select/select-base');
 
@@ -19,7 +18,6 @@ var FormSelect = React.createClass({
     }
   },
   render() {
-    var { test } = this.props;
     return (<div>
       <Select data={[{id:1, name: 1}, {id:2, name: 2}]} onSelect={this.onOtherSelect} onToggleShow={this.onToggleShow}/>
     </div>);
@@ -31,7 +29,6 @@ var BaseInfo = React.createClass({
     
   },
   render() {
-
     return (<div>
       <Formsy.Form onSubmit={this.submit} ref="form">
         <div className="row">

@@ -1,0 +1,46 @@
+.Framework-sidebar {
+  font-size: 12px;
+  width: 180px;
+  display: block;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  background-color: #293038;
+  z-index: 102;
+  overflow-x: hidden;
+  color: #fff;
+  text-align: left;
+  .sidebar-content {
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    .sidebar-nav {
+      .sidebar-title {
+        text-indent: 4px;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        background: #22282e;
+        .glyphicon {
+          margin-right: 6px;
+        }
+      }
+      ul {
+        padding: 0;
+        li {
+          padding: 10px;
+          list-style: none;
+          cursor: pointer;
+          &:hover {
+            background: #37424a;
+          }
+          &.active {
+            background: #37424f;
+          }
+        }
+      }
+    }
+  }
+}
