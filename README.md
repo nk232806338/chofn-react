@@ -10,6 +10,11 @@ a ui demo library by React
 ...UI组件库框架: React
 ...函数工具库: Underscore
 
+```js
+var TreeModel = require('tree-model'),
+    tree = new TreeModel(),
+    root = tree.parse({name: 'a', children: [{name: 'b'}]});
+```
 
 ###安装Node
 前端编译构建以及自动化工具都依赖于Node, MacOS/Windows 用户可直接在 [Node官网](https://nodejs.org/zh-cn/)自行下载可执行安装程序,直接运行即可。
