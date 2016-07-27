@@ -22,7 +22,7 @@ Windows以及MacOS用户可直接在[Node官网](https://nodejs.org/zh-cn/)下�
 node -v
 ```
 
-### STEP-2: 下载安装工程
+#### STEP-2: 下载安装工程
 目前本项目托管在Github上，具体地址为[https://github.com/nk232806338/chofn-react](https://github.com/nk232806338/chofn-react)
 > GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 
@@ -42,7 +42,7 @@ npm install
 ```
 这是在全局安装 webpack(本项目依赖的自动化构建工具)
 
-### 运行项目
+#### STEP-3: 运行项目
 当上述的安装步骤执行完毕之后，需要将前端资源运行在某web容器上，推荐使用 [http-server](https://github.com/indexzero/http-server),安装使用只需在命令行下执行
 ```sh
 npm install http-server -g
