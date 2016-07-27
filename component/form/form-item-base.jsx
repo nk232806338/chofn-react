@@ -57,7 +57,6 @@ var FormItemBase = React.createClass({
           handleBlur: this.handleBlur,
           handleFocus: this.handleFocus,
           changeValue: this.changeValue,
-          test: 'test'
         })}
         <div className="tips-wrapper">
           <span>
