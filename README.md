@@ -1,7 +1,7 @@
 # chofn-react
 
 基于`React`的UI组件库, 组件库本身结构大体分为`基础组件 功能组件`以及`业务组件`
-[online-demo 线上demo页访问地址](http://120.25.152.191/)
+[online-demo 线上demo页访问地址](http://f1.chofn.net/static/index.html)
 - `基础组件` 
  例如 Table、Tab选项卡、下拉选择, 仅提供最基础的行为支持
 - `功能组件`
@@ -9,7 +9,7 @@
 - `业务组件`
 业务组件是在组件层面上的最高层次的抽象，是利用`基础组件`或者`功能组件`作为支持，并且具备与业务模型场景对应的组件，一般的业务组件是按照业务场景的功能模块划分，可单独存在，当然具备通用性的业务模块可被其它业务组件复用
 <br/>
-![Image of Yaktocat](http://120.25.152.191:8080/img/1-%E7%BB%84%E4%BB%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+![Image of Yaktocat](http://f1.chofn.net/static/markdown-image/1-%E7%BB%84%E4%BB%B6%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
 
 
@@ -54,6 +54,13 @@ http-server ./  -p 8081
 ```
 即可把当前目录的所有资源文件部署到本地的HttpServer中，端口号可根据需要自主设定，上述命令通过 
 `-p 8081`指定了端口为8081， 启动成功后在浏览器中输入 localhost:8081 既可看到基于React的Demo首页
+
+
+## 组件使用
+
+### Form表单验证
+
+
 
 
 
