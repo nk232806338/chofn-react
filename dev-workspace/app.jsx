@@ -11,11 +11,10 @@ var TextNodeArray = [
 ];
 
 var TemplatesData = [
-  {id: 1, name: '模板1', url: './demo-imgs/PA1601454WH.jpeg'},
-  {id: 2, name: '模板2', url: './demo-imgs/PA1601635CD.jpg'},
-  {id: 3, name: '模板3', url: './demo-imgs/PA1601647CD.jpg'},
-  {id: 4, name: '模板4', url: './demo-imgs/PB1509519TJ.png'},
-  {id: 5, name: '模板5', url: './demo-imgs/PB1601659BJ.jpg'},
+  {id: 1, name: '模板1', url: './demo-imgs/PA1601635CD.jpg'},
+  {id: 2, name: '模板2', url: './demo-imgs/PA1601647CD.jpg'},
+  {id: 3, name: '模板3', url: './demo-imgs/PB1509519TJ.png'},
+  {id: 4, name: '模板4', url: './demo-imgs/PB1601659BJ.jpg'},
 ];
 
 var TextConfig = {
@@ -116,7 +115,9 @@ var App = React.createClass({
     reader.onload = function(event){
       var img = new Image();
       img.onload = function(){
-        var bgImgInstance = new fabric.Image(img);
+        var bgImgInstance = new fabric.Image(img, {
+          selectable: false
+        });
         bgImgInstance.scaleToWidth(1000);
         canvas.add(bgImgInstance);
         canvas.moveTo(bgImgInstance, 0);
@@ -166,7 +167,7 @@ var App = React.createClass({
   onActive(textNodeId) {
     var { data } = this.state;
     var willActiveTextNode = _.find(data, {id: textNodeId});
-    canvas.setActiveObject(willActiveTextNode.iTextInstance)
+    canvas.setActiveObject(willActiveTextNode.iTextInstance);
   },
   onSave() {
     var base64Url = canvas.toDataURL({
@@ -181,7 +182,14 @@ var App = React.createClass({
         isUploading: false
       });
     }, 2000);
-    console.info(base64Url);
+  },
+  onPrev() {
+    canvas.deactivateAll().renderAll();
+    var base64Url = canvas.toDataURL({
+      format: 'jpeg',
+      quality: 1
+    });
+    window.open(base64Url, '预览');
   },
   onChangeTemplate(templateData) {
     this.setBg(templateData);
@@ -196,7 +204,7 @@ var App = React.createClass({
         isUploading={isUploading} templatesData={TemplatesData} onSelect={this.onChangeTemplate}
         data={data} onActive={this.onActive} defaultFontColor={defaultFontColor}
         addIText={this.addIText} deleteIText={this.deleteIText}
-        onChange={this.onChange} onSave={this.onSave}
+        onChange={this.onChange} onSave={this.onSave} onPrev={this.onPrev}
         onColorChange={this.onColorChange} onFileChange={this.onFileChange} onBgFileChange={this.onBgFileChange}
       />
     </div>);

@@ -31,7 +31,6 @@ var OperationMain = React.createClass({
     var input = document.createElement('INPUT')
     input.value = defaultFontColor;
     input.addEventListener('change', (event) => {
-      console.info(event.target.value);
       onColorChange(event.target.value);
     });
     var picker = new jscolor(input);
@@ -69,7 +68,7 @@ var OperationMain = React.createClass({
   },
   render() {
     var { toggleBar } = this.state;
-    var { data, onActive, isUploading, templatesData, onBgFileChange } = this.props;
+    var { data, onActive, isUploading, templatesData, onBgFileChange, onPrev } = this.props;
     return (<div className={classNames('Operation-mod', {show: toggleBar})}>
       <div className="toggle-bar" onClick={this.toggleBar}>
         { toggleBar ? <span className="glyphicon glyphicon-chevron-right" /> : <span className="glyphicon glyphicon-chevron-left" />}
@@ -126,7 +125,10 @@ var OperationMain = React.createClass({
               </div>
             )}
           </div>
-          <div className="panel-footer"><button className="btn btn-primary" onClick={this.onSave}>保存图片</button></div>
+          <div className="panel-footer">
+            <button className="btn btn-primary" onClick={this.onSave} style={{marginRight: '10px'}}>保存图片</button>
+            <button className="btn btn-primary" onClick={onPrev}>预览图片</button>
+          </div>
         </div>
       </div>
     </div>);
