@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+
 module.exports = {
   entry: {
     app: "./main.jsx",

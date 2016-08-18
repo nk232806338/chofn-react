@@ -1,5 +1,6 @@
 var React = require('react');
 require('./dialog.less');
+//test
 var DialogBase = React.createClass({
   propTypes: {
     align: React.PropTypes.string,
