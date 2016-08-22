@@ -41,6 +41,9 @@ var ContractNew = React.createClass({
     console.info(proposer);
     this.setState({proposerData: proposer});
   },
+  componentDidMount() {
+    this.onSelectCustomer(CustomersData.body.data.rows[0]);
+  },
   render() {
     var { customerDialog, customerData, proposerData } = this.state;
     return (<div>

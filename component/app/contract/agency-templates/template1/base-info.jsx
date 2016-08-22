@@ -1,10 +1,11 @@
 var React = require('react');
 var Formsy = require('formsy-react');
-var classnames = require('classnames');
 var InputBase = require('../../../../form/Form-item-base');
 var TemplatesRegistry = require('../TemplatesRegistry');
+var Category  = require('../common/category');
 require('../../../../form/form.less');
 var Select = require('../../../../select/select-base');
+var Uploader = require('../../../../uploader/uploader');
 
 var FormSelect = React.createClass({
   propTypes: {
@@ -29,14 +30,25 @@ var FormSelect = React.createClass({
 var BaseInfo = React. createClass({
   getInitialState() {
     return {
-      hasProject: true
+      categoryData: {},
+      file: {name: '测试数据', url: '/uploads/logo.png'}
     };
   },
   onOtherSelect(item) {
     
   },
+  onCategoryChange(categoryData) {
+    this.setState({
+      categoryData: categoryData,
+    });
+  },
+  onFileUploaded(file) {
+    this.setState({
+      file: file,
+    });
+  },
   render() {
-    var { hasProject } = this.state;
+    var { categoryData, file } = this.state;
     return (<div>
       <Formsy.Form onSubmit={this.submit} ref="form">
         <div className="row">
@@ -44,12 +56,20 @@ var BaseInfo = React. createClass({
             <div className="Form-item clearfix small">
               <label>方案类别</label>
               <div className="Form-item-base clearfix">
-                <label htmlFor="hasProject"><input type="checkbox" name="hasProject" id="hasProject"/>有方案</label>
-                <label htmlFor="hasClarificaitonbook"><input type="checkbox" name="hasClarificaitonbook" id="hasClarificaitonbook"/>有交底</label>
-
-                <label htmlFor="hasPicture" classnames={{disabled: hasProject}}>
-                  <input type="checkbox" name="hasPicture" id="hasPicture" disabled={ hasProject ? "disabled" : ""}/>有图
-                </label>
+                <Category onChange={this.onCategoryChange} data={categoryData}/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <div className="Form-item clearfix small">
+              <label>上传文件</label>
+              <div className="Form-item-base">
+                <Uploader
+                  uploadUrl="/upload/" onFileUploaded={this.onFileUploaded}
+                  btnText="上传交底书" data={file}
+                />
               </div>
             </div>
           </div>
