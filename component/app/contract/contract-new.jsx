@@ -9,7 +9,7 @@ var Dialog = require('../../dialog/dialog-base');
 var Customers = require('./customers');
 var CustomersData = require('./customers.json');
 var proposersData = require('./data/proposer.json');
-var PriceCalculater = require('./price-calculate/price-calculater-main');
+var PriceCalculater = require('./agency-templates/price-calculater-main');
 require('../../form/form.less');
 var ContractNew = React.createClass({
   getInitialState() {
