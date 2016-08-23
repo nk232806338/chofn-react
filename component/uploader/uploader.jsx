@@ -1,4 +1,5 @@
 var React = require('react');
+var classnams = require('classnames');
 var Progress = require('../progress/progress');
 var ReactTooltip = require('react-tooltip');
 require('./uploader.less');
@@ -22,8 +23,8 @@ var Uploader = React.createClass({
   getDefaultProps() {
     return {
       data: {
-        name: '',
-        url: ''
+        name: '',// 文件名称
+        url: '' // 文件url
       },
     }
   },
@@ -88,11 +89,15 @@ var Uploader = React.createClass({
             status: STATUS.FAILED,
             msg: err.message
           });
+          window.setTimeout(event => {
+            that.setState({
+              status: STATUS.STANDBY,
+            });
+          }, 2500);
           //document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
         }
       }
     });
-
     uploader.init();
     this.uploader = uploader;
   },
@@ -105,7 +110,7 @@ var Uploader = React.createClass({
     return (<div  className="plupload-file-info-wrapper">
       { status == STATUS.SUCCESS ? <span className="glyphicon glyphicon-ok" /> : null}
       { status == STATUS.FAILED ? <div className="row-file"><span className="glyphicon glyphicon-remove" ></span>{msg}</div> : null}
-      { status != STATUS.FAILED ? <a data-tip data-for="sadFace" href={data.url} target="_blank">{data.name}</a> : null}
+      <a data-tip data-for="sadFace" href={data.url} target="_blank" className={classnams({hide: status == STATUS.FAILED })}>{data.name}</a>
       <ReactTooltip id="sadFace" type="light" effect="solid" offset={{left: -20}} border={true}>
         <div style={{
           width: '100px', height: '100px', backgroundImage: 'url(' + data.url + ')', backgroundSize: 'contain',
@@ -123,7 +128,7 @@ var Uploader = React.createClass({
       <div ref="pluploadWrapper">
         <button ref="pickfiles" type="button" className="btn btn-primary">
           <span className="glyphicon glyphicon-folder-open" aria-hidden="true" style={{marginRight: '4px'}}/>
-          { btnText ? btnText : '上传底图' }
+          { btnText ? btnText : '上传' }
         </button>
         {this.getInfoViewRender()}
       </div>

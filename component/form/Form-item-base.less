@@ -11,4 +11,19 @@
     transition: .3s;
     outline: none;
   }
+  input[type='radio'], input[type='checkbox'] {
+    margin-right: 4px;
+    cursor: pointer;
+  }
+  label {
+    text-align: left;
+    height: 30px;
+    margin-right: 10px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #666;
+    &.disabled {
+      color: #999;
+    }
+  }
 }

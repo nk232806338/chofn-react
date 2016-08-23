@@ -13,8 +13,11 @@ var ContractContainer = React.createClass({
   getInitialState() {
     return {
       // 代理服务合同数组
-      contractArray: [{templateType: null, id: 1212, data: {}}]
+      contractArray: [{templateType: '1', id: 1212, data: {}, showExpand: true}]
     };
+  },
+  componentDidMount() {
+
   },
   addContract(a, event) {
     event.stopPropagation();

@@ -7,7 +7,7 @@ var classnames = require('classnames');
  *   a.有3个选择条件,形式为checkbox,分别为 "有方案", "有交底", "有图"
  *   b."有方案"在选中条件下,后续checkbox才可编辑
  *   c."有方案"在取消后,后续checkbox均需取消选中状态
- *   d."有交底"若为选中状态,需要显示对应的文件上传组件
+ *   (d."有交底"若为选中状态,需要显示对应的文件上传组件,外层控制)
  * ]
  */
 var Category = React.createClass({
@@ -60,6 +60,7 @@ var Category = React.createClass({
             checked={data.hasPicture}
             type="checkbox" name="hasPicture" id="hasPicture"
             disabled={ !data.hasProject ? "disabled" : ""}
+            onChange={this.hasPictureChange}
           />
           有图
         </label>
