@@ -7,3 +7,6 @@
 .glyphicon {
  vertical-align: text-top;
 }
+.table tbody tr td {
+    vertical-align: middle;
+}

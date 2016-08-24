@@ -8,8 +8,8 @@
     "console-polyfill": "^0.2.2",
     "es5-shim": "^4.5.9",
     "formsy-react": "^0.18.1",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8",
+    "react-fileupload": "^2.3.0",
+    "react-select": "^1.0.0-beta14",
     "react-tooltip": "^3.1.6",
     "underscore": "^1.8.3",
     "video.js": "^5.10.8"
