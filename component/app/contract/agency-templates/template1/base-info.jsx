@@ -5,28 +5,8 @@ var TemplatesRegistry = require('../TemplatesRegistry');
 var Category  = require('../common/category');
 var Radios = require('../../../../form/form-item-radios');
 require('../../../../form/form.less');
-var Select = require('../../../../select/select-base');
+var Select = require('../../../../select/select-form.jsx');
 var Uploader = require('../../../../uploader/uploader');
-
-var FormSelect = React.createClass({
-  propTypes: {
-    handleFocus: React.PropTypes.func,
-    handleBlur: React.PropTypes.func,
-  },
-  onToggleShow(show) {
-    var { handleFocus, handleBlur } = this.props;
-    if (show) {
-      handleFocus();
-    } else {
-      handleBlur();
-    }
-  },
-  render() {
-    return (<div>
-      <Select data={[{id:1, name: 1}, {id:2, name: 2}]} onSelect={this.onOtherSelect} onToggleShow={this.onToggleShow}/>
-    </div>);
-  }
-});
 
 
 var BaseInfo = React. createClass({
@@ -61,7 +41,7 @@ var BaseInfo = React. createClass({
   render() {
     var { categoryData, file, submitCheckOptions } = this.state;
     return (<div>
-      <Formsy.Form onSubmit={this.submit} ref="form">
+      <Formsy.Form onSubmit={this.submit} ref="form" className="base-info-form">
         <div className="row">
           <div className="col-sm-12">
             <div className="Form-item clearfix small">
@@ -72,7 +52,6 @@ var BaseInfo = React. createClass({
             </div>
           </div>
         </div>
-
         <div className="row">
           <div className="col-sm-6">
             <div className="Form-item clearfix small">
@@ -94,7 +73,6 @@ var BaseInfo = React. createClass({
             </div> : null
           }
         </div>
-
         <div className="row">
           <div className="col-sm-12">
             <div className="Form-item clearfix">
@@ -151,7 +129,7 @@ var BaseInfo = React. createClass({
             <div className="Form-item clearfix">
               <label>费减信息</label>
               <FormsyItem name="submitCheck">
-                <FormSelect />
+                <Select options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}]}/>
               </FormsyItem>
             </div>
           </div>
@@ -162,7 +140,7 @@ var BaseInfo = React. createClass({
             <div className="Form-item clearfix">
               <label>风险代理</label>
               <FormsyItem name="submitCheck">
-                <FormSelect />
+                <Select options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}]}/>
               </FormsyItem>
             </div>
           </div>
@@ -170,7 +148,7 @@ var BaseInfo = React. createClass({
             <div className="Form-item clearfix">
               <label>费减信息</label>
               <FormsyItem name="submitCheck">
-                <FormSelect />
+                <Select options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}]}/>
               </FormsyItem>
             </div>
           </div>
@@ -199,9 +177,6 @@ var BaseInfo = React. createClass({
 });
 
 module.exports = BaseInfo;
-
-
-
 // <div className="row">
 //   <div className="col-sm-6">
 //     <div className="Form-item clearfix">

@@ -1,4 +1,5 @@
 var React = require('react');
+var Select = require('react-select');
 var SelectBase = require('./select-base');
 
 var SelectForm = React.createClass({
@@ -17,7 +18,7 @@ var SelectForm = React.createClass({
   render() {
     var { test, ...others } = this.props;
     return (<div>
-      <SelectBase {...others } onToggleShow={this.onToggleShow}/>
+      <Select {...others } onToggleShow={this.onToggleShow}/>
     </div>);
   }
 });

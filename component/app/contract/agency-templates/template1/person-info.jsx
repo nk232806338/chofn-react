@@ -5,7 +5,6 @@ var Select = require('react-select');
 require('react-select/dist/react-select.css');
 var Uploader = require('../../../../uploader/uploader');
 var Inventor = require('../common/inventors');
-
 var options = [
   { value: 'one', label: 'One' },
   { value: 'two', label: 'Two' }
@@ -14,7 +13,6 @@ var options = [
 function logChange(val) {
   console.log("Selected: " + val);
 }
-
 
 var PersonInfo = React.createClass({
   getInitialState() {
@@ -25,9 +23,7 @@ var PersonInfo = React.createClass({
   render() {
     var { file } = this.state;
     return (<div>
-
-      <Formsy.Form onSubmit={this.submit} ref="form">
-
+      <Formsy.Form onSubmit={this.submit} ref="form" className="person-info-form">
         <div className="row">
           <div className="col-sm-12">
             <div className="Form-item clearfix">
@@ -127,9 +123,8 @@ var PersonInfo = React.createClass({
             </div>
           </div>
         </div>
-
-        <Inventor />
       </Formsy.Form>
+      <Inventor />
     </div>);
   }
 });

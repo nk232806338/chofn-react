@@ -2,7 +2,8 @@
 1 verbose cli [ '/usr/local/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'react-dom@15.0.2' ]
+1 verbose cli   'axios',
+1 verbose cli   '--save' ]
 2 info using npm@2.15.8
 3 info using node@v4.4.7
 4 verbose install initial load of /Users/niekai/NodeWorkSpace/chofn-react/package.json
@@ -23,184 +24,869 @@
 19 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/less/package.json
 20 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/less-loader/package.json
 21 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react/package.json
-22 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-fileupload/package.json
-23 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-select/package.json
-24 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-tooltip/package.json
-25 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/style-loader/package.json
-26 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/underscore/package.json
-27 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/url-loader/package.json
-28 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/video.js/package.json
-29 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/webpack/package.json
-30 info package.json formidable@1.0.17 No license field.
-31 info package.json less-loader@2.2.3 No license field.
-32 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/package.json
-33 silly cache add args [ 'react-dom@15.0.2', null ]
-34 verbose cache add spec react-dom@15.0.2
-35 silly cache add parsed spec Result {
-35 silly cache add   raw: 'react-dom@15.0.2',
-35 silly cache add   scope: null,
-35 silly cache add   name: 'react-dom',
-35 silly cache add   rawSpec: '15.0.2',
-35 silly cache add   spec: '15.0.2',
-35 silly cache add   type: 'version' }
-36 silly addNamed react-dom@15.0.2
-37 verbose addNamed "15.0.2" is a plain semver version for react-dom
-38 silly mapToRegistry name react-dom
-39 silly mapToRegistry using default registry
-40 silly mapToRegistry registry https://registry.npmjs.org/
-41 silly mapToRegistry data Result {
-41 silly mapToRegistry   raw: 'react-dom',
-41 silly mapToRegistry   scope: null,
-41 silly mapToRegistry   name: 'react-dom',
-41 silly mapToRegistry   rawSpec: '',
-41 silly mapToRegistry   spec: 'latest',
-41 silly mapToRegistry   type: 'tag' }
-42 silly mapToRegistry uri https://registry.npmjs.org/react-dom
-43 verbose addNameVersion registry:https://registry.npmjs.org/react-dom not in flight; fetching
-44 verbose request uri https://registry.npmjs.org/react-dom
-45 verbose request no auth needed
-46 info attempt registry request try #1 at 3:03:45 PM
-47 verbose request id 40c9066c9b32983b
-48 verbose etag "BIY9DPKU8JB5NMXSL2RBU5620"
-49 http request GET https://registry.npmjs.org/react-dom
-50 http 304 https://registry.npmjs.org/react-dom
-51 verbose headers { date: 'Wed, 24 Aug 2016 07:03:47 GMT',
-51 verbose headers   via: '1.1 varnish',
-51 verbose headers   'cache-control': 'max-age=300',
-51 verbose headers   etag: '"BIY9DPKU8JB5NMXSL2RBU5620"',
-51 verbose headers   age: '6',
-51 verbose headers   connection: 'keep-alive',
-51 verbose headers   'x-served-by': 'cache-lcy1127-LCY',
-51 verbose headers   'x-cache': 'HIT',
-51 verbose headers   'x-cache-hits': '1',
-51 verbose headers   'x-timer': 'S1472022227.799819,VS0,VE0',
-51 verbose headers   vary: 'Accept-Encoding' }
-52 silly get cb [ 304,
-52 silly get   { date: 'Wed, 24 Aug 2016 07:03:47 GMT',
-52 silly get     via: '1.1 varnish',
-52 silly get     'cache-control': 'max-age=300',
-52 silly get     etag: '"BIY9DPKU8JB5NMXSL2RBU5620"',
-52 silly get     age: '6',
-52 silly get     connection: 'keep-alive',
-52 silly get     'x-served-by': 'cache-lcy1127-LCY',
-52 silly get     'x-cache': 'HIT',
-52 silly get     'x-cache-hits': '1',
-52 silly get     'x-timer': 'S1472022227.799819,VS0,VE0',
-52 silly get     vary: 'Accept-Encoding' } ]
-53 verbose etag https://registry.npmjs.org/react-dom from cache
-54 verbose get saving react-dom to /Users/niekai/.npm/registry.npmjs.org/react-dom/.cache.json
+22 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom/package.json
+23 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-fileupload/package.json
+24 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-select/package.json
+25 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-tooltip/package.json
+26 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/style-loader/package.json
+27 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/underscore/package.json
+28 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/url-loader/package.json
+29 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/video.js/package.json
+30 verbose installManyTop reading scoped package data from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/webpack/package.json
+31 info package.json formidable@1.0.17 No license field.
+32 info package.json less-loader@2.2.3 No license field.
+33 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/package.json
+34 silly cache add args [ 'axios', null ]
+35 verbose cache add spec axios
+36 silly cache add parsed spec Result {
+36 silly cache add   raw: 'axios',
+36 silly cache add   scope: null,
+36 silly cache add   name: 'axios',
+36 silly cache add   rawSpec: '',
+36 silly cache add   spec: 'latest',
+36 silly cache add   type: 'tag' }
+37 silly addNamed axios@latest
+38 verbose addNamed "latest" is being treated as a dist-tag for axios
+39 info addNameTag [ 'axios', 'latest' ]
+40 silly mapToRegistry name axios
+41 silly mapToRegistry using default registry
+42 silly mapToRegistry registry https://registry.npmjs.org/
+43 silly mapToRegistry data Result {
+43 silly mapToRegistry   raw: 'axios',
+43 silly mapToRegistry   scope: null,
+43 silly mapToRegistry   name: 'axios',
+43 silly mapToRegistry   rawSpec: '',
+43 silly mapToRegistry   spec: 'latest',
+43 silly mapToRegistry   type: 'tag' }
+44 silly mapToRegistry uri https://registry.npmjs.org/axios
+45 verbose addNameTag registry:https://registry.npmjs.org/axios not in flight; fetching
+46 verbose request uri https://registry.npmjs.org/axios
+47 verbose request no auth needed
+48 info attempt registry request try #1 at 10:32:22 AM
+49 verbose request id eee7488542f4fb2d
+50 http request GET https://registry.npmjs.org/axios
+51 http 200 https://registry.npmjs.org/axios
+52 verbose headers { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+52 verbose headers   etag: '"G0HM6W3JRCLSUR5EK9V9OL7L"',
+52 verbose headers   'content-type': 'application/json',
+52 verbose headers   'content-encoding': 'gzip',
+52 verbose headers   'cache-control': 'max-age=300',
+52 verbose headers   'content-length': '12007',
+52 verbose headers   'accept-ranges': 'bytes',
+52 verbose headers   date: 'Thu, 25 Aug 2016 02:32:24 GMT',
+52 verbose headers   via: '1.1 varnish',
+52 verbose headers   age: '101',
+52 verbose headers   connection: 'keep-alive',
+52 verbose headers   'x-served-by': 'cache-lcy1127-LCY',
+52 verbose headers   'x-cache': 'HIT',
+52 verbose headers   'x-cache-hits': '1',
+52 verbose headers   'x-timer': 'S1472092344.125065,VS0,VE0',
+52 verbose headers   vary: 'Accept-Encoding' }
+53 silly get cb [ 200,
+53 silly get   { server: 'CouchDB/1.6.1 (Erlang OTP/R16B03)',
+53 silly get     etag: '"G0HM6W3JRCLSUR5EK9V9OL7L"',
+53 silly get     'content-type': 'application/json',
+53 silly get     'content-encoding': 'gzip',
+53 silly get     'cache-control': 'max-age=300',
+53 silly get     'content-length': '12007',
+53 silly get     'accept-ranges': 'bytes',
+53 silly get     date: 'Thu, 25 Aug 2016 02:32:24 GMT',
+53 silly get     via: '1.1 varnish',
+53 silly get     age: '101',
+53 silly get     connection: 'keep-alive',
+53 silly get     'x-served-by': 'cache-lcy1127-LCY',
+53 silly get     'x-cache': 'HIT',
+53 silly get     'x-cache-hits': '1',
+53 silly get     'x-timer': 'S1472092344.125065,VS0,VE0',
+53 silly get     vary: 'Accept-Encoding' } ]
+54 verbose get saving axios to /Users/niekai/.npm/registry.npmjs.org/axios/.cache.json
 55 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
-56 silly mapToRegistry name react-dom
-57 silly mapToRegistry using default registry
-58 silly mapToRegistry registry https://registry.npmjs.org/
-59 silly mapToRegistry data Result {
-59 silly mapToRegistry   raw: 'react-dom',
-59 silly mapToRegistry   scope: null,
-59 silly mapToRegistry   name: 'react-dom',
-59 silly mapToRegistry   rawSpec: '',
-59 silly mapToRegistry   spec: 'latest',
-59 silly mapToRegistry   type: 'tag' }
-60 silly mapToRegistry uri https://registry.npmjs.org/react-dom
-61 verbose addRemoteTarball https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz not in flight; adding
-62 verbose addRemoteTarball [ 'https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz',
-62 verbose addRemoteTarball   'f8a20ac1bc2da9eb494fce3b44c3ec19d0951e27' ]
-63 info retry fetch attempt 1 at 3:03:48 PM
-64 info attempt registry request try #1 at 3:03:48 PM
-65 http fetch GET https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz
-66 http fetch 200 https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz
-67 silly fetchAndShaCheck shasum f8a20ac1bc2da9eb494fce3b44c3ec19d0951e27
-68 verbose addTmpTarball /var/folders/s2/gv9tjy516f50s86mf7jt_7q80000gn/T/npm-5623-04ce0404/registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz not in flight; adding
-69 verbose addTmpTarball already have metadata; skipping unpack for react-dom@15.0.2
-70 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
-71 silly cache afterAdd react-dom@15.0.2
-72 verbose afterAdd /Users/niekai/.npm/react-dom/15.0.2/package/package.json not in flight; writing
+56 silly addNameTag next cb for axios with tag latest
+57 silly addNamed axios@0.13.1
+58 verbose addNamed "0.13.1" is a plain semver version for axios
+59 silly mapToRegistry name axios
+60 silly mapToRegistry using default registry
+61 silly mapToRegistry registry https://registry.npmjs.org/
+62 silly mapToRegistry data Result {
+62 silly mapToRegistry   raw: 'axios',
+62 silly mapToRegistry   scope: null,
+62 silly mapToRegistry   name: 'axios',
+62 silly mapToRegistry   rawSpec: '',
+62 silly mapToRegistry   spec: 'latest',
+62 silly mapToRegistry   type: 'tag' }
+63 silly mapToRegistry uri https://registry.npmjs.org/axios
+64 verbose addRemoteTarball https://registry.npmjs.org/axios/-/axios-0.13.1.tgz not in flight; adding
+65 verbose addRemoteTarball [ 'https://registry.npmjs.org/axios/-/axios-0.13.1.tgz',
+65 verbose addRemoteTarball   '3e67abfe4333bc9d2d5fe6fbd13b4694eafc8df8' ]
+66 info retry fetch attempt 1 at 10:32:24 AM
+67 info attempt registry request try #1 at 10:32:24 AM
+68 http fetch GET https://registry.npmjs.org/axios/-/axios-0.13.1.tgz
+69 http fetch 200 https://registry.npmjs.org/axios/-/axios-0.13.1.tgz
+70 silly fetchAndShaCheck shasum 3e67abfe4333bc9d2d5fe6fbd13b4694eafc8df8
+71 verbose addTmpTarball /var/folders/s2/gv9tjy516f50s86mf7jt_7q80000gn/T/npm-2114-b392eda5/registry.npmjs.org/axios/-/axios-0.13.1.tgz not in flight; adding
+72 verbose addTmpTarball already have metadata; skipping unpack for axios@0.13.1
 73 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
-74 verbose afterAdd /Users/niekai/.npm/react-dom/15.0.2/package/package.json written
-75 silly install resolved [ { name: 'react-dom',
-75 silly install resolved     version: '15.0.2',
-75 silly install resolved     description: 'React package for working with the DOM.',
-75 silly install resolved     main: 'index.js',
-75 silly install resolved     repository:
-75 silly install resolved      { type: 'git',
-75 silly install resolved        url: 'git+https://github.com/facebook/react.git' },
-75 silly install resolved     keywords: [ 'react' ],
-75 silly install resolved     license: 'BSD-3-Clause',
-75 silly install resolved     bugs: { url: 'https://github.com/facebook/react/issues' },
-75 silly install resolved     homepage: 'https://facebook.github.io/react/',
-75 silly install resolved     dependencies: {},
-75 silly install resolved     peerDependencies: { react: '^15.0.2' },
-75 silly install resolved     scripts: { start: 'node server.js' },
-75 silly install resolved     _id: 'react-dom@15.0.2',
-75 silly install resolved     _shasum: 'f8a20ac1bc2da9eb494fce3b44c3ec19d0951e27',
-75 silly install resolved     _resolved: 'https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz',
-75 silly install resolved     _from: 'react-dom@15.0.2',
-75 silly install resolved     _npmVersion: '2.15.1',
-75 silly install resolved     _nodeVersion: '4.4.3',
-75 silly install resolved     _npmUser: { name: 'zpao', email: 'paul@oshannessy.com' },
-75 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object] ],
-75 silly install resolved     dist:
-75 silly install resolved      { shasum: 'f8a20ac1bc2da9eb494fce3b44c3ec19d0951e27',
-75 silly install resolved        tarball: 'https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz' },
-75 silly install resolved     _npmOperationalInternal:
-75 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
-75 silly install resolved        tmp: 'tmp/react-dom-15.0.2.tgz_1461976699566_0.6056196035351604' },
-75 silly install resolved     directories: {} } ]
-76 info install react-dom@15.0.2 into /Users/niekai/NodeWorkSpace/chofn-react
-77 info installOne react-dom@15.0.2
-78 verbose installOne of react-dom to /Users/niekai/NodeWorkSpace/chofn-react not in flight; installing
-79 verbose correctMkdir /Users/niekai/.npm/_locks correctMkdir not in flight; initializing
-80 verbose lock using /Users/niekai/.npm/_locks/react-dom-b1d0143be33de257.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-81 silly install write writing react-dom 15.0.2 to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-82 verbose unbuild node_modules/react-dom
-83 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom is being purged from base /Users/niekai/NodeWorkSpace/chofn-react
-84 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-85 verbose tar unpack /Users/niekai/.npm/react-dom/15.0.2/package.tgz
-86 verbose tar unpacking to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-87 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom is being purged
-88 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-89 silly gunzTarPerm modes [ '755', '644' ]
-90 silly gunzTarPerm extractEntry package.json
-91 silly gunzTarPerm extractEntry README.md
-92 silly gunzTarPerm extractEntry LICENSE
-93 silly gunzTarPerm extractEntry index.js
-94 silly gunzTarPerm extractEntry server.js
-95 silly gunzTarPerm extractEntry PATENTS
-96 silly gunzTarPerm extractEntry dist/react-dom-server.js
-97 silly gunzTarPerm extractEntry dist/react-dom-server.min.js
-98 silly gunzTarPerm extractEntry dist/react-dom.js
-99 silly gunzTarPerm extractEntry dist/react-dom.min.js
-100 verbose write writing to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom/package.json
-101 info preinstall react-dom@15.0.2
-102 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom/package.json
-103 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom/package.json
-104 silly install resolved []
-105 verbose about to build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-106 info build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-107 info linkStuff react-dom@15.0.2
-108 silly linkStuff react-dom@15.0.2 has /Users/niekai/NodeWorkSpace/chofn-react/node_modules as its parent node_modules
-109 verbose linkBins react-dom@15.0.2
-110 verbose linkMans react-dom@15.0.2
-111 verbose rebuildBundles react-dom@15.0.2
-112 info install react-dom@15.0.2
-113 info postinstall react-dom@15.0.2
-114 verbose unlock done using /Users/niekai/.npm/_locks/react-dom-b1d0143be33de257.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/react-dom
-115 verbose validateInstall loading /Users/niekai/NodeWorkSpace/chofn-react/package.json for validation
-116 verbose stack Error: The package react@15.0.2 does not satisfy its siblings' peerDependencies requirements!
-116 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
-116 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
-116 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
-116 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-116 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-116 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-116 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-116 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-116 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-116 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-117 verbose cwd /Users/niekai/NodeWorkSpace/chofn-react
-118 error Darwin 15.6.0
-119 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "react-dom@15.0.2"
-120 error node v4.4.7
-121 error npm  v2.15.8
-122 error code EPEERINVALID
-123 error peerinvalid The package react@15.0.2 does not satisfy its siblings' peerDependencies requirements!
-124 verbose exit [ 1, true ]
+74 silly cache afterAdd axios@0.13.1
+75 verbose afterAdd /Users/niekai/.npm/axios/0.13.1/package/package.json not in flight; writing
+76 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+77 verbose afterAdd /Users/niekai/.npm/axios/0.13.1/package/package.json written
+78 silly install resolved [ { name: 'axios',
+78 silly install resolved     version: '0.13.1',
+78 silly install resolved     description: 'Promise based HTTP client for the browser and node.js',
+78 silly install resolved     main: 'index.js',
+78 silly install resolved     scripts:
+78 silly install resolved      { test: 'grunt test',
+78 silly install resolved        start: 'node ./sandbox/server.js',
+78 silly install resolved        build: 'NODE_ENV=production grunt build',
+78 silly install resolved        preversion: 'npm test',
+78 silly install resolved        version: 'npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json',
+78 silly install resolved        postversion: 'git push && git push --tags',
+78 silly install resolved        examples: 'node ./examples/server.js',
+78 silly install resolved        coveralls: 'cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js' },
+78 silly install resolved     repository:
+78 silly install resolved      { type: 'git',
+78 silly install resolved        url: 'git+https://github.com/mzabriskie/axios.git' },
+78 silly install resolved     keywords: [ 'xhr', 'http', 'ajax', 'promise', 'node' ],
+78 silly install resolved     author: { name: 'Matt Zabriskie' },
+78 silly install resolved     license: 'MIT',
+78 silly install resolved     bugs: { url: 'https://github.com/mzabriskie/axios/issues' },
+78 silly install resolved     homepage: 'https://github.com/mzabriskie/axios',
+78 silly install resolved     devDependencies:
+78 silly install resolved      { coveralls: '^2.11.9',
+78 silly install resolved        'es6-promise': '^3.2.1',
+78 silly install resolved        grunt: '0.4.5',
+78 silly install resolved        'grunt-banner': '0.6.0',
+78 silly install resolved        'grunt-cli': '0.1.13',
+78 silly install resolved        'grunt-contrib-clean': '1.0.0',
+78 silly install resolved        'grunt-contrib-nodeunit': '1.0.0',
+78 silly install resolved        'grunt-contrib-watch': '0.6.1',
+78 silly install resolved        'grunt-eslint': '18.0.0',
+78 silly install resolved        'grunt-karma': '0.12.1',
+78 silly install resolved        'grunt-ts': '5.3.2',
+78 silly install resolved        'grunt-webpack': '1.0.11',
+78 silly install resolved        'istanbul-instrumenter-loader': '^0.2.0',
+78 silly install resolved        'jasmine-core': '^2.4.1',
+78 silly install resolved        karma: '^0.13.22',
+78 silly install resolved        'karma-chrome-launcher': '^1.0.1',
+78 silly install resolved        'karma-coverage': '^1.0.0',
+78 silly install resolved        'karma-firefox-launcher': '^1.0.0',
+78 silly install resolved        'karma-jasmine': '^1.0.2',
+78 silly install resolved        'karma-jasmine-ajax': '^0.1.13',
+78 silly install resolved        'karma-opera-launcher': '^1.0.0',
+78 silly install resolved        'karma-phantomjs-launcher': '^1.0.0',
+78 silly install resolved        'karma-safari-launcher': '^1.0.0',
+78 silly install resolved        'karma-sauce-launcher': '^1.0.0',
+78 silly install resolved        'karma-sinon': '^1.0.5',
+78 silly install resolved        'karma-sourcemap-loader': '^0.3.7',
+78 silly install resolved        'karma-webpack': '^1.7.0',
+78 silly install resolved        'load-grunt-tasks': '3.4.1',
+78 silly install resolved        minimist: '^1.2.0',
+78 silly install resolved        'phantomjs-prebuilt': '^2.1.7',
+78 silly install resolved        sinon: '^1.17.4',
+78 silly install resolved        webpack: '^1.13.1',
+78 silly install resolved        'webpack-dev-server': '^1.14.1',
+78 silly install resolved        'url-search-params': '^0.5.0' },
+78 silly install resolved     browser: { './lib/adapters/http.js': './lib/adapters/xhr.js' },
+78 silly install resolved     typescript: { definition: './axios.d.ts' },
+78 silly install resolved     dependencies: { 'follow-redirects': '0.0.7' },
+78 silly install resolved     gitHead: '377efb89aed819ed1cd416b69f057632ad5664a5',
+78 silly install resolved     _id: 'axios@0.13.1',
+78 silly install resolved     _shasum: '3e67abfe4333bc9d2d5fe6fbd13b4694eafc8df8',
+78 silly install resolved     _from: 'axios@latest',
+78 silly install resolved     _npmVersion: '3.9.5',
+78 silly install resolved     _nodeVersion: '3.3.1',
+78 silly install resolved     _npmUser: { name: 'mzabriskie', email: 'mzabriskie@gmail.com' },
+78 silly install resolved     maintainers: [ [Object], [Object] ],
+78 silly install resolved     dist:
+78 silly install resolved      { shasum: '3e67abfe4333bc9d2d5fe6fbd13b4694eafc8df8',
+78 silly install resolved        tarball: 'https://registry.npmjs.org/axios/-/axios-0.13.1.tgz' },
+78 silly install resolved     _npmOperationalInternal:
+78 silly install resolved      { host: 'packages-12-west.internal.npmjs.com',
+78 silly install resolved        tmp: 'tmp/axios-0.13.1.tgz_1468689204636_0.7909611663781106' },
+78 silly install resolved     directories: {},
+78 silly install resolved     _resolved: 'https://registry.npmjs.org/axios/-/axios-0.13.1.tgz' } ]
+79 info install axios@0.13.1 into /Users/niekai/NodeWorkSpace/chofn-react
+80 info installOne axios@0.13.1
+81 verbose installOne of axios to /Users/niekai/NodeWorkSpace/chofn-react not in flight; installing
+82 verbose correctMkdir /Users/niekai/.npm/_locks correctMkdir not in flight; initializing
+83 verbose lock using /Users/niekai/.npm/_locks/axios-b8187bd5242b95e8.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+84 silly install write writing axios 0.13.1 to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+85 verbose unbuild node_modules/axios
+86 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios is being purged from base /Users/niekai/NodeWorkSpace/chofn-react
+87 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+88 verbose tar unpack /Users/niekai/.npm/axios/0.13.1/package.tgz
+89 verbose tar unpacking to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+90 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios is being purged
+91 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+92 silly gunzTarPerm modes [ '755', '644' ]
+93 silly gunzTarPerm extractEntry package.json
+94 silly gunzTarPerm extractEntry README.md
+95 silly gunzTarPerm extractEntry LICENSE
+96 silly gunzTarPerm extractEntry index.js
+97 silly gunzTarPerm extractEntry UPGRADE_GUIDE.md
+98 silly gunzTarPerm extractEntry component.json
+99 silly gunzTarPerm extractEntry dist/axios.js
+100 silly gunzTarPerm extractEntry dist/axios.min.js
+101 silly gunzTarPerm extractEntry dist/axios.map
+102 silly gunzTarPerm extractEntry dist/axios.min.map
+103 silly gunzTarPerm extractEntry http_proxy.txt
+104 silly gunzTarPerm extractEntry CHANGELOG.md
+105 silly gunzTarPerm extractEntry lib/axios.js
+106 silly gunzTarPerm extractEntry lib/defaults.js
+107 silly gunzTarPerm extractEntry lib/utils.js
+108 silly gunzTarPerm extractEntry lib/adapters/README.md
+109 silly gunzTarPerm extractEntry lib/adapters/http.js
+110 silly gunzTarPerm extractEntry lib/adapters/xhr.js
+111 silly gunzTarPerm extractEntry lib/core/README.md
+112 silly gunzTarPerm extractEntry lib/core/Axios.js
+113 silly gunzTarPerm extractEntry lib/core/InterceptorManager.js
+114 silly gunzTarPerm extractEntry lib/core/createError.js
+115 silly gunzTarPerm extractEntry lib/core/dispatchRequest.js
+116 silly gunzTarPerm extractEntry lib/core/enhanceError.js
+117 silly gunzTarPerm extractEntry lib/core/settle.js
+118 silly gunzTarPerm extractEntry lib/core/transformData.js
+119 silly gunzTarPerm extractEntry lib/helpers/README.md
+120 silly gunzTarPerm extractEntry lib/helpers/btoa.js
+121 silly gunzTarPerm extractEntry lib/helpers/buildURL.js
+122 silly gunzTarPerm extractEntry lib/helpers/combineURLs.js
+123 silly gunzTarPerm extractEntry lib/helpers/cookies.js
+124 silly gunzTarPerm extractEntry lib/helpers/bind.js
+125 silly gunzTarPerm extractEntry lib/helpers/isAbsoluteURL.js
+126 silly gunzTarPerm extractEntry lib/helpers/isURLSameOrigin.js
+127 silly gunzTarPerm extractEntry lib/helpers/normalizeHeaderName.js
+128 silly gunzTarPerm extractEntry lib/helpers/parseHeaders.js
+129 silly gunzTarPerm extractEntry lib/helpers/spread.js
+130 silly gunzTarPerm extractEntry lib/helpers/deprecatedMethod.js
+131 silly gunzTarPerm extractEntry axios.d.ts
+132 verbose write writing to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/package.json
+133 info preinstall axios@0.13.1
+134 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/package.json
+135 silly prepareForInstallMany adding follow-redirects@0.0.7 from axios dependencies
+136 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/package.json
+137 silly cache add args [ 'follow-redirects@0.0.7', null ]
+138 verbose cache add spec follow-redirects@0.0.7
+139 silly cache add parsed spec Result {
+139 silly cache add   raw: 'follow-redirects@0.0.7',
+139 silly cache add   scope: null,
+139 silly cache add   name: 'follow-redirects',
+139 silly cache add   rawSpec: '0.0.7',
+139 silly cache add   spec: '0.0.7',
+139 silly cache add   type: 'version' }
+140 silly addNamed follow-redirects@0.0.7
+141 verbose addNamed "0.0.7" is a plain semver version for follow-redirects
+142 silly mapToRegistry name follow-redirects
+143 silly mapToRegistry using default registry
+144 silly mapToRegistry registry https://registry.npmjs.org/
+145 silly mapToRegistry data Result {
+145 silly mapToRegistry   raw: 'follow-redirects',
+145 silly mapToRegistry   scope: null,
+145 silly mapToRegistry   name: 'follow-redirects',
+145 silly mapToRegistry   rawSpec: '',
+145 silly mapToRegistry   spec: 'latest',
+145 silly mapToRegistry   type: 'tag' }
+146 silly mapToRegistry uri https://registry.npmjs.org/follow-redirects
+147 verbose addNameVersion registry:https://registry.npmjs.org/follow-redirects not in flight; fetching
+148 verbose request uri https://registry.npmjs.org/follow-redirects
+149 verbose request no auth needed
+150 info attempt registry request try #1 at 10:32:25 AM
+151 http request GET https://registry.npmjs.org/follow-redirects
+152 http 200 https://registry.npmjs.org/follow-redirects
+153 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+153 verbose headers   etag: '"6NPMTQ36E3IOF3O6VAJ02Q7JR"',
+153 verbose headers   'content-type': 'application/json',
+153 verbose headers   'content-encoding': 'gzip',
+153 verbose headers   'cache-control': 'max-age=300',
+153 verbose headers   'content-length': '4489',
+153 verbose headers   'accept-ranges': 'bytes',
+153 verbose headers   date: 'Thu, 25 Aug 2016 02:32:25 GMT',
+153 verbose headers   via: '1.1 varnish',
+153 verbose headers   age: '256',
+153 verbose headers   connection: 'keep-alive',
+153 verbose headers   'x-served-by': 'cache-lcy1127-LCY',
+153 verbose headers   'x-cache': 'HIT',
+153 verbose headers   'x-cache-hits': '1',
+153 verbose headers   'x-timer': 'S1472092345.837109,VS0,VE0',
+153 verbose headers   vary: 'Accept-Encoding' }
+154 silly get cb [ 200,
+154 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+154 silly get     etag: '"6NPMTQ36E3IOF3O6VAJ02Q7JR"',
+154 silly get     'content-type': 'application/json',
+154 silly get     'content-encoding': 'gzip',
+154 silly get     'cache-control': 'max-age=300',
+154 silly get     'content-length': '4489',
+154 silly get     'accept-ranges': 'bytes',
+154 silly get     date: 'Thu, 25 Aug 2016 02:32:25 GMT',
+154 silly get     via: '1.1 varnish',
+154 silly get     age: '256',
+154 silly get     connection: 'keep-alive',
+154 silly get     'x-served-by': 'cache-lcy1127-LCY',
+154 silly get     'x-cache': 'HIT',
+154 silly get     'x-cache-hits': '1',
+154 silly get     'x-timer': 'S1472092345.837109,VS0,VE0',
+154 silly get     vary: 'Accept-Encoding' } ]
+155 verbose get saving follow-redirects to /Users/niekai/.npm/registry.npmjs.org/follow-redirects/.cache.json
+156 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+157 silly mapToRegistry name follow-redirects
+158 silly mapToRegistry using default registry
+159 silly mapToRegistry registry https://registry.npmjs.org/
+160 silly mapToRegistry data Result {
+160 silly mapToRegistry   raw: 'follow-redirects',
+160 silly mapToRegistry   scope: null,
+160 silly mapToRegistry   name: 'follow-redirects',
+160 silly mapToRegistry   rawSpec: '',
+160 silly mapToRegistry   spec: 'latest',
+160 silly mapToRegistry   type: 'tag' }
+161 silly mapToRegistry uri https://registry.npmjs.org/follow-redirects
+162 verbose addRemoteTarball https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz not in flight; adding
+163 verbose addRemoteTarball [ 'https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz',
+163 verbose addRemoteTarball   '34b90bab2a911aa347571da90f22bd36ecd8a919' ]
+164 info retry fetch attempt 1 at 10:32:26 AM
+165 info attempt registry request try #1 at 10:32:26 AM
+166 http fetch GET https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz
+167 http fetch 200 https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz
+168 silly fetchAndShaCheck shasum 34b90bab2a911aa347571da90f22bd36ecd8a919
+169 verbose addTmpTarball /var/folders/s2/gv9tjy516f50s86mf7jt_7q80000gn/T/npm-2114-b392eda5/registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz not in flight; adding
+170 verbose addTmpTarball already have metadata; skipping unpack for follow-redirects@0.0.7
+171 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+172 silly cache afterAdd follow-redirects@0.0.7
+173 verbose afterAdd /Users/niekai/.npm/follow-redirects/0.0.7/package/package.json not in flight; writing
+174 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+175 verbose afterAdd /Users/niekai/.npm/follow-redirects/0.0.7/package/package.json written
+176 silly install resolved [ { name: 'follow-redirects',
+176 silly install resolved     version: '0.0.7',
+176 silly install resolved     description: 'HTTP and HTTPS modules that follow redirects.',
+176 silly install resolved     main: 'index.js',
+176 silly install resolved     scripts:
+176 silly install resolved      { test: 'npm run cover && npm run lint && npm run style',
+176 silly install resolved        lint: 'jshint *.js test/*.js test/**/*.js',
+176 silly install resolved        style: 'jscs *.js && jscs test/*.js test/**/*.js --config=test/.jscsrc',
+176 silly install resolved        cover: 'BLUEBIRD_DEBUG=1 istanbul cover ./node_modules/.bin/_mocha',
+176 silly install resolved        debug: 'BLUEBIRD_DEBUG=1 mocha' },
+176 silly install resolved     repository:
+176 silly install resolved      { type: 'git',
+176 silly install resolved        url: 'git+ssh://git@github.com/olalonde/follow-redirects.git' },
+176 silly install resolved     homepage: 'https://github.com/olalonde/follow-redirects',
+176 silly install resolved     bugs: { url: 'https://github.com/olalonde/follow-redirects/issues' },
+176 silly install resolved     keywords:
+176 silly install resolved      [ 'http',
+176 silly install resolved        'https',
+176 silly install resolved        'url',
+176 silly install resolved        'redirect',
+176 silly install resolved        'client',
+176 silly install resolved        'location',
+176 silly install resolved        'utility' ],
+176 silly install resolved     author:
+176 silly install resolved      { name: 'Olivier Lalonde',
+176 silly install resolved        email: 'olalonde@gmail.com',
+176 silly install resolved        url: 'http://www.syskall.com' },
+176 silly install resolved     contributors: [ [Object] ],
+176 silly install resolved     files: [ 'index.js', 'create.js', 'http.js', 'https.js' ],
+176 silly install resolved     dependencies: { debug: '^2.2.0', 'stream-consume': '^0.1.0' },
+176 silly install resolved     devDependencies:
+176 silly install resolved      { bluebird: '^2.9.30',
+176 silly install resolved        'concat-stream': '^1.5.0',
+176 silly install resolved        coveralls: '^2.11.2',
+176 silly install resolved        express: '^4.13.0',
+176 silly install resolved        istanbul: '^0.3.17',
+176 silly install resolved        jscs: '^1.13.1',
+176 silly install resolved        jshint: '^2.8.0',
+176 silly install resolved        mocha: '^2.2.5',
+176 silly install resolved        semver: '~4.3.6' },
+176 silly install resolved     license: 'MIT',
+176 silly install resolved     gitHead: '5137f3958a179f0bf9310886edb77efd3b85a208',
+176 silly install resolved     _id: 'follow-redirects@0.0.7',
+176 silly install resolved     _shasum: '34b90bab2a911aa347571da90f22bd36ecd8a919',
+176 silly install resolved     _from: 'follow-redirects@0.0.7',
+176 silly install resolved     _npmVersion: '2.14.2',
+176 silly install resolved     _nodeVersion: '0.12.7',
+176 silly install resolved     _npmUser: { name: 'james.talmage', email: 'james@talmage.io' },
+176 silly install resolved     dist:
+176 silly install resolved      { shasum: '34b90bab2a911aa347571da90f22bd36ecd8a919',
+176 silly install resolved        tarball: 'https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz' },
+176 silly install resolved     maintainers: [ [Object], [Object] ],
+176 silly install resolved     directories: {},
+176 silly install resolved     _resolved: 'https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz' } ]
+177 info install follow-redirects@0.0.7 into /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+178 info installOne follow-redirects@0.0.7
+179 verbose installOne of follow-redirects to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios not in flight; installing
+180 verbose correctMkdir /Users/niekai/.npm/_locks correctMkdir not in flight; initializing
+181 verbose lock using /Users/niekai/.npm/_locks/follow-redirects-c2fafc117a4591f2.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+182 silly install write writing follow-redirects 0.0.7 to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+183 verbose unbuild node_modules/axios/node_modules/follow-redirects
+184 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects is being purged from base /Users/niekai/NodeWorkSpace/chofn-react
+185 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+186 verbose tar unpack /Users/niekai/.npm/follow-redirects/0.0.7/package.tgz
+187 verbose tar unpacking to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+188 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects is being purged
+189 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+190 silly gunzTarPerm modes [ '755', '644' ]
+191 silly gunzTarPerm extractEntry package.json
+192 silly gunzTarPerm extractEntry README.md
+193 silly gunzTarPerm extractEntry create.js
+194 silly gunzTarPerm extractEntry http.js
+195 silly gunzTarPerm extractEntry https.js
+196 silly gunzTarPerm extractEntry index.js
+197 verbose write writing to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/package.json
+198 info preinstall follow-redirects@0.0.7
+199 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/package.json
+200 silly prepareForInstallMany adding debug@^2.2.0 from follow-redirects dependencies
+201 silly prepareForInstallMany adding stream-consume@^0.1.0 from follow-redirects dependencies
+202 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/package.json
+203 silly cache add args [ 'debug@^2.2.0', null ]
+204 verbose cache add spec debug@^2.2.0
+205 silly cache add args [ 'stream-consume@^0.1.0', null ]
+206 verbose cache add spec stream-consume@^0.1.0
+207 silly cache add parsed spec Result {
+207 silly cache add   raw: 'debug@^2.2.0',
+207 silly cache add   scope: null,
+207 silly cache add   name: 'debug',
+207 silly cache add   rawSpec: '^2.2.0',
+207 silly cache add   spec: '>=2.2.0 <3.0.0',
+207 silly cache add   type: 'range' }
+208 silly addNamed debug@>=2.2.0 <3.0.0
+209 verbose addNamed ">=2.2.0 <3.0.0" is a valid semver range for debug
+210 silly addNameRange { name: 'debug', range: '>=2.2.0 <3.0.0', hasData: false }
+211 silly mapToRegistry name debug
+212 silly mapToRegistry using default registry
+213 silly mapToRegistry registry https://registry.npmjs.org/
+214 silly mapToRegistry data Result {
+214 silly mapToRegistry   raw: 'debug',
+214 silly mapToRegistry   scope: null,
+214 silly mapToRegistry   name: 'debug',
+214 silly mapToRegistry   rawSpec: '',
+214 silly mapToRegistry   spec: 'latest',
+214 silly mapToRegistry   type: 'tag' }
+215 silly mapToRegistry uri https://registry.npmjs.org/debug
+216 verbose addNameRange registry:https://registry.npmjs.org/debug not in flight; fetching
+217 silly cache add parsed spec Result {
+217 silly cache add   raw: 'stream-consume@^0.1.0',
+217 silly cache add   scope: null,
+217 silly cache add   name: 'stream-consume',
+217 silly cache add   rawSpec: '^0.1.0',
+217 silly cache add   spec: '>=0.1.0 <0.2.0',
+217 silly cache add   type: 'range' }
+218 silly addNamed stream-consume@>=0.1.0 <0.2.0
+219 verbose addNamed ">=0.1.0 <0.2.0" is a valid semver range for stream-consume
+220 silly addNameRange { name: 'stream-consume',
+220 silly addNameRange   range: '>=0.1.0 <0.2.0',
+220 silly addNameRange   hasData: false }
+221 silly mapToRegistry name stream-consume
+222 silly mapToRegistry using default registry
+223 silly mapToRegistry registry https://registry.npmjs.org/
+224 silly mapToRegistry data Result {
+224 silly mapToRegistry   raw: 'stream-consume',
+224 silly mapToRegistry   scope: null,
+224 silly mapToRegistry   name: 'stream-consume',
+224 silly mapToRegistry   rawSpec: '',
+224 silly mapToRegistry   spec: 'latest',
+224 silly mapToRegistry   type: 'tag' }
+225 silly mapToRegistry uri https://registry.npmjs.org/stream-consume
+226 verbose addNameRange registry:https://registry.npmjs.org/stream-consume not in flight; fetching
+227 verbose request uri https://registry.npmjs.org/debug
+228 verbose request no auth needed
+229 info attempt registry request try #1 at 10:32:26 AM
+230 verbose etag "81PMPI7E63CS6SSNXX1MMU7FQ"
+231 http request GET https://registry.npmjs.org/debug
+232 verbose request uri https://registry.npmjs.org/stream-consume
+233 verbose request no auth needed
+234 info attempt registry request try #1 at 10:32:26 AM
+235 verbose etag "DGXKXNNMAKCR6L48455H3IEA8"
+236 http request GET https://registry.npmjs.org/stream-consume
+237 http 304 https://registry.npmjs.org/stream-consume
+238 verbose headers { date: 'Thu, 25 Aug 2016 02:32:27 GMT',
+238 verbose headers   via: '1.1 varnish',
+238 verbose headers   'cache-control': 'max-age=300',
+238 verbose headers   etag: '"DGXKXNNMAKCR6L48455H3IEA8"',
+238 verbose headers   age: '228',
+238 verbose headers   connection: 'keep-alive',
+238 verbose headers   'x-served-by': 'cache-lcy1130-LCY',
+238 verbose headers   'x-cache': 'HIT',
+238 verbose headers   'x-cache-hits': '2',
+238 verbose headers   'x-timer': 'S1472092347.150321,VS0,VE0',
+238 verbose headers   vary: 'Accept-Encoding' }
+239 silly get cb [ 304,
+239 silly get   { date: 'Thu, 25 Aug 2016 02:32:27 GMT',
+239 silly get     via: '1.1 varnish',
+239 silly get     'cache-control': 'max-age=300',
+239 silly get     etag: '"DGXKXNNMAKCR6L48455H3IEA8"',
+239 silly get     age: '228',
+239 silly get     connection: 'keep-alive',
+239 silly get     'x-served-by': 'cache-lcy1130-LCY',
+239 silly get     'x-cache': 'HIT',
+239 silly get     'x-cache-hits': '2',
+239 silly get     'x-timer': 'S1472092347.150321,VS0,VE0',
+239 silly get     vary: 'Accept-Encoding' } ]
+240 verbose etag https://registry.npmjs.org/stream-consume from cache
+241 verbose get saving stream-consume to /Users/niekai/.npm/registry.npmjs.org/stream-consume/.cache.json
+242 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+243 silly addNameRange number 2 { name: 'stream-consume',
+243 silly addNameRange   range: '>=0.1.0 <0.2.0',
+243 silly addNameRange   hasData: true }
+244 silly addNameRange versions [ 'stream-consume', [ '0.1.0' ] ]
+245 silly addNamed stream-consume@0.1.0
+246 verbose addNamed "0.1.0" is a plain semver version for stream-consume
+247 silly cache afterAdd stream-consume@0.1.0
+248 verbose afterAdd /Users/niekai/.npm/stream-consume/0.1.0/package/package.json not in flight; writing
+249 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+250 verbose afterAdd /Users/niekai/.npm/stream-consume/0.1.0/package/package.json written
+251 http 200 https://registry.npmjs.org/debug
+252 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+252 verbose headers   etag: '"4HYI298QH7VZ47KWZI339FNZY"',
+252 verbose headers   'content-type': 'application/json',
+252 verbose headers   'content-encoding': 'gzip',
+252 verbose headers   'cache-control': 'max-age=300',
+252 verbose headers   'content-length': '9344',
+252 verbose headers   'accept-ranges': 'bytes',
+252 verbose headers   date: 'Thu, 25 Aug 2016 02:32:26 GMT',
+252 verbose headers   via: '1.1 varnish',
+252 verbose headers   age: '128',
+252 verbose headers   connection: 'keep-alive',
+252 verbose headers   'x-served-by': 'cache-lcy1127-LCY',
+252 verbose headers   'x-cache': 'HIT',
+252 verbose headers   'x-cache-hits': '5',
+252 verbose headers   'x-timer': 'S1472092346.492572,VS0,VE0',
+252 verbose headers   vary: 'Accept-Encoding' }
+253 silly get cb [ 200,
+253 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+253 silly get     etag: '"4HYI298QH7VZ47KWZI339FNZY"',
+253 silly get     'content-type': 'application/json',
+253 silly get     'content-encoding': 'gzip',
+253 silly get     'cache-control': 'max-age=300',
+253 silly get     'content-length': '9344',
+253 silly get     'accept-ranges': 'bytes',
+253 silly get     date: 'Thu, 25 Aug 2016 02:32:26 GMT',
+253 silly get     via: '1.1 varnish',
+253 silly get     age: '128',
+253 silly get     connection: 'keep-alive',
+253 silly get     'x-served-by': 'cache-lcy1127-LCY',
+253 silly get     'x-cache': 'HIT',
+253 silly get     'x-cache-hits': '5',
+253 silly get     'x-timer': 'S1472092346.492572,VS0,VE0',
+253 silly get     vary: 'Accept-Encoding' } ]
+254 verbose get saving debug to /Users/niekai/.npm/registry.npmjs.org/debug/.cache.json
+255 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+256 silly addNameRange number 2 { name: 'debug', range: '>=2.2.0 <3.0.0', hasData: true }
+257 silly addNameRange versions [ 'debug',
+257 silly addNameRange   [ '0.0.1',
+257 silly addNameRange     '0.1.0',
+257 silly addNameRange     '0.2.0',
+257 silly addNameRange     '0.3.0',
+257 silly addNameRange     '0.4.0',
+257 silly addNameRange     '0.4.1',
+257 silly addNameRange     '0.5.0',
+257 silly addNameRange     '0.6.0',
+257 silly addNameRange     '0.7.0',
+257 silly addNameRange     '0.7.1',
+257 silly addNameRange     '0.7.2',
+257 silly addNameRange     '0.7.3',
+257 silly addNameRange     '0.7.4',
+257 silly addNameRange     '0.8.0',
+257 silly addNameRange     '0.8.1',
+257 silly addNameRange     '1.0.0',
+257 silly addNameRange     '1.0.1',
+257 silly addNameRange     '1.0.2',
+257 silly addNameRange     '1.0.3',
+257 silly addNameRange     '1.0.4',
+257 silly addNameRange     '2.0.0',
+257 silly addNameRange     '2.1.0',
+257 silly addNameRange     '2.1.1',
+257 silly addNameRange     '2.1.2',
+257 silly addNameRange     '2.1.3',
+257 silly addNameRange     '2.2.0' ] ]
+258 silly addNamed debug@2.2.0
+259 verbose addNamed "2.2.0" is a plain semver version for debug
+260 silly cache afterAdd debug@2.2.0
+261 verbose afterAdd /Users/niekai/.npm/debug/2.2.0/package/package.json not in flight; writing
+262 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+263 verbose afterAdd /Users/niekai/.npm/debug/2.2.0/package/package.json written
+264 silly install resolved [ { name: 'stream-consume',
+264 silly install resolved     version: '0.1.0',
+264 silly install resolved     description: 'Consume a stream to ensure it keeps flowing',
+264 silly install resolved     main: 'index.js',
+264 silly install resolved     scripts: { test: 'mocha' },
+264 silly install resolved     repository:
+264 silly install resolved      { type: 'git',
+264 silly install resolved        url: 'git+https://github.com/aroneous/stream-consume.git' },
+264 silly install resolved     author: { name: 'Aron Nopanen' },
+264 silly install resolved     license: 'MIT',
+264 silly install resolved     bugs: { url: 'https://github.com/aroneous/stream-consume/issues' },
+264 silly install resolved     homepage: 'https://github.com/aroneous/stream-consume',
+264 silly install resolved     devDependencies: { mocha: '^1.20.1', should: '^4.0.4', through2: '^0.5.1' },
+264 silly install resolved     gitHead: '54496fd47e0f10bf6924728ef405b72a4bbad6de',
+264 silly install resolved     _id: 'stream-consume@0.1.0',
+264 silly install resolved     _shasum: 'a41ead1a6d6081ceb79f65b061901b6d8f3d1d0f',
+264 silly install resolved     _from: 'stream-consume@>=0.1.0 <0.2.0',
+264 silly install resolved     _npmVersion: '1.5.0-alpha-3',
+264 silly install resolved     _npmUser: { name: 'aroneous', email: 'aron.nopanen@gmail.com' },
+264 silly install resolved     maintainers: [ [Object] ],
+264 silly install resolved     dist:
+264 silly install resolved      { shasum: 'a41ead1a6d6081ceb79f65b061901b6d8f3d1d0f',
+264 silly install resolved        tarball: 'https://registry.npmjs.org/stream-consume/-/stream-consume-0.1.0.tgz' },
+264 silly install resolved     directories: {},
+264 silly install resolved     _resolved: 'https://registry.npmjs.org/stream-consume/-/stream-consume-0.1.0.tgz',
+264 silly install resolved     readme: 'ERROR: No README data found!' },
+264 silly install resolved   { name: 'debug',
+264 silly install resolved     version: '2.2.0',
+264 silly install resolved     repository: { type: 'git', url: 'git://github.com/visionmedia/debug.git' },
+264 silly install resolved     description: 'small debugging utility',
+264 silly install resolved     keywords: [ 'debug', 'log', 'debugger' ],
+264 silly install resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+264 silly install resolved     contributors: [ [Object] ],
+264 silly install resolved     license: 'MIT',
+264 silly install resolved     dependencies: { ms: '0.7.1' },
+264 silly install resolved     devDependencies: { browserify: '9.0.3', mocha: '*' },
+264 silly install resolved     main: './node.js',
+264 silly install resolved     browser: './browser.js',
+264 silly install resolved     component: { scripts: [Object] },
+264 silly install resolved     gitHead: 'b38458422b5aa8aa6d286b10dfe427e8a67e2b35',
+264 silly install resolved     bugs: { url: 'https://github.com/visionmedia/debug/issues' },
+264 silly install resolved     homepage: 'https://github.com/visionmedia/debug',
+264 silly install resolved     _id: 'debug@2.2.0',
+264 silly install resolved     scripts: {},
+264 silly install resolved     _shasum: 'f87057e995b1a1f6ae6a4960664137bc56f039da',
+264 silly install resolved     _from: 'debug@>=2.2.0 <3.0.0',
+264 silly install resolved     _npmVersion: '2.7.4',
+264 silly install resolved     _nodeVersion: '0.12.2',
+264 silly install resolved     _npmUser: { name: 'tootallnate', email: 'nathan@tootallnate.net' },
+264 silly install resolved     maintainers: [ [Object], [Object] ],
+264 silly install resolved     dist:
+264 silly install resolved      { shasum: 'f87057e995b1a1f6ae6a4960664137bc56f039da',
+264 silly install resolved        tarball: 'https://registry.npmjs.org/debug/-/debug-2.2.0.tgz' },
+264 silly install resolved     directories: {},
+264 silly install resolved     _resolved: 'https://registry.npmjs.org/debug/-/debug-2.2.0.tgz',
+264 silly install resolved     readme: 'ERROR: No README data found!' } ]
+265 info install stream-consume@0.1.0 into /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+266 info install debug@2.2.0 into /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+267 info installOne stream-consume@0.1.0
+268 verbose installOne of stream-consume to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects not in flight; installing
+269 verbose correctMkdir /Users/niekai/.npm/_locks correctMkdir not in flight; initializing
+270 info installOne debug@2.2.0
+271 verbose installOne of debug to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects not in flight; installing
+272 verbose correctMkdir /Users/niekai/.npm/_locks correctMkdir not in flight; initializing
+273 verbose lock using /Users/niekai/.npm/_locks/stream-consume-40cf0e5c284d27af.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+274 verbose lock using /Users/niekai/.npm/_locks/debug-e541a25db8c62f17.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+275 silly install write writing stream-consume 0.1.0 to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+276 silly install write writing debug 2.2.0 to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+277 verbose unbuild node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+278 verbose unbuild node_modules/axios/node_modules/follow-redirects/node_modules/debug
+279 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume is being purged from base /Users/niekai/NodeWorkSpace/chofn-react
+280 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+281 verbose tar unpack /Users/niekai/.npm/stream-consume/0.1.0/package.tgz
+282 verbose tar unpacking to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+283 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume is being purged
+284 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+285 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug is being purged from base /Users/niekai/NodeWorkSpace/chofn-react
+286 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+287 silly gunzTarPerm modes [ '755', '644' ]
+288 verbose tar unpack /Users/niekai/.npm/debug/2.2.0/package.tgz
+289 verbose tar unpacking to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+290 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug is being purged
+291 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+292 silly gunzTarPerm modes [ '755', '644' ]
+293 silly gunzTarPerm extractEntry package.json
+294 silly gunzTarPerm extractEntry package.json
+295 silly gunzTarPerm extractEntry .npmignore
+296 silly gunzTarPerm extractEntry README.md
+297 silly gunzTarPerm extractEntry .npmignore
+298 silly gunzTarPerm extractEntry node.js
+299 silly gunzTarPerm extractEntry index.js
+300 silly gunzTarPerm extractEntry test/tests.js
+301 silly gunzTarPerm extractEntry debug.js
+302 silly gunzTarPerm extractEntry browser.js
+303 silly gunzTarPerm extractEntry Readme.md
+304 silly gunzTarPerm extractEntry bower.json
+305 silly gunzTarPerm extractEntry .jshintrc
+306 silly gunzTarPerm extractEntry component.json
+307 silly gunzTarPerm extractEntry Makefile
+308 silly gunzTarPerm extractEntry History.md
+309 verbose write writing to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume/package.json
+310 info preinstall stream-consume@0.1.0
+311 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume/package.json
+312 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume/package.json
+313 silly install resolved []
+314 verbose about to build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+315 info build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+316 info linkStuff stream-consume@0.1.0
+317 silly linkStuff stream-consume@0.1.0 has /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules as its parent node_modules
+318 verbose linkBins stream-consume@0.1.0
+319 verbose linkMans stream-consume@0.1.0
+320 verbose rebuildBundles stream-consume@0.1.0
+321 info install stream-consume@0.1.0
+322 info postinstall stream-consume@0.1.0
+323 verbose unlock done using /Users/niekai/.npm/_locks/stream-consume-40cf0e5c284d27af.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/stream-consume
+324 verbose write writing to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/package.json
+325 info preinstall debug@2.2.0
+326 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/package.json
+327 silly prepareForInstallMany adding ms@0.7.1 from debug dependencies
+328 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/package.json
+329 silly cache add args [ 'ms@0.7.1', null ]
+330 verbose cache add spec ms@0.7.1
+331 silly cache add parsed spec Result {
+331 silly cache add   raw: 'ms@0.7.1',
+331 silly cache add   scope: null,
+331 silly cache add   name: 'ms',
+331 silly cache add   rawSpec: '0.7.1',
+331 silly cache add   spec: '0.7.1',
+331 silly cache add   type: 'version' }
+332 silly addNamed ms@0.7.1
+333 verbose addNamed "0.7.1" is a plain semver version for ms
+334 silly mapToRegistry name ms
+335 silly mapToRegistry using default registry
+336 silly mapToRegistry registry https://registry.npmjs.org/
+337 silly mapToRegistry data Result {
+337 silly mapToRegistry   raw: 'ms',
+337 silly mapToRegistry   scope: null,
+337 silly mapToRegistry   name: 'ms',
+337 silly mapToRegistry   rawSpec: '',
+337 silly mapToRegistry   spec: 'latest',
+337 silly mapToRegistry   type: 'tag' }
+338 silly mapToRegistry uri https://registry.npmjs.org/ms
+339 verbose addNameVersion registry:https://registry.npmjs.org/ms not in flight; fetching
+340 verbose request uri https://registry.npmjs.org/ms
+341 verbose request no auth needed
+342 info attempt registry request try #1 at 10:32:27 AM
+343 verbose etag "4EHDI6ZD0RZD26RKK73S8EZTQ"
+344 http request GET https://registry.npmjs.org/ms
+345 http 304 https://registry.npmjs.org/ms
+346 verbose headers { date: 'Thu, 25 Aug 2016 02:32:27 GMT',
+346 verbose headers   via: '1.1 varnish',
+346 verbose headers   'cache-control': 'max-age=300',
+346 verbose headers   etag: '"4EHDI6ZD0RZD26RKK73S8EZTQ"',
+346 verbose headers   age: '88',
+346 verbose headers   connection: 'keep-alive',
+346 verbose headers   'x-served-by': 'cache-lcy1130-LCY',
+346 verbose headers   'x-cache': 'HIT',
+346 verbose headers   'x-cache-hits': '3',
+346 verbose headers   'x-timer': 'S1472092347.743147,VS0,VE0',
+346 verbose headers   vary: 'Accept-Encoding' }
+347 silly get cb [ 304,
+347 silly get   { date: 'Thu, 25 Aug 2016 02:32:27 GMT',
+347 silly get     via: '1.1 varnish',
+347 silly get     'cache-control': 'max-age=300',
+347 silly get     etag: '"4EHDI6ZD0RZD26RKK73S8EZTQ"',
+347 silly get     age: '88',
+347 silly get     connection: 'keep-alive',
+347 silly get     'x-served-by': 'cache-lcy1130-LCY',
+347 silly get     'x-cache': 'HIT',
+347 silly get     'x-cache-hits': '3',
+347 silly get     'x-timer': 'S1472092347.743147,VS0,VE0',
+347 silly get     vary: 'Accept-Encoding' } ]
+348 verbose etag https://registry.npmjs.org/ms from cache
+349 verbose get saving ms to /Users/niekai/.npm/registry.npmjs.org/ms/.cache.json
+350 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+351 silly cache afterAdd ms@0.7.1
+352 verbose afterAdd /Users/niekai/.npm/ms/0.7.1/package/package.json not in flight; writing
+353 verbose correctMkdir /Users/niekai/.npm correctMkdir not in flight; initializing
+354 verbose afterAdd /Users/niekai/.npm/ms/0.7.1/package/package.json written
+355 silly install resolved [ { name: 'ms',
+355 silly install resolved     version: '0.7.1',
+355 silly install resolved     description: 'Tiny ms conversion utility',
+355 silly install resolved     repository: { type: 'git', url: 'git://github.com/guille/ms.js.git' },
+355 silly install resolved     main: './index',
+355 silly install resolved     devDependencies: { mocha: '*', 'expect.js': '*', serve: '*' },
+355 silly install resolved     component: { scripts: [Object] },
+355 silly install resolved     gitHead: '713dcf26d9e6fd9dbc95affe7eff9783b7f1b909',
+355 silly install resolved     bugs: { url: 'https://github.com/guille/ms.js/issues' },
+355 silly install resolved     homepage: 'https://github.com/guille/ms.js',
+355 silly install resolved     _id: 'ms@0.7.1',
+355 silly install resolved     scripts: {},
+355 silly install resolved     _shasum: '9cd13c03adbff25b65effde7ce864ee952017098',
+355 silly install resolved     _from: 'ms@0.7.1',
+355 silly install resolved     _npmVersion: '2.7.5',
+355 silly install resolved     _nodeVersion: '0.12.2',
+355 silly install resolved     _npmUser: { name: 'rauchg', email: 'rauchg@gmail.com' },
+355 silly install resolved     maintainers: [ [Object] ],
+355 silly install resolved     dist:
+355 silly install resolved      { shasum: '9cd13c03adbff25b65effde7ce864ee952017098',
+355 silly install resolved        tarball: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz' },
+355 silly install resolved     directories: {},
+355 silly install resolved     _resolved: 'https://registry.npmjs.org/ms/-/ms-0.7.1.tgz',
+355 silly install resolved     readme: 'ERROR: No README data found!' } ]
+356 info install ms@0.7.1 into /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+357 info installOne ms@0.7.1
+358 verbose installOne of ms to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug not in flight; installing
+359 verbose correctMkdir /Users/niekai/.npm/_locks correctMkdir not in flight; initializing
+360 verbose lock using /Users/niekai/.npm/_locks/ms-040e101d7d574a2d.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+361 silly install write writing ms 0.7.1 to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+362 verbose unbuild node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+363 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms is being purged from base /Users/niekai/NodeWorkSpace/chofn-react
+364 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+365 verbose tar unpack /Users/niekai/.npm/ms/0.7.1/package.tgz
+366 verbose tar unpacking to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+367 silly gentlyRm /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms is being purged
+368 verbose gentlyRm don't care about contents; nuking /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+369 silly gunzTarPerm modes [ '755', '644' ]
+370 silly gunzTarPerm extractEntry package.json
+371 silly gunzTarPerm extractEntry .npmignore
+372 silly gunzTarPerm extractEntry README.md
+373 silly gunzTarPerm extractEntry LICENSE
+374 silly gunzTarPerm extractEntry index.js
+375 silly gunzTarPerm extractEntry History.md
+376 verbose write writing to /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms/package.json
+377 info preinstall ms@0.7.1
+378 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms/package.json
+379 verbose readDependencies loading dependencies from /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms/package.json
+380 silly install resolved []
+381 verbose about to build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+382 info build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+383 info linkStuff ms@0.7.1
+384 silly linkStuff ms@0.7.1 has /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules as its parent node_modules
+385 verbose linkBins ms@0.7.1
+386 verbose linkMans ms@0.7.1
+387 verbose rebuildBundles ms@0.7.1
+388 info install ms@0.7.1
+389 info postinstall ms@0.7.1
+390 verbose unlock done using /Users/niekai/.npm/_locks/ms-040e101d7d574a2d.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug/node_modules/ms
+391 verbose about to build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+392 info build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+393 info linkStuff debug@2.2.0
+394 silly linkStuff debug@2.2.0 has /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules as its parent node_modules
+395 verbose linkBins debug@2.2.0
+396 verbose linkMans debug@2.2.0
+397 verbose rebuildBundles debug@2.2.0
+398 verbose rebuildBundles [ 'ms' ]
+399 info install debug@2.2.0
+400 info postinstall debug@2.2.0
+401 verbose unlock done using /Users/niekai/.npm/_locks/debug-e541a25db8c62f17.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects/node_modules/debug
+402 verbose about to build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+403 info build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+404 info linkStuff follow-redirects@0.0.7
+405 silly linkStuff follow-redirects@0.0.7 has /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules as its parent node_modules
+406 verbose linkBins follow-redirects@0.0.7
+407 verbose linkMans follow-redirects@0.0.7
+408 verbose rebuildBundles follow-redirects@0.0.7
+409 verbose rebuildBundles [ 'debug', 'stream-consume' ]
+410 info install follow-redirects@0.0.7
+411 info postinstall follow-redirects@0.0.7
+412 verbose unlock done using /Users/niekai/.npm/_locks/follow-redirects-c2fafc117a4591f2.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios/node_modules/follow-redirects
+413 verbose about to build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+414 info build /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+415 info linkStuff axios@0.13.1
+416 silly linkStuff axios@0.13.1 has /Users/niekai/NodeWorkSpace/chofn-react/node_modules as its parent node_modules
+417 verbose linkBins axios@0.13.1
+418 verbose linkMans axios@0.13.1
+419 verbose rebuildBundles axios@0.13.1
+420 verbose rebuildBundles [ 'follow-redirects' ]
+421 info install axios@0.13.1
+422 info postinstall axios@0.13.1
+423 verbose unlock done using /Users/niekai/.npm/_locks/axios-b8187bd5242b95e8.lock for /Users/niekai/NodeWorkSpace/chofn-react/node_modules/axios
+424 verbose validateInstall loading /Users/niekai/NodeWorkSpace/chofn-react/package.json for validation
+425 verbose stack Error: The package react@15.0.2 does not satisfy its siblings' peerDependencies requirements!
+425 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+425 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
+425 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+425 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+425 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+425 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+425 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+425 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+425 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+425 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+426 verbose cwd /Users/niekai/NodeWorkSpace/chofn-react
+427 error Darwin 15.6.0
+428 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "axios" "--save"
+429 error node v4.4.7
+430 error npm  v2.15.8
+431 error code EPEERINVALID
+432 error peerinvalid The package react@15.0.2 does not satisfy its siblings' peerDependencies requirements!
+433 verbose exit [ 1, true ]

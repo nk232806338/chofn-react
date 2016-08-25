@@ -1,6 +1,6 @@
 var React = require('react');
 var _ = require('underscore');
-var SelectBase = require('../../../select/select-base.jsx');
+var Select = require('react-select');
 var templateTypeData = require('../data/meta-data-5-template-type.json').body.data.COMMITMENT;
 var TemplatesRegistry = require('./TemplatesRegistry');
 require('./price-calculater.less');
@@ -64,10 +64,13 @@ var ContractContainer = React.createClass({
               <h3 className="panel-title">
                 <div className="row">
                   <div className="col-sm-3">
-                    <SelectBase data={_.map(templateTypeData, (value, key) => {
-                        return {'id':key, 'value': value} }
+                    <Select options={_.map(templateTypeData, (value, key) => {
+                        return {'id':key, 'value': key, label: value} }
                       )}
-                    keyName="value" onSelect={templateType => this.onChangeTemplate(templateType, contract)}
+                    value={contract.templateType} clearable={false}
+                    onChange={newTemplate => {
+                      this.onChangeTemplate(newTemplate, contract)
+                    }}
                     onClick={event => event.stopPropagation()}
                     />
                   </div>

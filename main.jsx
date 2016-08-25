@@ -1,26 +1,30 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Contract = require('./component/app/contract/contract-main');
-const FileUpload = require('react-fileupload');
+var axios = require('axios');
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 var App = React.createClass({
+  componentDidMount() {
+
+    axios.post('http://patent.test.chofn.net/index/index/', 'username=lucy&password=zz123asd', {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }).then(function () {
+      axios.post('http://patent.test.chofn.net/customer/index/', 'page=1&pageSize=15', {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+
+  },
   render() {
-    var options= {
-      baseUrl:'/upload',
-      param:{
-        fid:0
-      },
-      chooseFile() {
-        console.info('1');
-      }
-    }
-    ;
     return (
       <div>
         <Contract />
-        <FileUpload options={options}>
-          <button ref="chooseBtn">choose</button>
-          <button ref="uploadBtn">upload</button>
-        </FileUpload>
       </div>
     );
   }

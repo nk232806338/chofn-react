@@ -11,6 +11,7 @@ var CustomersData = require('./customers.json');
 var proposersData = require('./data/proposer.json');
 var PriceCalculater = require('./agency-templates/price-calculater-main');
 require('../../form/form.less');
+require('./contract-new.less');
 var ContractNew = React.createClass({
   getInitialState() {
     return {
@@ -57,8 +58,7 @@ var ContractNew = React.createClass({
             <Customers data={CustomersData.body.data.rows} onSelect={this.onSelectCustomer} />
           </Dialog> : null}
           { customerData ? <div>
-            <Formsy.Form onSubmit={this.submit} ref="form">
-
+            <Formsy.Form onSubmit={this.submit} ref="form" className="proposer-form">
               <div className="row">
                 <div className="col-sm-6">
                   <div className="Form-item clearfix">
@@ -72,7 +72,7 @@ var ContractNew = React.createClass({
                   <div className="Form-item clearfix">
                     <label>委托人名称</label>
                     <FormItemBase name="wdName" tips="请选择委托人">
-                      <SelectForm data={proposersData.body.data} keyName="proposerName" onSelect={this.onSelectProposer}/>
+                      <SelectForm options={[{value: 1, label: 'a'}, {value: 2, label: 'b'}]} keyName="proposerName" onSelect={this.onSelectProposer}/>
                     </FormItemBase>
                   </div>
                 </div>

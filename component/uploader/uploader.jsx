@@ -54,7 +54,6 @@ var Uploader = React.createClass({
       },
       uploadSuccess(resp) {
         console.log('upload success..!');
-        debugger;
         var { onFileUploaded } = that.props;
         // Called when file has finished uploading
         if (onFileUploaded) onFileUploaded({
@@ -68,7 +67,6 @@ var Uploader = React.createClass({
         }, 1000)
       },
       uploadError : function(err) {
-        debugger;
         alert(err.message);
         that.setState({
           status: STATUS.FAILED,
