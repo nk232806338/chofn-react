@@ -8,11 +8,22 @@ var Pagination = require('../../pagination/pagination-base');
 var Dialog = require('../../dialog/dialog-base');
 var Customers = require('./customers');
 var PriceCalculater = require('./agency-templates/price-calculater-main');
+var Alert = require('../../alert/alert');
 var API = require('../../api');
 var axios = require('axios');
 var Model = require('./contract-new-model');
 require('../../form/form.less');
 require('./contract-new.less');
+
+// ----- Test Code Begin
+// ----- Test Code End
+
+var AlertModel = function (show, type, msg) {
+  this.show = show || false;
+  this.type = type || '';
+  this.msg = msg || '';
+};
+
 var ContractNew = React.createClass({
   getInitialState() {
     return {
@@ -24,6 +35,7 @@ var ContractNew = React.createClass({
       bailorsArray: [],
       proposersArray: [],
       contactsArray: [],
+      alertModel: new AlertModel()
     }
   },
   showCustomerDialog() {
@@ -37,13 +49,13 @@ var ContractNew = React.createClass({
     });
   },
   onSelectCustomer(customer) {
-    var that = this;
     console.info(customer);
     this.setState({
+      loading: true,
+      customer,
+      alertModel: new AlertModel(true, Alert.LOADING),
       customerDialog: false,
-      customer
     });
-
     Model(customer.id).then(result => {
       var bailor = result.bailorsArray[0],
         contact = _.find(result.contactsArray, {contactId: bailor.contactId});
@@ -53,6 +65,7 @@ var ContractNew = React.createClass({
         bailor,
         contactsArray: result.contactsArray,
         contact,
+        alertModel: new AlertModel(false),
       });
     });
   },
@@ -64,12 +77,19 @@ var ContractNew = React.createClass({
     });
   },
   componentDidMount() {
-    //this.onSelectCustomer(CustomersData.body.data.rows[0]);
+    window.setTimeout(() => {
+      this.setState({
+        loading: false
+      });
+    }, 3000);
+    // this.onSelectCustomer({
+    //   id: 1989553
+    // });
   },
   render() {
-    var { customerDialog, customer, proposersArray, proposer, bailorsArray, bailor, contact } = this.state;
-    console.info(contact.contactTel);
+    var { customerDialog, customer, proposersArray, proposer, bailorsArray, bailor, contact, alertModel } = this.state;
     return (<div>
+      {alertModel.show ? <Alert type={alertModel.type}>{alertModel.msg}</Alert> : null}
       <div className="panel panel-default">
         <div className="panel-heading"><strong>委托人信息</strong></div>
         <div className="panel-body">
@@ -142,7 +162,7 @@ var ContractNew = React.createClass({
           </div> : null}
         </div>
       </div>
-      { customer ? <PriceCalculater /> : null}
+      { customer ? <PriceCalculater {...this.props} /> : null}
     </div>);
   }
 });

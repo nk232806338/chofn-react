@@ -1,0 +1,38 @@
+.cf-nav-tab {
+  .nav {
+    &.nav-tabs {
+      li {
+        position: relative;
+        max-width: 30%;
+        width: 200px;
+        .remove-icon {
+          position: absolute;
+          right: 4px;
+          top: 0;
+          padding: 6px;
+        }
+        a {
+          padding: 4px;
+        }
+        &.add-btn-wrapper {
+          &:hover {
+            a {
+              border-top: 1px solid transparent;
+              border-left: 1px solid transparent;
+              border-right: 1px solid transparent;
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+    .add {
+      cursor: pointer;
+    }
+  }
+}
+.nav-content {
+  padding-top: 16px;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}

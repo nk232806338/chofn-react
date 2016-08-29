@@ -2,10 +2,13 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Contract = require('./component/app/contract/contract-main');
 var axios = require('axios');
-var Alert = require('./component/alert/alert');
 var App = React.createClass({
+  getInitialState() {
+    return {
+      alertShow: false
+    }
+  },
   componentDidMount() {
-
     axios.post('http://patent.test.chofn.net/index/index/', 'username=lucy&password=zz123asd', {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     }).then(function () {
@@ -19,12 +22,10 @@ var App = React.createClass({
           console.log(error);
         });
     });
-
   },
   render() {
     return (
       <div>
-        <Alert></Alert>
         <Contract />
       </div>
     );

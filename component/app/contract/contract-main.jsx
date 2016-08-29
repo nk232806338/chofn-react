@@ -4,7 +4,7 @@ var ContractNew = require('./contract-new');
 var ContractMain = React.createClass({
   render() {
     return (<div>
-      <ContractNew />
+      <ContractNew {...this.props} />
     </div>);
   }
 });
