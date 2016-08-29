@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Contract = require('./component/app/contract/contract-main');
 var axios = require('axios');
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+var Alert = require('./component/alert/alert');
 var App = React.createClass({
   componentDidMount() {
 
@@ -24,6 +24,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
+        <Alert></Alert>
         <Contract />
       </div>
     );

@@ -1,10 +1,16 @@
 var React = require('react');
 var TableBase = require('../../table/table-base');
-
+var axios = require('axios');
+var API = require('../../api');
 var Customers = React.createClass({
   propTypes: {
-    data: React.PropTypes.array,
+    data: React.PropTypes.any,
     onSelect: React.PropTypes.func
+  },
+  getInitialState() {
+    return {
+      data: []
+    };
   },
   submit() {
     var { onSelect } = this.props;
@@ -13,8 +19,17 @@ var Customers = React.createClass({
   onSelect(item) {
     this.selectItem = item;
   },
+  componentDidMount() {
+    axios.post(API.getCustomers, '/page=1&pageSize=15', {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).then(response => {
+      this.setState({
+        data: response.data.body.data.rows
+      });
+    });
+  },
   render() {
-    var { data } = this.props;
+    var { data } = this.state;
     return (<div>
       <TableBase hasIndex data={data} onSelect={this.onSelect}>
         <TableBase.Column header={{cell: '', name: '客户名义'}} td={{cell: '', key: 'name'}} onEvents={this.onTableEvents} />

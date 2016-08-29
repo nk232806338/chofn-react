@@ -8,15 +8,21 @@ var TableBase = React.createClass({
     hasIndex: React.PropTypes.bool,
     data: React.PropTypes.array,
     onSelect: React.PropTypes.func,
-    onDoubleClick: React.PropTypes.func
+    onDoubleClick: React.PropTypes.func,
   },
   getDefaultProps() {
-    onDoubleClick: () => {}
   },
   getInitialState() {
     return {
       data: this.props.data
     };
+  },
+  componentWillUpdate(nextProps, nextState) {
+    if (this.state.data != nextProps.data) {
+      this.setState({
+        data: nextProps.data
+      });
+    }
   },
   activeTr(tr, event) {
     var { data } = this.state;
@@ -25,10 +31,10 @@ var TableBase = React.createClass({
     tr.active = true;
     if (onSelect) onSelect(tr);
     this.setState({data});
-  },  
+  },
   render() {
     var { data } = this.state;
-    var { children, hasIndex, onDoubleClick } = this.props;
+    var { children, hasIndex } = this.props;
     return (<div className="Table-base">
       <table className="table table-hover">
         <thead>

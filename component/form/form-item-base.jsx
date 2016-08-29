@@ -51,6 +51,7 @@ var FormItemBase = React.createClass({
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
     const errorMessage = this.getErrorMessage();
+
     if (children) {
       return (<div className={'Form-item-base clearfix' + className}>
         {React.cloneElement(children, {
@@ -72,8 +73,10 @@ var FormItemBase = React.createClass({
     return (
       <div className={'Form-item-base clearfix' + className}>
         <Component
-          {...others} type={type ? type : 'text'} onChange={event => this.changeValue(event.currentTarget.value, event)} value={this.getValue()}
-          onFocus={this.handleFocus} onBlur={event => this.handleBlur(event.target.value, event)} />
+          {...others} type={type ? type : 'text'} onChange={event => this.changeValue(event.currentTarget.value, event)}
+          value={this.getValue()}
+          onFocus={this.handleFocus} onBlur={event => this.handleBlur(event.target.value, event)}
+        />
         <div className="tips-wrapper">
           <span>
             { isFocused || ifRequired ? tips : errorMessage}
