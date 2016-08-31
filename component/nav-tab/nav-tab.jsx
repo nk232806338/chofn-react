@@ -7,6 +7,7 @@ var NavTab = React.createClass({
     addTab: React.PropTypes.func,
     removeTab: React.PropTypes.func,
     activeTab: React.PropTypes.func,
+    active: React.PropTypes.any,
   },
   getDefaultProps() {
     return {
@@ -34,13 +35,13 @@ var NavTab = React.createClass({
     }
   },
   render() {
-    var { data } = this.props;
+    var { data, active } = this.props;
     return (<div className="cf-nav-tab">
       <ul className="nav nav-tabs nav-justified">
         {data.map((item, index) =>
           <li
             onClick={event => this.activeTab(item.id, event)} style={{cursor: 'pointer'}}
-            className={classNames({'active': item.active})} key={_.uniqueId('li-')}
+            className={classNames({'active': item.id == active})} key={_.uniqueId('li-')}
           >
             <a>
               {index + 1}.{item.name}

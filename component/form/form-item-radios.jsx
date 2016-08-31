@@ -5,13 +5,17 @@ var _ = require('underscore');
  */
 var FormItemRadios = React.createClass({
   propTypes: {
-    name: React.PropTypes.string.isRequired, // radio的form-name
     options: React.PropTypes.array.isRequired, // [{value:1, label: '是', checked: true}, {value:-1, label: '否'}....]
     onChange: React.PropTypes.func,
   },
+  getInitialState() {
+    return {
+      options: this.props.options,
+    };
+  },
   onChange(event) {
     // 由Formsy包装层传递下来
-    var { changeValue, onChange, options } = this.props;
+    var { changeValue, onChange, options, name } = this.props;
     if (event.target.checked) {
       changeValue(event.target.value);
     }
@@ -19,12 +23,25 @@ var FormItemRadios = React.createClass({
       if (option.checked) option.checked = false;
     });
     _.find(options, {value: event.target.value}).checked = true;
-    if (onChange) {
-      onChange(options);
+    // if (onChange) {
+    //   var result = {};
+    //   result[name] = event.target.value;
+    //   onChange(result);
+    // }
+    this.setState({
+      options
+    });
+  },
+  componentDidMount() {
+    var { changeValue, options } = this.props;
+    var defaultCheckOption = _.find(options, {checked: true});
+    if (defaultCheckOption) {
+      changeValue(defaultCheckOption.value);
     }
   },
   render() {
-    var { name, options } = this.props;
+    var { name } = this.props;
+    var { options } = this.state;
     return (<div onChange={this.onChange}>
       {options.map(option => {
         var id = _.uniqueId('radio-option-');

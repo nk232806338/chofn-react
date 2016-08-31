@@ -3,13 +3,16 @@ var _ = require('underscore');
 var Select = require('react-select');
 var templateTypeData = require('../data/meta-data-5-template-type.json').body.data.COMMITMENT;
 var TemplatesRegistry = require('./TemplatesRegistry');
-require('./price-calculater.less');
+require('./contract-container.less');
 /**
  * @desc [代理服务合同创建模块]
  * 代理服务有多种类型,(如 国内专利发明申请、专利转让等)
  * 每种代理服务类型都有对应的业务模板, 此业务组件包含用户创建的多种代理服务
  */
 var ContractContainer = React.createClass({
+  propTypes: {
+    proposersArray: React.PropTypes.array,
+  },
   getInitialState() {
     return {
       // 代理服务合同数组
@@ -52,9 +55,21 @@ var ContractContainer = React.createClass({
     currentContract.showExpand = !currentContract.showExpand;
     this.setState(contractArray);
   },
-  render() {
+  saveAsDraft() {
+
+  },
+  onContractDataChange(data, contractId) {
     var { contractArray } = this.state;
-    return (<div className="Price-calculater">
+    _.find(contractArray, {id: contractId}).data = data;
+    console.info(contractArray);
+    this.setState({
+      contractArray
+    });
+  },
+  render() {
+    var { proposersArray } = this.props;
+    var { contractArray } = this.state;
+    return (<div className="Contract-container-mod">
       {contractArray.map(contract => {
         var contractTemplate =  _.find(TemplatesRegistry, {id: contract.templateType});
         var TemplateComponent = contractTemplate ? contractTemplate.component : 'div';
@@ -100,9 +115,22 @@ var ContractContainer = React.createClass({
 
               </h3>
             </div>
-            {contract.showExpand && contract.templateType ? <div className="panel-body">
-              <TemplateComponent data={contract.data} />
-            </div> : null}
+            {contract.showExpand && contract.templateType ?
+              <div>
+                <div className="panel-body">
+                  <TemplateComponent
+                    data={contract.data} onChange={data => this.onContractDataChange(data, contract.id)}
+                    proposersArray={proposersArray}
+                  />
+                </div>
+                <div className="panel-footer">
+                  <button type="button" className="btn btn-primary" onClick={this.saveAsDraft}>
+                    <span className="glyphicon glyphicon-file" aria-hidden="true" style={{marginRight: '4px'}}/>保存草稿
+                  </button>
+                </div>
+              </div>
+             : null
+            }
           </div>
         )}
       )}

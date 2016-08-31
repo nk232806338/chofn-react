@@ -8,16 +8,11 @@ require('react-select/dist/react-select.css');
 var Uploader = require('../../../../uploader/uploader');
 var Inventor = require('../common/inventors');
 var MultipleRegionSelect = require('../../../../select/region/multiple-region-select');
-var options = [
-  { value: 'one', label: 'One' },
-  { value: 'two', label: 'Two' }
-];
-
-function logChange(val) {
-  console.log("Selected: " + val);
-}
 
 var PersonInfo = React.createClass({
+  propTypes: {
+    proposersArrayInit: React.PropTypes.array,
+  },
   getInitialState() {
     return {
       file: {name: '测试数据', url: '/uploads/logo.png'},
@@ -43,6 +38,7 @@ var PersonInfo = React.createClass({
     });
   },
   render() {
+    var { proposersArrayInit } = this.props;
     var { file, proposerArray } = this.state;
     return (<div>
       <NavTab
@@ -55,7 +51,7 @@ var PersonInfo = React.createClass({
             <div className="col-sm-12">
               <div className="Form-item clearfix">
                 <label>申请人名称</label>
-                <FormsyItem name="pwd" required tips="申请人名称" />
+                <FormsyItem name="pwd" required tips="申请人名称" value={proposersArrayInit && proposersArrayInit[0].proposerName}/>
               </div>
             </div>
           </div>

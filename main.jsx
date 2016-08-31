@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Contract = require('./component/app/contract/contract-main');
 var axios = require('axios');
+var API = require('./component/api');
 var App = React.createClass({
   getInitialState() {
     return {
@@ -16,12 +17,25 @@ var App = React.createClass({
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       })
         .then(function (response) {
+          // console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      axios.post(API.test, '?id=18', {
+        headers: {'Content-Type': ' '}
+      })
+        .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
     });
+
+
+
   },
   render() {
     return (

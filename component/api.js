@@ -10,6 +10,9 @@ var API = {
   'getProposers': host + 'Customer/proposerIndex', // '获取客户下的多个申请人信息'
   'getBailors': host + 'Customer/bailorIndex/', // '获取客户下的多个委托人信息'
   'getContacts': host + 'Customer/contactIndex/', // '获取客户下的多个联系人信息'
+  'uploadFile': host + 'File/upload/', // 文件上传接口
+  'uploadMultipleFile': host + 'file/uploadmany/', // 多文件上传
+  'test': host + 'contract/itemDetail/?id=18', //获取合同测试数据
 };
 
 module.exports = API;

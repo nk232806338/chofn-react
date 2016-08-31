@@ -77,10 +77,12 @@ var Inventor = React.createClass({
                 </div>
               </td>
               <td>
-                <Uploader
-                  uploadUrl="/upload/" onFileUploaded={this.onFileUploaded}
-                  btnText="" data
-                />
+                <div className="Form-item-base">
+                  <Uploader
+                    uploadUrl="/upload/" onFileUploaded={this.onFileUploaded}
+                    btnText="" data
+                  />
+                </div>
               </td>
               <td>
                 <Select

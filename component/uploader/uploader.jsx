@@ -34,12 +34,13 @@ var Uploader = React.createClass({
   getInitialState() {
     var that = this;
     this.options = {
-      baseUrl:'/upload',
-      dataType: 'text',
+      baseUrl: this.props.uploadUrl,
+      dataType: 'json',
       chooseAndUpload: true,
-      param:{
-        fid:0
-      },
+      fileFieldName: 'uploadFile[]',
+      // param:{
+      //   fid:0
+      // },
       chooseFile() {
         console.info('chooseFile');
         that.setState({
@@ -56,10 +57,7 @@ var Uploader = React.createClass({
         console.log('upload success..!');
         var { onFileUploaded } = that.props;
         // Called when file has finished uploading
-        if (onFileUploaded) onFileUploaded({
-          name: '123',
-          url: resp
-        });
+        if (onFileUploaded) onFileUploaded(resp.body.data);
         window.setTimeout(event => {
           that.setState({
             status: STATUS.SUCCESS,
@@ -79,6 +77,7 @@ var Uploader = React.createClass({
         }, 2500);
       }
     };
+    // 返回初始state
     return {
       status: STATUS.STANDBY,
       percent: 0,
@@ -110,13 +109,15 @@ var Uploader = React.createClass({
   render() {
     var { btnText } = this.props;
     return (
-      <FileUpload options={this.options}>
-        <button ref="chooseAndUpload" type="button" className="btn btn-primary">
-          <span className="glyphicon glyphicon-folder-open" style={{marginRight: '4px'}}/>
-          { btnText ? btnText : '上传' }
-        </button>
-        {this.getInfoViewRender()}
-      </FileUpload>
+      <div style={{position: 'relative'}}>
+        <FileUpload options={this.options}>
+          <button ref="chooseAndUpload" type="button" className="btn btn-primary">
+            <span className="glyphicon glyphicon-folder-open" style={{marginRight: '4px'}}/>
+            { btnText ? btnText : '上传' }
+          </button>
+          {this.getInfoViewRender()}
+        </FileUpload>
+      </div>
     );
   }
 });

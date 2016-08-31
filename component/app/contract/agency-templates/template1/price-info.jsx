@@ -1,9 +1,11 @@
 var React = require('react');
 var PriceOpt = require('../common/price-opt');
 var PriceInfo = React.createClass({
-
+  propTypes: {
+    onChange: React.PropTypes.func,
+    data: React.PropTypes.any,
+  },
   render() {
-
     return (<div>
       <table className="table">
         <thead>

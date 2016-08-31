@@ -2,12 +2,12 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var _ = require('underscore');
 var FormItemBase = require('../../form/Form-item-base');
-var SelectForm = require('../../select/select-form');
+var SelectForm = require('../../select/form-item-select');
 var TableBase = require('../../table/table-base');
 var Pagination = require('../../pagination/pagination-base');
 var Dialog = require('../../dialog/dialog-base');
 var Customers = require('./customers');
-var PriceCalculater = require('./agency-templates/price-calculater-main');
+var ContractContainer = require('./agency-templates/contract-container');
 var Alert = require('../../alert/alert');
 var API = require('../../api');
 var axios = require('axios');
@@ -82,12 +82,12 @@ var ContractNew = React.createClass({
         loading: false
       });
     }, 3000);
-    // this.onSelectCustomer({
-    //   id: 1989553
-    // });
+    this.onSelectCustomer({
+      id: 1989553
+    });
   },
   render() {
-    var { customerDialog, customer, proposersArray, proposer, bailorsArray, bailor, contact, alertModel } = this.state;
+    var { customerDialog, customer, proposersArray, bailorsArray, bailor, contact, alertModel } = this.state;
     return (<div>
       {alertModel.show ? <Alert type={alertModel.type}>{alertModel.msg}</Alert> : null}
       <div className="panel panel-default">
@@ -162,7 +162,7 @@ var ContractNew = React.createClass({
           </div> : null}
         </div>
       </div>
-      { customer ? <PriceCalculater {...this.props} /> : null}
+      { customer ? <ContractContainer {...this.props} proposersArray={proposersArray}/> : null}
     </div>);
   }
 });

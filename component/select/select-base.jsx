@@ -53,7 +53,7 @@ var SelectBase = React.createClass({
       });
     } else {
       this.setState({
-        unfoldUp: true
+        unfoldUp: <true></true>
       });
     }
   },

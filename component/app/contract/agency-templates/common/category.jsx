@@ -15,32 +15,44 @@ var Category = React.createClass({
     onChange: React.PropTypes.func,
   },
   hasProjectChange(event) {
-    var { data, onChange } = this.props;
-    data.hasProject = event.target.checked;
+    var { data } = this.props;
+    data.hasProject = event.target.checked ? 1 : 0;
     if (!data.hasProject) {
-      data.hasClarificaitonbook = false;
-      data.hasPicture = false;
+      data.hasClarificaitonbook = 0;
+      data.hasPicture = 0;
     }
-    onChange(data);
+    this.onChange(data);
   },
   hasClarificaitonbookChange(event) {
-    var { data, onChange } = this.props;
-    data.hasClarificaitonbook = event.target.checked;
-    onChange(data);
+    var { data } = this.props;
+    data.hasClarificaitonbook = event.target.checked ? 1 : 0;
+    this.onChange(data);
   },
   hasPictureChange(event) {
-    var { data, onChange } = this.props;
-    data.hasPicture = event.target.checked;
+    var { data } = this.props;
+    data.hasPicture = event.target.checked ? 1 : 0;
+    this.onChange(data);
+  },
+  onChange(data) {
+    var { onChange } = this.props;
+    if (!data.hasOwnProperty('hasPicture')) {
+      data.hasPicture = 0;
+    }
+    if (!data.hasOwnProperty('hasProject')) {
+      data.hasProject = 0;
+    }
+    if (!data.hasOwnProperty('hasClarificaitonbook')) {
+      data.hasClarificaitonbook = 0;
+    }
     onChange(data);
   },
   render() {
     var { data } = this.props;
-
     return (
       <div>
         <label htmlFor="hasProject">
           <input
-            checked={data.hasProjectChange}
+            defaultChecked={data.hasProjectChange}
             type="checkbox" name="hasProject"
             id="hasProject" onChange={this.hasProjectChange}
           />
@@ -48,7 +60,7 @@ var Category = React.createClass({
         </label>
         <label htmlFor="hasClarificaitonbook" className={classnames({disabled: !data.hasProject})}>
           <input
-            checked={data.hasClarificaitonbook}
+            defaultChecked={data.hasClarificaitonbook}
             type="checkbox" name="hasClarificaitonbook"
             id="hasClarificaitonbook" disabled={ !data.hasProject ? "disabled" : ""}
             onChange={this.hasClarificaitonbookChange}
@@ -57,7 +69,7 @@ var Category = React.createClass({
         </label>
         <label htmlFor="hasPicture" className={classnames({disabled: !data.hasProject})}>
           <input
-            checked={data.hasPicture}
+            defaultChecked={data.hasPicture}
             type="checkbox" name="hasPicture" id="hasPicture"
             disabled={ !data.hasProject ? "disabled" : ""}
             onChange={this.hasPictureChange}
