@@ -69,20 +69,30 @@ var Priority = React.createClass({
     onChange: React.PropTypes.func,
     data: React.PropTypes.array,
   },
-  getDefaultProps() {
-    return {
-      data: [{name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}}]
-    }
-  },
   getInitialState() {
     var { data } = this.props;
+    var transData = this.transData(data);
     return {
-      activePriority: data[0]
+      activePriority: transData[0],
+      transData: transData
     };
   },
+  transData(data) {
+    return data.map(priorityData => {
+        return {name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: priorityData}
+      }) || [{name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}}];
+  },
+  unTransData(transData) {
+    return transData.map(transData => {
+      return transData.data;
+    });
+  },
   addTab() {
-    var { data, onChange } = this.props;
-    onChange(data.concat({name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}}));
+    var { transData } = this.state;
+    var newTransData = transData.concat({name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}});
+    this.setState({
+      transData: newTransData
+    });
   },
   removeTab(tabId) {
     // this.setState({
@@ -90,26 +100,26 @@ var Priority = React.createClass({
     // });
   },
   activeTab(tabId) {
-    var { data } = this.props;
+    var { transData } = this.state;
     this.setState({
-      activePriority: _.find(data, {id: tabId})
+      activePriority: _.find(transData, {id: tabId})
     });
   },
   // reset values by tabId
   onChange(values, tabId) {
-    var { onChange, data } = this.props;
-    var priority = _.find(data, {id: tabId});
+    var { onChange } = this.props;
+    var { transData } = this.state;
+    var priority = _.find(transData, {id: tabId});
     priority.data = values;
-    onChange(data);
+    onChange(this.unTransData(transData));
   },
   render() {
-    var { data } = this.props;
-    var { activePriority } = this.state;
+    var { activePriority, transData } = this.state;
     var Component = activePriority.component;
     return (
       <div>
           <NavTab
-            data={data} activeTab={this.activeTab}
+            data={transData} activeTab={this.activeTab}
             addTab={this.addTab} removeTab={this.removeTab}
             active={activePriority.id}
           />

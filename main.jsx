@@ -22,16 +22,6 @@ var App = React.createClass({
         .catch(function (error) {
           console.log(error);
         });
-
-      axios.post(API.test, '?id=18', {
-        headers: {'Content-Type': ' '}
-      })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
     });
 
 

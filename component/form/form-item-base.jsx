@@ -1,7 +1,7 @@
 var React = require('react');
 var Formsy = require('formsy-react');
 require('./Form-item-base.less');
-var   FormItemBase = React.createClass({
+var FormItemBase = React.createClass({
   // Add the Formsy Mixin
   mixins: [Formsy.Mixin],
   propTypes: {

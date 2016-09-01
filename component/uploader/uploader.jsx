@@ -41,6 +41,7 @@ var Uploader = React.createClass({
       // param:{
       //   fid:0
       // },
+      accept: 'jpg',
       chooseFile() {
         console.info('chooseFile');
         that.setState({

@@ -1,6 +1,8 @@
 var React = require('react');
 var _ = require('underscore');
 var Select = require('react-select');
+var axios = require('axios');
+var API = require('../../../api');
 var templateTypeData = require('../data/meta-data-5-template-type.json').body.data.COMMITMENT;
 var TemplatesRegistry = require('./TemplatesRegistry');
 require('./contract-container.less');
@@ -16,11 +18,12 @@ var ContractContainer = React.createClass({
   getInitialState() {
     return {
       // 代理服务合同数组
-      contractArray: [{templateType: '1', id: 1212, data: {}, showExpand: true}]
+      contractArray: [{templateType: '1', id: 1212, data: {}, showExpand: false}]
     };
   },
   componentDidMount() {
-
+    var { contractArray } = this.state;
+    this.toggleExpand(contractArray[0]);
   },
   addContract(a, event) {
     event.stopPropagation();
@@ -53,7 +56,21 @@ var ContractContainer = React.createClass({
     _.each(contractArray, contract => contract.showExpand = false);
     var currentContract = _.find(contractArray, {id: contract.id});
     currentContract.showExpand = !currentContract.showExpand;
-    this.setState(contractArray);
+
+    axios.post(API.test, '', {
+      headers: {'Content-Type': ' '}
+    })
+      .then(response => {
+        currentContract.data = response.data.body.data
+        this.setState({
+          contractArray,
+        });
+        console.info(currentContract.data);
+      })
+      .catch(function (error) {
+        console.info(error.stack);
+        console.log(error);
+      });
   },
   saveAsDraft() {
 
@@ -112,7 +129,6 @@ var ContractContainer = React.createClass({
                     </i>
                   </div> : null}
                 </div>
-
               </h3>
             </div>
             {contract.showExpand && contract.templateType ?

@@ -66,8 +66,15 @@ var BaseInfo = React. createClass({
     onChange(data);
   },
   render() {
-    var { categoryData, file, bookFile } = this.state;
+    var { file, bookFile } = this.state;
     var { data } = this.props;
+
+    var clarificaitonbook = data.clarificaitonbook;
+    var categoryData = {
+      hasProject: clarificaitonbook.hasClarificaitonbook,
+      hasPicture: clarificaitonbook.hasPicture,
+      hasClarificaitonbook: clarificaitonbook.hasClarificaitonbook
+    };
     return (<div>
       <Formsy.Form onValid={this.onFormChange}
         ref="form" className="base-info-form"
@@ -87,9 +94,9 @@ var BaseInfo = React. createClass({
             <div className="Form-item clearfix small">
               <label>交底书名称</label>
               <FormsyItem
-                name="clarificaiton-book-name"
+                name="clarificaitonName"
                 required tips="交底书名称"  placeholder="交底书名称" validations="minLength:1"
-                validationErrors="请输入完整的交底书名称" value={''}
+                validationErrors="请输入完整的交底书名称" value={clarificaitonbook.name}
               />
             </div>
           </div>
@@ -218,7 +225,7 @@ var BaseInfo = React. createClass({
       </Formsy.Form>
       <div className="row">
         <div className="col-sm-12">
-          <Priority onChange={this.onPriorityChange} data={data.priorityArray}/>
+          <Priority onChange={this.onPriorityChange} data={data.priority}/>
         </div>
       </div>
     </div>);
