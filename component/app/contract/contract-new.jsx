@@ -58,15 +58,24 @@ var ContractNew = React.createClass({
     });
     Model(customer.id).then(result => {
       var bailor = result.bailorsArray[0],
-        contact = _.find(result.contactsArray, {contactId: bailor.contactId});
-      this.setState({
-        proposersArray: result.proposersArray,
-        bailorsArray: result.bailorsArray,
-        bailor,
-        contactsArray: result.contactsArray,
-        contact,
-        alertModel: new AlertModel(false),
-      });
+        contact = _.find(result.contactsArray, {contactId: bailor && bailor.contactId});
+      if (result.proposersArray.length == 0 || result.bailorsArray == 0 || result.contactsArray == 0) {
+        this.setState({
+          alertModel: new AlertModel(true, Alert.DANGER, '数据拉取错误'),
+        });
+      } else {
+        this.setState({
+          proposersArray: result.proposersArray,
+          bailorsArray: result.bailorsArray,
+          bailor,
+          contactsArray: result.contactsArray,
+          contact,
+          alertModel: new AlertModel(false),
+        });
+      }
+    }).catch(error => {
+      console.info('新建合同初始化数据错误');
+      console.info(error.stack);
     });
   },
   onSelectBailor(bailor) {

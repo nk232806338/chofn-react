@@ -22,16 +22,19 @@ var PersonInfo = React.createClass({
     };
   },
   transData(contractDetailProposer) {
-    return contractDetailProposer.map(proposer => {
+    var transData = contractDetailProposer.map(proposer => {
       return {name: '申请人', id: _.uniqueId('proposer-id-'), data: proposer, component: <Proposer />};
-    }) || [{name: '申请人', id: _.uniqueId('proposer-id-'), data: {}, component: <Proposer />}];
+    });
+    return transData.length > 0 ? transData : [{name: '申请人', id: _.uniqueId('proposer-id-'), data: {}, component: <Proposer />}];
   },
-  unTransData() {
-
+  unTransData(transData) {
+    return transData.map(proposer => {
+      return proposer.data;
+    })
   },
   addTab() {
     this.setState({
-      proposerArray: this.state.proposerArray.concat({name: '申请人', id: _.uniqueId('priority-id-')})
+      proposerArray: this.state.proposerArray.concat({name: '申请人', id: _.uniqueId('priority-id-'), data: {}, component: <Proposer />})
     });
   },
   removeTab(tabId) {
@@ -41,14 +44,18 @@ var PersonInfo = React.createClass({
   },
   activeTab(tabId) {
     var { proposerArray } = this.state;
-    _.find(proposerArray, {active: true}).active = false;
-    _.find(proposerArray, {id: tabId}).active = true;
     this.setState({
+      activeProposer: _.find(proposerArray, {id: tabId}),
       proposerArray
     });
   },
   onChange(values, proposerId) {
-
+    var { proposerArray } = this.state;
+    var { data, onChange } = this.props;
+    var proposer = _.find(proposerArray, {id: proposerId});
+    proposer.data = _.extend(proposer.data, values);
+    data.contractDetailProposer = this.unTransData(proposerArray);
+    onChange(data);
   },
   render() {
     var { proposerArray, activeProposer } = this.state;
@@ -61,6 +68,7 @@ var PersonInfo = React.createClass({
         active={activeProposer.id}
       />
       <div className="nav-content">
+
         {React.cloneElement(Proposer, {
           data: activeProposer.data,
           proposersArrayMeta: proposersArrayMeta,

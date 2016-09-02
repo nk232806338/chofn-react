@@ -78,9 +78,10 @@ var Priority = React.createClass({
     };
   },
   transData(data) {
-    return data.map(priorityData => {
-        return {name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: priorityData}
-      }) || [{name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}}];
+    var transData = data.map(priorityData => {
+      return {name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: priorityData}
+    });
+    return transData.length > 0 ? transData : [{name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}}];
   },
   unTransData(transData) {
     return transData.map(transData => {

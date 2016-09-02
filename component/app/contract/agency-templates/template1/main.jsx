@@ -32,7 +32,6 @@ var Template1Main = React.createClass({
   },
   render() {
     var { data, proposersArray } = this.props;
-
     var { activeNav } = this.state;
     var Component = Registry[activeNav];
     return (<div>
