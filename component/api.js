@@ -12,7 +12,8 @@ var API = {
   'getContacts': host + 'Customer/contactIndex/', // '获取客户下的多个联系人信息'
   'uploadFile': host + 'File/upload/', // 文件上传接口
   'uploadMultipleFile': host + 'file/uploadmany/', // 多文件上传
-  'test': host + 'contract/itemDetail/?id=530', //获取合同测试数据
+  'getContractDetail': host + 'Contract/detail',
+  'test': host + 'contract/itemDetail/?id=27', //获取合同测试数据
 };
 
 module.exports = API;

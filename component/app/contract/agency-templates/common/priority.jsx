@@ -69,6 +69,11 @@ var Priority = React.createClass({
     onChange: React.PropTypes.func,
     data: React.PropTypes.array,
   },
+  getDefaultProps() {
+    return {
+      data: []
+    }
+  },
   getInitialState() {
     var { data } = this.props;
     var transData = this.transData(data);

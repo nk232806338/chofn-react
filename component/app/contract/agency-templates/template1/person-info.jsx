@@ -36,6 +36,7 @@ var PersonInfo = React.createClass({
     this.setState({
       proposerArray: this.state.proposerArray.concat({name: '申请人', id: _.uniqueId('priority-id-'), data: {}, component: <Proposer />})
     });
+
   },
   removeTab(tabId) {
     this.setState({

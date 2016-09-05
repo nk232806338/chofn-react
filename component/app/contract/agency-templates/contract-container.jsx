@@ -14,15 +14,11 @@ require('./contract-container.less');
 var ContractContainer = React.createClass({
   propTypes: {
     proposersArray: React.PropTypes.array,
-  },
-  getInitialState() {
-    return {
-      // 代理服务合同数组
-      contractArray: [{templateType: '1', id: 1212, data: {}, showExpand: false}]
-    };
+    data: React.PropTypes.any, // 代理服务数组,
+    onChange: React.PropTypes.func,
   },
   componentDidMount() {
-    var { contractArray } = this.state;
+    var contractArray = this.props.data;
     this.toggleExpand(contractArray[0]);
   },
   addContract(a, event) {
@@ -52,16 +48,16 @@ var ContractContainer = React.createClass({
   },
   toggleExpand(contract) {
     if (!contract.templateType) return false;
-    var { contractArray } = this.state;
-    _.each(contractArray, contract => contract.showExpand = false);
+    var contractArray = this.props.data;
+    // _.each(contractArray, contract => contract.showExpand = false);
     var currentContract = _.find(contractArray, {id: contract.id});
     currentContract.showExpand = !currentContract.showExpand;
-
     axios.post(API.test, '', {
       headers: {'Content-Type': ' '}
     })
       .then(response => {
-        currentContract.data = response.data.body.data
+        currentContract.data = response.data.body.data;
+        debugger;
         this.setState({
           contractArray,
         });
@@ -73,19 +69,15 @@ var ContractContainer = React.createClass({
       });
   },
   saveAsDraft() {
-
   },
   onContractDataChange(data, contractId) {
-    var { contractArray } = this.state;
+    var { contractArray } = this.props.data;
     _.find(contractArray, {id: contractId}).data = data;
-    console.info(contractArray);
-    this.setState({
-      contractArray
-    });
+    this.props.onChange(contractArray);
   },
   render() {
-    var { proposersArray } = this.props;
-    var { contractArray } = this.state;
+    var { proposersArray, data } = this.props;
+    var contractArray = data;
     return (<div className="Contract-container-mod">
       {contractArray.map(contract => {
         var contractTemplate =  _.find(TemplatesRegistry, {id: contract.templateType});
@@ -131,22 +123,18 @@ var ContractContainer = React.createClass({
                 </div>
               </h3>
             </div>
-            {contract.showExpand && contract.templateType ?
-              <div>
-                <div className="panel-body">
-                  <TemplateComponent
-                    data={contract.data} onChange={data => this.onContractDataChange(data, contract.id)}
-                    proposersArray={proposersArray}
-                  />
-                </div>
-                <div className="panel-footer">
-                  <button type="button" className="btn btn-primary" onClick={this.saveAsDraft}>
-                    <span className="glyphicon glyphicon-file" aria-hidden="true" style={{marginRight: '4px'}}/>保存草稿
-                  </button>
-                </div>
-              </div>
-             : null
-            }
+            {contract.showExpand && contract.templateType ? <div className="panel-body">
+              <TemplateComponent
+                data={contract.data} onChange={data => this.onContractDataChange(data, contract.id)}
+                proposersArray={proposersArray}
+              />
+            </div> : null}
+            <div style={{marginBottom: '40px'}} />
+            <div className="panel-footer">
+              <button type="button" className="btn btn-primary" onClick={this.saveAsDraft}>
+                <span className="glyphicon glyphicon-file" aria-hidden="true" style={{marginRight: '4px'}}/>保存草稿
+              </button>
+            </div>
           </div>
         )}
       )}

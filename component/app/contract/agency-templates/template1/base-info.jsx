@@ -25,8 +25,8 @@ var BaseInfo = React. createClass({
     }
   },
   getInitialState() {
+    var { data } = this.props;
     return {
-      categoryData: {},
       bookFile: {},
       file: {name: '测试数据', url: '/uploads/logo.png'},
       priorityArray: [],
@@ -36,9 +36,8 @@ var BaseInfo = React. createClass({
     
   },
   onCategoryChange(categoryData) {
-    this.setState({
-      categoryData: categoryData,
-    });
+    var { data, onChange } = this.props;
+    onChange(categoryData);
   },
   onBookFileUploaded(fileArray) {
     this.setState({
@@ -66,10 +65,9 @@ var BaseInfo = React. createClass({
     onChange(data);
   },
   render() {
-    var { file, bookFile } = this.state;
+    var { file, bookFile, categoryData } = this.state;
     var { data } = this.props;
-
-    var clarificaitonbook = data.clarificaitonbook;
+    var clarificaitonbook = data.clarificaitonbook || {};
     var categoryData = {
       hasProject: clarificaitonbook.hasClarificaitonbook,
       hasPicture: clarificaitonbook.hasPicture,
@@ -225,7 +223,7 @@ var BaseInfo = React. createClass({
       </Formsy.Form>
       <div className="row">
         <div className="col-sm-12">
-          <Priority onChange={this.onPriorityChange} data={data.priority}/>
+          <Priority onChange={this.onPriorityChange} data={data && data.priority}/>
         </div>
       </div>
     </div>);

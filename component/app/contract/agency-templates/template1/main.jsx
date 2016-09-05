@@ -18,7 +18,7 @@ var Template1Main = React.createClass({
   },
   getInitialState() {
     return {
-      activeNav: NavTab.PERSON
+      activeNav: NavTab.BASE
     }
   },
   onTabChange(tab) {
@@ -26,9 +26,19 @@ var Template1Main = React.createClass({
       activeNav: tab
     });
   },
-  onDataChange(newData) {
+  onDataChange(newData, type) {
     var { data, onChange } = this.props;
+    switch (type) {
+      case NavTab.BASE:
+        break
+    }
     onChange(data);
+  },
+  transData(data) {
+    var result = {};
+    result[NavTab.BASE] = {
+
+    };
   },
   render() {
     var { data, proposersArray } = this.props;
@@ -38,7 +48,7 @@ var Template1Main = React.createClass({
       <NavTab onTabChange={this.onTabChange} activeNav={activeNav}/>
       <div className="content-for-info">
         <Component
-          onChange={this.onDataChange} data={data}
+          onChange={newData => {this.onDataChange(newData, activeNav)}} data={data}
           proposersArrayMeta={proposersArray}
         />
       </div>

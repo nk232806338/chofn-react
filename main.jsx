@@ -23,9 +23,6 @@ var App = React.createClass({
           console.log(error);
         });
     });
-
-
-
   },
   render() {
     return (

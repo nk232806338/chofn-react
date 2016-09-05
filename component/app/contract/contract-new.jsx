@@ -25,6 +25,10 @@ var AlertModel = function (show, type, msg) {
 };
 
 var ContractNew = React.createClass({
+  propsTypes: {
+    // 要查询的代理服务的id, 若存在为修改, 不存在为新建
+    contractDetailId: React.PropTypes.any
+  },
   getInitialState() {
     return {
       customerDialog: false,
@@ -35,7 +39,13 @@ var ContractNew = React.createClass({
       bailorsArray: [],
       proposersArray: [],
       contactsArray: [],
-      alertModel: new AlertModel()
+      alertModel: new AlertModel(),
+      // 是否根据选中customer发起请求,完成额外信息的加载,
+      // 额外信息包括 proposers, bailors 和 contacts
+      // 加载完成后方可展示所有的合同列表
+      isFetchedModel: false,
+      contractDetail: {}, // 当前合同的详细信息
+      contractsArray: [] // 某合同下的所有代理服务数组
     }
   },
   showCustomerDialog() {
@@ -56,7 +66,7 @@ var ContractNew = React.createClass({
       alertModel: new AlertModel(true, Alert.LOADING),
       customerDialog: false,
     });
-    Model(customer.id).then(result => {
+    Model(customer.id, this.props.contractDetailId).then(result => {
       var bailor = result.bailorsArray[0],
         contact = _.find(result.contactsArray, {contactId: bailor && bailor.contactId});
       if (result.proposersArray.length == 0 || result.bailorsArray == 0 || result.contactsArray == 0) {
@@ -71,11 +81,22 @@ var ContractNew = React.createClass({
           contactsArray: result.contactsArray,
           contact,
           alertModel: new AlertModel(false),
+          isFetchedModel: true,
+          contractDetail: result.contractDetail,
+          contractArray: this.transContractArray(result.contractDetail),
         });
       }
     }).catch(error => {
       console.info('新建合同初始化数据错误');
       console.info(error.stack);
+    });
+  },
+  transContractArray(contractDetail) {
+    if (!contractDetail) {
+      return [{templateType: '1', id: 1212, data: {}, showExpand: false}];
+    }
+    return contractDetail.itemFinance.items.map(item => {
+      return {templateType: item.commitmentId, id: item.detailId, data: {}, showExpand: false};
     });
   },
   onSelectBailor(bailor) {
@@ -85,18 +106,19 @@ var ContractNew = React.createClass({
       contact: _.find(contactsArray, {contactId: bailor.contactId})
     });
   },
+  onContractArrayChange(newContractArray) {
+    this.setState({
+      contractArray: newContractArray
+    });
+  },
   componentDidMount() {
-    window.setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 3000);
     this.onSelectCustomer({
       id: 1989553
     });
   },
   render() {
-    var { customerDialog, customer, proposersArray, bailorsArray, bailor, contact, alertModel } = this.state;
+    var { customerDialog, customer, proposersArray,
+      bailorsArray, bailor, contact, alertModel, isFetchedModel, contractArray } = this.state;
     return (<div>
       {alertModel.show ? <Alert type={alertModel.type}>{alertModel.msg}</Alert> : null}
       <div className="panel panel-default">
@@ -109,7 +131,7 @@ var ContractNew = React.createClass({
           { customerDialog ? <Dialog align="top" width="900" onClose={this.closeCustomerDialog} title="选择客户">
             <Customers data onSelect={this.onSelectCustomer}/>
           </Dialog> : null}
-          { customer ? <div>
+          { customer && isFetchedModel ? <div>
             <Formsy.Form onSubmit={this.submit} ref="form" className="proposer-form">
               <div className="row">
                 <div className="col-sm-6">
@@ -171,7 +193,12 @@ var ContractNew = React.createClass({
           </div> : null}
         </div>
       </div>
-      { customer ? <ContractContainer {...this.props} proposersArray={proposersArray}/> : null}
+      { customer && isFetchedModel ?
+        <ContractContainer
+          {...this.props} proposersArray={proposersArray}
+          data={contractArray} onChange={this.onContractArrayChange}
+        /> : null
+      }
     </div>);
   }
 });
