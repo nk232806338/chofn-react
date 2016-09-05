@@ -39,12 +39,9 @@ var ContractContainer = React.createClass({
   },
   onChangeTemplate(templateType, contract) {
     // the param : contract is a reference of
-    var { contractArray } = this.state;
-    contract.templateType = templateType.id;
-    this.toggleExpand(contract);
-    this.setState({
-      contractArray
-    });
+    var contractArray = this.props.data;
+    _.find(contractArray, {id: contract.id}).templateType = templateType.id;
+    this.props.onChange(contractArray);
   },
   toggleExpand(contract) {
     if (!contract.templateType) return false;
@@ -52,21 +49,33 @@ var ContractContainer = React.createClass({
     // _.each(contractArray, contract => contract.showExpand = false);
     var currentContract = _.find(contractArray, {id: contract.id});
     currentContract.showExpand = !currentContract.showExpand;
-    axios.post(API.test, '', {
-      headers: {'Content-Type': ' '}
-    })
-      .then(response => {
-        currentContract.data = response.data.body.data;
-        debugger;
-        this.setState({
-          contractArray,
-        });
-        console.info(currentContract.data);
+    if (_.isEmpty(currentContract.data)) {
+      axios.post(API.test, '', {
+        headers: {'Content-Type': ' '}
       })
-      .catch(function (error) {
-        console.info(error.stack);
-        console.log(error);
-      });
+        .then(response => {
+          currentContract.data = response.data.body.data;
+          this.props.onChange(contractArray);
+          console.info(currentContract.data);
+        })
+        .catch(function (error) {
+          console.info(error.stack);
+          console.log(error);
+        });
+    } else {
+      /**
+       * @author niekai
+       * @date 2016/09/05
+       * This is a little trick!
+       * Sometimes a component is rendered by it's props
+       * because the definition of Props, your should execute a callback function
+       * to notify the Parent the props is changed, it's no need to do this when you just
+       * want render your component when change some props but your want't keep it.
+       * Certainly the change will not keep in memory when your component is render by your parent again;
+       * In this case used for currentContract.showExpand
+       */
+      this.forceUpdate();
+    }
   },
   saveAsDraft() {
   },
@@ -87,7 +96,7 @@ var ContractContainer = React.createClass({
             <div className="panel-heading" onClick={event => {this.toggleExpand(contract, event)}}>
               <h3 className="panel-title">
                 <div className="row">
-                  <div className="col-sm-3">
+                  <div className="col-sm-3" onClick={event => event.stopPropagation()}>
                     <Select options={_.map(templateTypeData, (value, key) => {
                         return {'id':key, 'value': key, label: value} }
                       )}
@@ -95,7 +104,6 @@ var ContractContainer = React.createClass({
                     onChange={newTemplate => {
                       this.onChangeTemplate(newTemplate, contract)
                     }}
-                    onClick={event => event.stopPropagation()}
                     />
                   </div>
                   <div className="col-sm-3">
