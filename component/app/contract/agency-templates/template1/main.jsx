@@ -27,28 +27,21 @@ var Template1Main = React.createClass({
     });
   },
   onDataChange(newData, type) {
-    var { data, onChange } = this.props;
-    switch (type) {
-      case NavTab.BASE:
-        break
-    }
+    var { onChange, data } = this.props;
+    var activeData = data[type];
+    _.extend(activeData, newData);
     onChange(data);
   },
-  transData(data) {
-    var result = {};
-    result[NavTab.BASE] = {
-
-    };
-  },
   render() {
-    var { data, proposersArray } = this.props;
+    var { proposersArray, data } = this.props;
     var { activeNav } = this.state;
     var Component = Registry[activeNav];
+    var activeData = data[activeNav];
     return (<div>
       <NavTab onTabChange={this.onTabChange} activeNav={activeNav}/>
       <div className="content-for-info">
         <Component
-          onChange={newData => {this.onDataChange(newData, activeNav)}} data={data}
+          onChange={newData => {this.onDataChange(newData, activeNav)}} {...activeData}
           proposersArrayMeta={proposersArray}
         />
       </div>

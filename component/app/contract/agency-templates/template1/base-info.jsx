@@ -14,10 +14,14 @@ var API = require('../../../../api');
 /**
  * @type {__React.ClassicComponentClass<P>}
  */
-var BaseInfo = React. createClass({
+var BaseInfo = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func,
-    data: React.PropTypes.object,
+    hasProject: React.PropTypes.any,
+    hasPicture: React.PropTypes.any,
+    hasClarificaitonbook: React.PropTypes.any,
+    clarificaitonBookName: React.PropTypes.any,
+    bookFile: React.PropTypes.any,
   },
   getDefaultProps() {
     return {
@@ -25,7 +29,6 @@ var BaseInfo = React. createClass({
     }
   },
   getInitialState() {
-    var { data } = this.props;
     return {
       bookFile: {},
       file: {name: '测试数据', url: '/uploads/logo.png'},
@@ -36,7 +39,7 @@ var BaseInfo = React. createClass({
     
   },
   onCategoryChange(categoryData) {
-    var { data, onChange } = this.props;
+    var { onChange } = this.props;
     onChange(categoryData);
   },
   onBookFileUploaded(fileArray) {
@@ -55,9 +58,8 @@ var BaseInfo = React. createClass({
 
   },
   onFormChange() {
-    var { onChange, data } = this.props;
-    var model = this.refs.form.getModel();
-    onChange(_.assign(data, model));
+    var { onChange } = this.props;
+    onChange(this.refs.form.getModel());
   },
   onPriorityChange(priorityArray) {
     var { data, onChange } = this.props;
@@ -65,16 +67,10 @@ var BaseInfo = React. createClass({
     onChange(data);
   },
   render() {
-    var { file, bookFile, categoryData } = this.state;
-    var { data } = this.props;
-    var clarificaitonbook = data.clarificaitonbook || {};
-    var categoryData = {
-      hasProject: clarificaitonbook.hasClarificaitonbook,
-      hasPicture: clarificaitonbook.hasPicture,
-      hasClarificaitonbook: clarificaitonbook.hasClarificaitonbook
-    };
+    var { file, bookFile } = this.state;
+    var { hasProject, hasPicture, hasClarificaitonbook, clarificaitonBookName, clarificaitonBookName } = this.props;
     return (<div>
-      <Formsy.Form onValid={this.onFormChange}
+      <Formsy.Form onChange={this.onFormChange}
         ref="form" className="base-info-form"
       >
         <div className="row">
@@ -82,7 +78,11 @@ var BaseInfo = React. createClass({
             <div className="Form-item clearfix small">
               <label>方案类别</label>
               <div className="Form-item-base clearfix">
-                <Category onChange={this.onCategoryChange} data={categoryData}/>
+                <Category onChange={this.onCategoryChange} data={{
+                  hasProject,
+                  hasPicture,
+                  hasClarificaitonbook
+                }}/>
               </div>
             </div>
           </div>
@@ -94,11 +94,11 @@ var BaseInfo = React. createClass({
               <FormsyItem
                 name="clarificaitonName"
                 required tips="交底书名称"  placeholder="交底书名称" validations="minLength:1"
-                validationErrors="请输入完整的交底书名称" value={clarificaitonbook.name}
+                validationErrors="请输入完整的交底书名称" value={clarificaitonBookName}
               />
             </div>
           </div>
-          {categoryData.hasClarificaitonbook ?
+          {hasClarificaitonbook ?
             <div className="col-sm-6">
               <div className="Form-item clearfix small">
                 <label>上传交底书</label>
@@ -155,7 +155,7 @@ var BaseInfo = React. createClass({
           <div className="col-sm-6">
             <div className="Form-item clearfix">
               <label>返初搞时限</label>
-              <FormsyItem name="timeLimit" value={data.timeLimit || ''}/>
+              <FormsyItem name="timeLimit" value={''}/>
             </div>
           </div>
           <div className="col-sm-6">
@@ -223,7 +223,7 @@ var BaseInfo = React. createClass({
       </Formsy.Form>
       <div className="row">
         <div className="col-sm-12">
-          <Priority onChange={this.onPriorityChange} data={data && data.priority}/>
+          <Priority onChange={this.onPriorityChange} data={[]}/>
         </div>
       </div>
     </div>);

@@ -10,10 +10,11 @@ var Inventor = require('../common/inventors');
 var PersonInfo = React.createClass({
   propTypes: {
     proposersArrayMeta: React.PropTypes.array,
+    contractDetailProposer: React.PropTypes.any, // 申请人数组
   },
   getInitialState() {
-    var { data } = this.props;
-    var contractDetailProposer = data.contractDetailProposer || [];
+    var { contractDetailProposer } = this.props;
+    var contractDetailProposer = contractDetailProposer || [];
     var transData = this.transData(contractDetailProposer);
     return {
       file: {name: '测试数据', url: '/uploads/logo.png'},
@@ -33,10 +34,11 @@ var PersonInfo = React.createClass({
     })
   },
   addTab() {
+    var { proposersArrayMeta } = this.props;
     this.setState({
-      proposerArray: this.state.proposerArray.concat({name: '申请人', id: _.uniqueId('priority-id-'), data: {}, component: <Proposer />})
+      proposerArray: this.state.proposerArray.concat({
+        name: '申请人', id: _.uniqueId('priority-id-'), data: proposersArrayMeta[0], component: <Proposer />})
     });
-
   },
   removeTab(tabId) {
     this.setState({
@@ -46,8 +48,7 @@ var PersonInfo = React.createClass({
   activeTab(tabId) {
     var { proposerArray } = this.state;
     this.setState({
-      activeProposer: _.find(proposerArray, {id: tabId}),
-      proposerArray
+      activeProposer: _.find(proposerArray, {id: tabId})
     });
   },
   onChange(values, proposerId) {
@@ -55,8 +56,7 @@ var PersonInfo = React.createClass({
     var { data, onChange } = this.props;
     var proposer = _.find(proposerArray, {id: proposerId});
     proposer.data = _.extend(proposer.data, values);
-    data.contractDetailProposer = this.unTransData(proposerArray);
-    onChange(data);
+    onChange(this.unTransData(proposerArray));
   },
   render() {
     var { proposerArray, activeProposer } = this.state;

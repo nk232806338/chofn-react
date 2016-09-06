@@ -52,7 +52,7 @@ var Category = React.createClass({
       <div>
         <label htmlFor="hasProject">
           <input
-            defaultChecked={data.hasProjectChange}
+            defaultChecked={data.hasProject}
             type="checkbox" name="hasProject"
             id="hasProject" onChange={this.hasProjectChange}
           />

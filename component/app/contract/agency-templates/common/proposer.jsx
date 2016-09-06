@@ -29,6 +29,8 @@ var Proposer = React.createClass({
     onChange(newValue);
   },
   onFormChange() {
+    var { onChange } = this.props;
+    onChange(this.refs.form.getModel());
   },
   getCountry() {
     // 获取所有国家
@@ -52,7 +54,7 @@ var Proposer = React.createClass({
             <FormsyItem name="proposerId" required tips="申请人名称">
               <FormSelect
                 options={proposersArrayMeta}
-                value={data.proposerId || ''}
+                value={data.proposerId || proposersArrayMeta[0].proposerId}
                 labelKey="proposerName" valueKey="proposerId" clearable={false}
                 onChange={this.onProposerChange}
               />

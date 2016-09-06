@@ -5,6 +5,7 @@ var axios = require('axios');
 var API = require('../../../api');
 var templateTypeData = require('../data/meta-data-5-template-type.json').body.data.COMMITMENT;
 var TemplatesRegistry = require('./TemplatesRegistry');
+var NavTab = require('./NavTab');
 require('./contract-container.less');
 /**
  * @desc [代理服务合同创建模块]
@@ -43,6 +44,25 @@ var ContractContainer = React.createClass({
     _.find(contractArray, {id: contract.id}).templateType = templateType.id;
     this.props.onChange(contractArray);
   },
+  transData(data) {
+    var result = {};
+    var clarificaitonbook = data.clarificaitonbook || {};
+    result[NavTab.BASE] = {
+      hasProject: clarificaitonbook.hasProject,
+      hasPicture: clarificaitonbook.hasPicture,
+      hasClarificaitonbook: clarificaitonbook.hasClarificaitonbook,
+      clarificaitonBookName: clarificaitonbook.name,
+      bookFile: clarificaitonbook.bookFile,
+      files: clarificaitonbook.files,
+    };
+    result[NavTab.PRICE] = {
+
+    };
+    result[NavTab.PERSON]= {
+      contractDetailProposer: data.contractDetailProposer,
+    };
+    return result;
+  },
   toggleExpand(contract) {
     if (!contract.templateType) return false;
     var contractArray = this.props.data;
@@ -54,7 +74,8 @@ var ContractContainer = React.createClass({
         headers: {'Content-Type': ' '}
       })
         .then(response => {
-          currentContract.data = response.data.body.data;
+          // we need to rebuilt the structure of response data in order to adjust the Front-End's need
+          currentContract.data = this.transData(response.data.body.data);
           this.props.onChange(contractArray);
           console.info(currentContract.data);
         })
@@ -80,7 +101,7 @@ var ContractContainer = React.createClass({
   saveAsDraft() {
   },
   onContractDataChange(data, contractId) {
-    var { contractArray } = this.props.data;
+    var contractArray = this.props.data;
     _.find(contractArray, {id: contractId}).data = data;
     this.props.onChange(contractArray);
   },
