@@ -52,8 +52,10 @@ var ContractContainer = React.createClass({
       hasPicture: clarificaitonbook.hasPicture,
       hasClarificaitonbook: clarificaitonbook.hasClarificaitonbook,
       clarificaitonBookName: clarificaitonbook.name,
+      clarificaitonRemark: clarificaitonbook.remark,
       bookFile: clarificaitonbook.bookFile,
       files: clarificaitonbook.files,
+      priority: data.priority,
     };
     result[NavTab.PRICE] = {
 

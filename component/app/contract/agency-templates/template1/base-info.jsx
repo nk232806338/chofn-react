@@ -22,6 +22,8 @@ var BaseInfo = React.createClass({
     hasClarificaitonbook: React.PropTypes.any,
     clarificaitonBookName: React.PropTypes.any,
     bookFile: React.PropTypes.any,
+    priority: React.PropTypes.any, // 优先权数组
+    clarificaitonRemark: React.PropTypes.any, // 技术交底书备注
   },
   getDefaultProps() {
     return {
@@ -32,7 +34,6 @@ var BaseInfo = React.createClass({
     return {
       bookFile: {},
       file: {name: '测试数据', url: '/uploads/logo.png'},
-      priorityArray: [],
     };
   },
   onOtherSelect(item) {
@@ -68,7 +69,10 @@ var BaseInfo = React.createClass({
   },
   render() {
     var { file, bookFile } = this.state;
-    var { hasProject, hasPicture, hasClarificaitonbook, clarificaitonBookName, clarificaitonBookName } = this.props;
+    var {
+      hasProject, hasPicture, hasClarificaitonbook, clarificaitonRemark,
+      clarificaitonBookName, clarificaitonBookName, priority
+    } = this.props;
     return (<div>
       <Formsy.Form onChange={this.onFormChange}
         ref="form" className="base-info-form"
@@ -129,7 +133,10 @@ var BaseInfo = React.createClass({
           <div className="col-sm-12">
             <div className="Form-item clearfix">
               <label>备注</label>
-              <FormsyItem name="clarificaiton-remark" type="textarea" required tips="备注" />
+              <FormsyItem
+                value={clarificaitonRemark || ''}
+                name="clarificaitonRemark" type="textarea" required tips="备注"
+              />
             </div>
           </div>
         </div>
@@ -223,7 +230,7 @@ var BaseInfo = React.createClass({
       </Formsy.Form>
       <div className="row">
         <div className="col-sm-12">
-          <Priority onChange={this.onPriorityChange} data={[]}/>
+          <Priority onChange={this.onPriorityChange} data={priority}/>
         </div>
       </div>
     </div>);
