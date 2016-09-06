@@ -56,6 +56,10 @@ var ContractContainer = React.createClass({
       bookFile: clarificaitonbook.bookFile,
       files: clarificaitonbook.files,
       priority: data.priority,
+      submitCheck: data.contractDetailExt.submitCheck,
+      advancedPublic: data.contractDetailExt.advancedPublic,
+      timeLimit: data.contractDetailExt.timeLimit,
+      isRisk: data.contractDetail.isRisk,
     };
     result[NavTab.PRICE] = {
 

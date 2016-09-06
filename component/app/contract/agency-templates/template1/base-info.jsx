@@ -8,9 +8,10 @@ var Radios = require('../../../../form/form-item-radios');
 var NavTab = require('../../../../nav-tab/nav-tab');
 var Priority = require('../common/priority');
 require('../../../../form/form.less');
-var Select = require('../../../../select/form-item-select.jsx');
+var FormSelect = require('../../../../select/form-item-select');
 var Uploader = require('../../../../uploader/uploader');
 var API = require('../../../../api');
+var FormItemNumber = require('../../../../form/form-item-number');
 /**
  * @type {__React.ClassicComponentClass<P>}
  */
@@ -24,6 +25,10 @@ var BaseInfo = React.createClass({
     bookFile: React.PropTypes.any,
     priority: React.PropTypes.any, // 优先权数组
     clarificaitonRemark: React.PropTypes.any, // 技术交底书备注
+    submitCheck: React.PropTypes.any, // 是否提交实审请求
+    advancedPublic: React.PropTypes.any, // 是否要求提前公开
+    timeLimit: React.PropTypes.any, // 返初搞时限
+    isRisk: React.PropTypes.any, // 风险代理
   },
   getDefaultProps() {
     return {
@@ -31,6 +36,7 @@ var BaseInfo = React.createClass({
     }
   },
   getInitialState() {
+    this.timer = null;
     return {
       bookFile: {},
       file: {name: '测试数据', url: '/uploads/logo.png'},
@@ -60,7 +66,10 @@ var BaseInfo = React.createClass({
   },
   onFormChange() {
     var { onChange } = this.props;
-    onChange(this.refs.form.getModel());
+    window.clearTimeout(this.timer);
+    this.timer = window.setTimeout(event => {
+      onChange(this.refs.form.getModel());
+    }, 100);
   },
   onPriorityChange(priorityArray) {
     var { data, onChange } = this.props;
@@ -70,8 +79,8 @@ var BaseInfo = React.createClass({
   render() {
     var { file, bookFile } = this.state;
     var {
-      hasProject, hasPicture, hasClarificaitonbook, clarificaitonRemark,
-      clarificaitonBookName, clarificaitonBookName, priority
+      hasProject, hasPicture, hasClarificaitonbook, clarificaitonRemark, timeLimit, isRisk,
+      clarificaitonBookName, clarificaitonBookName, priority, submitCheck, advancedPublic
     } = this.props;
     return (<div>
       <Formsy.Form onChange={this.onFormChange}
@@ -145,7 +154,12 @@ var BaseInfo = React.createClass({
             <div className="Form-item clearfix">
               <label>是否提交实审请求</label>
               <FormsyItem name="submitCheck">
-                <Radios options={[{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]}/>
+                <Radios
+                  value={submitCheck}
+                  options={
+                    [{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]
+                  }
+                />
               </FormsyItem>
             </div>
           </div>
@@ -153,7 +167,7 @@ var BaseInfo = React.createClass({
             <div className="Form-item clearfix">
               <label>是否要求提前公开</label>
               <FormsyItem name="advancedPublic">
-                <Radios options={[{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]}/>
+                <Radios value={advancedPublic} options={[{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]}/>
               </FormsyItem>
             </div>
           </div>
@@ -162,14 +176,16 @@ var BaseInfo = React.createClass({
           <div className="col-sm-6">
             <div className="Form-item clearfix">
               <label>返初搞时限</label>
-              <FormsyItem name="timeLimit" value={''}/>
+              <FormsyItem name="timeLimit" >
+                <FormItemNumber value={timeLimit}/>
+              </FormsyItem>
             </div>
           </div>
           <div className="col-sm-6">
             <div className="Form-item clearfix">
               <label>费减信息</label>
               <FormsyItem name="cutFee">
-                <Select
+                <FormSelect
                   options={[
                     {value: 0, label: '无费减'},
                     {value: 5, label: '费减备案一类 85%'},
@@ -185,9 +201,10 @@ var BaseInfo = React.createClass({
             <div className="Form-item clearfix">
               <label>风险代理</label>
               <FormsyItem name="isRisk">
-                <Select
-                  options={[{value: 0, label: '无'}, {value: 1, label: '半风险'}, {value: 2, label: '全风险'}]}
-                  value={0}
+                <FormSelect
+                  clearable={false} valueKey="value" labelKey="label"
+                  options={[{value: '0', label: '无'}, {value: '1', label: '半风险'}, {value: '2', label: '全风险'}]}
+                  value={isRisk || '0'}
                 />
               </FormsyItem>
             </div>

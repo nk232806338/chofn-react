@@ -28,17 +28,14 @@ var FormItemSelect = React.createClass({
   },
   onChange(activeOption) {
     var { changeValue, onChange, valueKey } = this.props;
+    // debugger;
     changeValue(activeOption[valueKey]);
-    onChange(activeOption);
-    this.setState({
-      value: activeOption.value
-    });
+    if (onChange) onChange(activeOption);
   },
   render() {
     var { ...others } = this.props;
-    var { value } = this.state;
     return (<div>
-      <Select {...others } onChange={this.onChange} value={value}/>
+      <Select {...others } onChange={this.onChange} value={this.props.value}/>
     </div>);
   }
 });
