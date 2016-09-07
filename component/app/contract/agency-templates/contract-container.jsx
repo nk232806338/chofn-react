@@ -110,6 +110,9 @@ var ContractContainer = React.createClass({
     }
   },
   saveAsDraft() {
+    var contractArray = this.props.data;
+    _.each(contractArray, contract => contract.submitForm = true);
+    this.props.onChange(contractArray);
   },
   onContractDataChange(data, contractId) {
     var contractArray = this.props.data;
@@ -166,7 +169,7 @@ var ContractContainer = React.createClass({
             {contract.showExpand && contract.templateType ? <div className="panel-body">
               <TemplateComponent
                 data={contract.data} onChange={data => this.onContractDataChange(data, contract.id)}
-                proposersArray={proposersArray}
+                proposersArray={proposersArray} submitForm={contract.submitForm}
               />
             </div> : null}
             <div style={{marginBottom: '40px'}} />

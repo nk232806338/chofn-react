@@ -17,6 +17,7 @@ var FormItemNumber = require('../../../../form/form-item-number');
  */
 var BaseInfo = React.createClass({
   propTypes: {
+    submitForm: React.PropTypes.any,
     onChange: React.PropTypes.func,
     hasProject: React.PropTypes.any,
     hasPicture: React.PropTypes.any,
@@ -81,6 +82,12 @@ var BaseInfo = React.createClass({
     onChange({
       priority: priorityArray
     });
+  },
+  componentWillUpdate(nextProps) {
+    var { submitForm } = this.props;
+    if (submitForm != nextProps.submitForm) {
+      this.refs.form.submit();
+    }
   },
   render() {
     var { file, bookFile } = this.state;

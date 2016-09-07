@@ -15,6 +15,7 @@ var Template1Main = React.createClass({
     data: React.PropTypes.object,
     onChange: React.PropTypes.func,
     proposersArray: React.PropTypes.array,
+    submitForm: React.PropTypes.any,
   },
   getInitialState() {
     return {
@@ -33,7 +34,7 @@ var Template1Main = React.createClass({
     onChange(data);
   },
   render() {
-    var { proposersArray, data } = this.props;
+    var { proposersArray, data, submitForm } = this.props;
     var { activeNav } = this.state;
     var Component = Registry[activeNav];
     var activeData = data[activeNav];
@@ -42,7 +43,7 @@ var Template1Main = React.createClass({
       <div className="content-for-info">
         <Component
           onChange={newData => {this.onDataChange(newData, activeNav)}} {...activeData}
-          proposersArrayMeta={proposersArray}
+          proposersArrayMeta={proposersArray} submitForm={submitForm}
         />
       </div>
     </div>);

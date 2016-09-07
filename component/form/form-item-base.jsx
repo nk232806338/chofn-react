@@ -47,6 +47,9 @@ var FormItemBase = React.createClass({
       className += ' is-focused';
     } else if (this.showError()) {
       className += ' error';
+    // ifRequired also show error msg
+    } else if (ifRequired) {
+      className += ' error';
     }
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
