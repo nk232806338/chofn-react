@@ -37,7 +37,6 @@ var MultipleRegionSelect = React.createClass({
     };
   },
   componentDidMount() {
-    debugger;
     this.isUnMounted = false;
     this.getProvince();
     this.getCity();
@@ -103,7 +102,6 @@ var MultipleRegionSelect = React.createClass({
     }
     if (!cityId) return false;
     if (!RegionCached[cityId]) {
-      debugger;
       return axios.post(API.getRegion, 'parentId=' + cityId, {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       }).then(response => {

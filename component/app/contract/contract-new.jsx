@@ -107,10 +107,10 @@ var ContractNew = React.createClass({
     });
   },
   onContractArrayChange(newContractArray) {
-    debugger;
     this.setState({
       contractArray: newContractArray
     });
+    console.info(newContractArray);
   },
   componentDidMount() {
     this.onSelectCustomer({

@@ -118,7 +118,7 @@ var Proposer = React.createClass({
           <div className="Form-item clearfix">
             <label>地址</label>
             <div className="Form-item-base">
-              <span>{data.proposerCountryId}|{data.proposerProvinceId}|{data.proposerCityId}|{data.proposerAreaId}</span>
+              {/*<span>{data.proposerCountryId}|{data.proposerProvinceId}|{data.proposerCityId}|{data.proposerAreaId}</span>*/}
               <MultipleRegionSelect
                 provinceId={data.proposerProvinceId}
                 cityId={data.proposerCityId}

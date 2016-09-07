@@ -119,7 +119,6 @@ var Priority = React.createClass({
   },
   getInitialState() {
     var { data } = this.props;
-    debugger;
     this.transData = this.transData(data);
     return {
       activePriority: this.transData[0],
