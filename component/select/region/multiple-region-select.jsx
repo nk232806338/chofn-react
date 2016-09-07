@@ -8,6 +8,7 @@ var FormsyItem = require('../../form/Form-item-base');
  * @type {__React.ClassicComponentClass<P>}
  * @desc 省/市/区 三级联动下拉框
  */
+var RegionCached = {};
 var MultipleRegionSelect = React.createClass({
   propTypes: {
     countryId: React.PropTypes.any,
@@ -19,7 +20,7 @@ var MultipleRegionSelect = React.createClass({
   },
   getDefaultProps() {
     return {
-      countryId: 1
+      countryId: 1 // 省/市/区 默认只展示中国(1)的地级信息
     }
   },
   getInitialState() {
@@ -36,6 +37,8 @@ var MultipleRegionSelect = React.createClass({
     };
   },
   componentDidMount() {
+    debugger;
+    this.isUnMounted = false;
     this.getProvince();
     this.getCity();
     this.getArea();
@@ -51,41 +54,69 @@ var MultipleRegionSelect = React.createClass({
 
     }
   },
+  componentWillUnmount() {
+    this.isUnMounted = true;
+  },
   getProvince() {
     var { countryId } = this.props;
-    return axios.post(API.getRegion, 'parentId=' + countryId, {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    }).then(response => {
-      this.setState({
-        provinceArray: response.data.body.data
+    if (!countryId) return false;
+    if (!RegionCached[countryId]) {
+      return axios.post(API.getRegion, 'parentId=' + countryId, {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }).then(response => {
+        RegionCached[countryId] = response.data.body.data;
+        !this.isUnMounted && this.setState({
+          provinceArray: RegionCached[countryId]
+        });
       });
-    });
+    } else {
+      !this.isUnMounted && this.setState({
+        provinceArray: RegionCached[countryId]
+      });
+    }
   },
   getCity(provinceIdParam) {
     var { provinceId } = this.props;
     if (provinceIdParam) {
       provinceId = provinceIdParam;
     }
-    return axios.post(API.getRegion, 'parentId=' + provinceId, {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    }).then(response => {
-      this.setState({
-        cityArray: response.data.body.data
+    if (!provinceId) return false;
+    if (!RegionCached[provinceId]) {
+      return axios.post(API.getRegion, 'parentId=' + provinceId, {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }).then(response => {
+        RegionCached[provinceId] = response.data.body.data;
+        !this.isUnMounted && this.setState({
+          cityArray: RegionCached[provinceId]
+        });
       });
-    });
+    } else {
+      !this.isUnMounted && this.setState({
+        cityArray: RegionCached[provinceId]
+      });
+    }
   },
   getArea(cityIdParam) {
     var { cityId } = this.props;
     if (cityIdParam) {
       cityId = cityIdParam;
     }
-    return axios.post(API.getRegion, 'parentId=' + cityId, {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    }).then(response => {
-      this.setState({
-        areaArray: response.data.body.data
+    if (!cityId) return false;
+    if (!RegionCached[cityId]) {
+      debugger;
+      return axios.post(API.getRegion, 'parentId=' + cityId, {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }).then(response => {
+        RegionCached[cityId] = response.data.body.data;
+        !this.isUnMounted && this.setState({
+          areaArray: RegionCached[cityId]
+        });
       });
-    });
+    } else {
+      !this.isUnMounted && this.setState({
+        areaArray: RegionCached[cityId]
+      });
+    }
   },
   onChange(newValue, type) {
     this.data[type] = newValue.id;

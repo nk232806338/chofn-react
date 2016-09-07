@@ -6,6 +6,8 @@ var FormSelectAysc = require('../../../../select/form-item-select-aysc');
 var FormsyItem = require('../../../../form/Form-item-base');
 var Uploader = require('../../../../uploader/uploader');
 var MultipleRegionSelect = require('../../../../select/region/multiple-region-select');
+var getRegionCallBack = require('../../../../select/region/get-region-data');
+var _ = require('underscore');
 var axios = require('axios');
 var API = require('../../../../api');
 /**
@@ -16,31 +18,35 @@ var Proposer = React.createClass({
   propTypes: {
     data: React.PropTypes.any,
     proposersArrayMeta: React.PropTypes.array,
+    aid: React.PropTypes.any,
   },
   onRegionChange(regionsData) {
-    var { data, onChange } = this.props;
-    data.proposerProvinceId = regionsData.provinceId;
-    data.proposerCityId = regionsData.cityId;
-    data.proposerAreaId = regionsData.areaId;
-    onChange(data);
+    var { onChange, aid } = this.props;
+    var result = {};
+    result.proposerProvinceId = regionsData.provinceId;
+    result.proposerCityId = regionsData.cityId;
+    result.proposerAreaId = regionsData.areaId;
+    onChange(result, aid);
   },
   onProposerChange(newValue) {
-    var { data, onChange } = this.props;
-    onChange(newValue);
+    var { onChange, aid } = this.props;
+    onChange(newValue, aid);
   },
   onFormChange() {
-    var { onChange } = this.props;
-    onChange(this.refs.form.getModel());
+    var { onChange, aid } = this.props;
+    window.clearTimeout(this.timer);
+    this.timer = window.setTimeout(event => {
+      onChange(this.refs.form.getModel(), aid);
+    }, 100);
   },
-  getCountry() {
-    // 获取所有国家
-    return axios.post(API.getRegion, '', {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    }).then(response => {
-      return {
-        options: response.data.body.data,
-      };
-    });
+  componentDidMount() {
+    var { data, proposersArrayMeta } = this.props;
+    if (!data.proposerId) {
+      this.onProposerChange(_.assign({}, proposersArrayMeta[0]))
+    }
+  },
+  componentWillUnmount() {
+    window.clearTimeout(this.timer);
   },
   render() {
     var { data, proposersArrayMeta } = this.props;
@@ -54,7 +60,7 @@ var Proposer = React.createClass({
             <FormsyItem name="proposerId" required tips="申请人名称">
               <FormSelect
                 options={proposersArrayMeta}
-                value={data.proposerId || proposersArrayMeta[0].proposerId}
+                value={data.proposerId}
                 labelKey="proposerName" valueKey="proposerId" clearable={false}
                 onChange={this.onProposerChange}
               />
@@ -84,7 +90,7 @@ var Proposer = React.createClass({
             <label>国籍</label>
             <FormsyItem name="proposerCountryId" required tips="国籍" >
               <FormSelectAysc
-                loadOptions={this.getCountry} labelKey="name" valueKey="id"
+                loadOptions={getRegionCallBack} labelKey="name" valueKey="id"
                 value={data.proposerCountryId}
               />
             </FormsyItem>
@@ -112,8 +118,8 @@ var Proposer = React.createClass({
           <div className="Form-item clearfix">
             <label>地址</label>
             <div className="Form-item-base">
+              <span>{data.proposerCountryId}|{data.proposerProvinceId}|{data.proposerCityId}|{data.proposerAreaId}</span>
               <MultipleRegionSelect
-                countryId={data.proposerCountryId}
                 provinceId={data.proposerProvinceId}
                 cityId={data.proposerCityId}
                 areaId={data.proposerAreaId}
