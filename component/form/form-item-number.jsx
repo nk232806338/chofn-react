@@ -37,7 +37,8 @@ var FormItemNumber = React.createClass({
     }
   },
   componentDidMount() {
-
+    var { onChange, value } = this.props;
+    if (onChange) onChange(parseInt(value));
   },
   add() {
     var { value } = this.state;

@@ -4,10 +4,10 @@ var Select = require('react-select');
 var FormItemSelectAysc = React.createClass({
   propTypes: {
     changeValue: React.PropTypes.func,
+    value: React.PropTypes.any,
   },
   getInitialState() {
     return {
-      value: this.props.value
     }
   },
   componentDidMount() {
@@ -19,13 +19,9 @@ var FormItemSelectAysc = React.createClass({
   onChange(activeOption) {
     var { changeValue, valueKey } = this.props;
     changeValue(activeOption[valueKey]);
-    this.setState({
-      value: activeOption[valueKey]
-    });
   },
   render() {
-    var { ...others } = this.props;
-    var { value } = this.state;
+    var { ...others, value } = this.props;
     return (<div>
       <Select.Async
         {...others } clearable={false}

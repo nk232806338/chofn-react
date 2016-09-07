@@ -23,31 +23,23 @@ var FormItemRadios = React.createClass({
       if (option.checked) option.checked = false;
     });
     _.find(options, {value: event.target.value}).checked = true;
-    // if (onChange) {
-    //   var result = {};
-    //   result[name] = event.target.value;
-    //   onChange(result);
-    // }
     this.setState({
       options
     });
   },
   componentDidMount() {
-    var { changeValue, options } = this.props;
-    var defaultCheckOption = _.find(options, {checked: true});
-    if (defaultCheckOption) {
-      changeValue(defaultCheckOption.value);
-    }
+    var { changeValue, value } = this.props;
+    changeValue(value);
   },
   render() {
-    var { name } = this.props;
+    var { name, value } = this.props;
     var { options } = this.state;
     return (<div onChange={this.onChange}>
       {options.map(option => {
         var id = _.uniqueId('radio-option-');
         return (
           <label htmlFor={id} key={'key-' + id}>
-            <input type="radio" name={name} id={id} value={option.value} defaultChecked={option.checked}/>
+            <input type="radio" name={name} id={id} value={option.value} defaultChecked={option.value == value}/>
             {option.label}
           </label>
         );

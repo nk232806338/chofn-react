@@ -29,6 +29,11 @@ var BaseInfo = React.createClass({
     advancedPublic: React.PropTypes.any, // 是否要求提前公开
     timeLimit: React.PropTypes.any, // 返初搞时限
     isRisk: React.PropTypes.any, // 风险代理
+    cutFee: React.PropTypes.any, // 费减信息
+    rightItemNum: React.PropTypes.any, // 权利要求项数
+    specificationPageNum: React.PropTypes.any, // 说明书页数
+    contractDetailRemark: React.PropTypes.any, // 事项备注
+    isPriority: React.PropTypes.any, // 是否申请优先权
   },
   getDefaultProps() {
     return {
@@ -72,15 +77,17 @@ var BaseInfo = React.createClass({
     }, 100);
   },
   onPriorityChange(priorityArray) {
-    var { data, onChange } = this.props;
-    data.priorityArray = priorityArray;
-    onChange(data);
+    var { onChange } = this.props;
+    onChange({
+      priority: priorityArray
+    });
   },
   render() {
     var { file, bookFile } = this.state;
     var {
       hasProject, hasPicture, hasClarificaitonbook, clarificaitonRemark, timeLimit, isRisk,
-      clarificaitonBookName, clarificaitonBookName, priority, submitCheck, advancedPublic
+      clarificaitonBookName, priority, submitCheck, advancedPublic, isPriority,
+      cutFee, rightItemNum, specificationPageNum, contractDetailRemark
     } = this.props;
     return (<div>
       <Formsy.Form onChange={this.onFormChange}
@@ -186,11 +193,12 @@ var BaseInfo = React.createClass({
               <label>费减信息</label>
               <FormsyItem name="cutFee">
                 <FormSelect
+                  clearable={false} valueKey="value" labelKey="label"
                   options={[
-                    {value: 0, label: '无费减'},
-                    {value: 5, label: '费减备案一类 85%'},
-                    {value: 6, label: '费减备案二类 70%'},
-                  ]} value={0}
+                    {value: '0', label: '无费减'},
+                    {value: '5', label: '费减备案一类 85%'},
+                    {value: '6', label: '费减备案二类 70%'},
+                  ]} value={cutFee || '0'}
                 />
               </FormsyItem>
             </div>
@@ -216,13 +224,13 @@ var BaseInfo = React.createClass({
           <div className="col-sm-6">
             <div className="Form-item clearfix">
               <label>权利要求项数</label>
-              <FormsyItem name="rightItemNum" value={''}/>
+              <FormsyItem name="rightItemNum" value={rightItemNum || ''}/>
             </div>
           </div>
           <div className="col-sm-6">
             <div className="Form-item clearfix">
               <label>说明书页数</label>
-              <FormsyItem name="specificationPageNum" value={''} />
+              <FormsyItem name="specificationPageNum" value={specificationPageNum || ''} />
             </div>
           </div>
         </div>
@@ -230,7 +238,10 @@ var BaseInfo = React.createClass({
           <div className="col-sm-12">
             <div className="Form-item clearfix">
               <label>事项备注</label>
-              <FormsyItem name="remark" type="textarea" required tips="事项备注" />
+              <FormsyItem
+                value={contractDetailRemark}
+                name="contractDetailRemark" type="textarea" required tips="注：选择风险代理必填事项备注"
+              />
             </div>
           </div>
         </div>
@@ -239,7 +250,10 @@ var BaseInfo = React.createClass({
             <div className="Form-item clearfix">
               <label>是否申请优先权</label>
               <FormsyItem name="isPriority">
-                <Radios options={[{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]}/>
+                <Radios
+                  value={isPriority || "0"}
+                  options={[{value: "1", label: '是'}, {value: "0", label: '否'}]}
+                />
               </FormsyItem>
             </div>
           </div>

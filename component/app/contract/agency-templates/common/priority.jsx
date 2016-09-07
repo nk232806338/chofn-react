@@ -7,6 +7,7 @@ var FormSelectAysc = require('../../../../select/form-item-select-aysc');
 var API = require('../../../../api');
 var Formsy = require('formsy-react');
 var FormsyItem = require('../../../../form/Form-item-base');
+var FormItemDate = require('../../../../form/form-item-date');
 var axios = require('axios');
 require('moment/locale/zh-cn.js');
 require('react-datetime/css/react-datetime.css');
@@ -16,17 +17,17 @@ require('./priority.less');
  * @desc PriorityForm Component
  */
 var PriorityForm = React.createClass({
-  getDefaultProps() {
-    return {
-    };
-  },
   propTypes: {
     data: React.PropTypes.object,
     onChange: React.PropTypes.func,
+    aid: React.PropTypes.any,
   },
-  onFormChange(values) {
-    var {onChange} = this.props;
-    if (onChange) onChange(values);
+  onFormChange(values, changed) {
+    var { onChange, aid } = this.props;
+    window.clearTimeout(this.timer);
+    this.timer = window.setTimeout(event => {
+      if (onChange) onChange(values, aid);
+    }, 10)
   },
   onValid() {
   },
@@ -59,13 +60,13 @@ var PriorityForm = React.createClass({
           </div>
           <div className="col-sm-6">
             <div className="Form-item clearfix date-picker">
-              <label>在先申请日</label>
-              <div className="Form-item-base">
-                <Datetime
+              <label>在先申请日期</label>
+              <FormsyItem name="applyDate">
+                <FormItemDate
                   locale="zh-cn" dateFormat="YYYY-MM-DD" timeFormat={false}
                   closeOnSelect={true} defaultValue={data.applyDate || ''}
                 />
-              </div>
+              </FormsyItem>
             </div>
           </div>
           <div className="col-sm-6">
@@ -80,10 +81,10 @@ var PriorityForm = React.createClass({
           <div className="col-sm-6">
             <div className="Form-item clearfix">
               <label>*在先申请国</label>
-              <FormsyItem name="countryId" required tips="国籍" >
+              <FormsyItem name="countryId" required tips="国籍" value={data.countryId}>
                 <FormSelectAysc
                   loadOptions={this.getCountry} labelKey="name" valueKey="id"
-                  value={data.proposerCountryId}
+                  value={data.countryId}
                 />
               </FormsyItem>
             </div>
@@ -91,6 +92,14 @@ var PriorityForm = React.createClass({
         </div>
       </div>
     </Formsy.Form>);
+  }
+});
+
+var DefaultHoder = React.createClass({
+  render() {
+    return (
+      <div className="nav-content Priority-form-wrapper" style={{height: '108px'}}></div>
+    );
   }
 });
 
@@ -110,17 +119,17 @@ var Priority = React.createClass({
   },
   getInitialState() {
     var { data } = this.props;
-    var transData = this.transData(data);
+    debugger;
+    this.transData = this.transData(data);
     return {
-      activePriority: transData[0],
-      transData: transData
+      activePriority: this.transData[0],
     };
   },
   transData(data) {
     var transData = data.map(priorityData => {
-      return {name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: priorityData}
+      return {name: '优先权', id: _.uniqueId('priority-id-'), component: PriorityForm, data: priorityData}
     });
-    return transData.length > 0 ? transData : [{name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}}];
+    return transData.length > 0 ? transData : [{name: '优先权', id: _.uniqueId('priority-id-'), component: PriorityForm, data: {}}];
   },
   unTransData(transData) {
     return transData.map(transData => {
@@ -128,11 +137,8 @@ var Priority = React.createClass({
     });
   },
   addTab() {
-    var { transData } = this.state;
-    var newTransData = transData.concat({name: '优先权', id: _.uniqueId('priority-id-'), component: <PriorityForm />, data: {}});
-    this.setState({
-      transData: newTransData
-    });
+    this.transData= this.transData.concat({name: '优先权', id: _.uniqueId('priority-id-'), component: PriorityForm, data: {}});
+    this.forceUpdate();
   },
   removeTab(tabId) {
     // this.setState({
@@ -140,33 +146,33 @@ var Priority = React.createClass({
     // });
   },
   activeTab(tabId) {
-    var { transData } = this.state;
     this.setState({
-      activePriority: _.find(transData, {id: tabId})
+      activePriority: {component: DefaultHoder}
     });
+    window.setTimeout(event => {
+      this.setState({
+        activePriority: _.find(this.transData, {id: tabId})
+      });
+    }, 1);
   },
   // reset values by tabId
   onChange(values, tabId) {
     var { onChange } = this.props;
-    var { transData } = this.state;
-    var priority = _.find(transData, {id: tabId});
-    priority.data = values;
-    onChange(this.unTransData(transData));
+    var priority = _.find(this.transData, {id: tabId});
+    _.extend(priority.data, values);
+    onChange(this.unTransData(this.transData));
   },
   render() {
-    var { activePriority, transData } = this.state;
+    var { activePriority } = this.state;
     var Component = activePriority.component;
     return (
       <div>
           <NavTab
-            data={transData} activeTab={this.activeTab}
+            data={this.transData} activeTab={this.activeTab}
             addTab={this.addTab} removeTab={this.removeTab}
             active={activePriority.id}
           />
-        {React.cloneElement(Component, {
-          data: activePriority.data,
-          onChange: values => this.onChange(values, activePriority.id)
-        })}
+        <Component data={activePriority.data} onChange={this.onChange} aid={activePriority.id} />
       </div>
     );
   }

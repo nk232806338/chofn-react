@@ -60,6 +60,11 @@ var ContractContainer = React.createClass({
       advancedPublic: data.contractDetailExt.advancedPublic,
       timeLimit: data.contractDetailExt.timeLimit,
       isRisk: data.contractDetail.isRisk,
+      cutFee: data.contractDetailExt.cutFee,
+      rightItemNum: data.contractDetailExt.rightItemNum,
+      specificationPageNum: data.contractDetailExt.specificationPageNum,
+      contractDetailRemark: data.contractDetail.remark,
+      isPriority: data.contractDetail.isPriority,
     };
     result[NavTab.PRICE] = {
 
