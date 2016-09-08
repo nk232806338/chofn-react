@@ -6,6 +6,7 @@ var API = require('../../../api');
 var templateTypeData = require('../data/meta-data-5-template-type.json').body.data.COMMITMENT;
 var TemplatesRegistry = require('./TemplatesRegistry');
 var NavTab = require('./NavTab');
+var ButtonConfirm = require('../../../form/button/button-confirm');
 require('./contract-container.less');
 /**
  * @desc [代理服务合同创建模块]
@@ -23,21 +24,24 @@ var ContractContainer = React.createClass({
     // 默认展开第一条合同
     this.toggleExpand(contractArray[0]);
   },
-  addContract(a, event) {
+  addContract(contract, event) {
     event.stopPropagation();
-    this.state.contractArray.push({id: _.uniqueId('template-id-')});
-    this.setState({
-      contractArray: this.state.contractArray
-    });
+    var contractArray = this.props.data;
+    contractArray.push({id: _.uniqueId('create-by-front-end-')});
+    this.props.onChange(contractArray);
+  },
+  copyContract(contract, event) {
+    event.stopPropagation();
+    var contractArray = this.props.data;
+    contractArray.push({id: _.uniqueId('create-by-front-end-'), templateType: contract.templateType, data: contract.data});
+    this.props.onChange(contractArray);
   },
   removeContract(contract, event) {
     event.stopPropagation();
-    var { contractArray } = this.state;
-    this.setState({
-      contractArray : _.without(contractArray, _.findWhere(contractArray, {
-        id: contract.id
-      }))
-    });
+    var contractArray = this.props.data;
+    this.props.onChange(_.without(contractArray, _.findWhere(contractArray, {
+      id: contract.id
+    })));
   },
   onChangeTemplate(templateType, contract) {
     // the param : contract is a reference of
@@ -47,7 +51,9 @@ var ContractContainer = React.createClass({
   },
   transData(data) {
     var result = {};
-    var clarificaitonbook = data.clarificaitonbook || {};
+    var clarificaitonbook = data.clarificaitonbook || {},
+        contractDetailExt = data.contractDetailExt || {},
+        contractDetail = data.contractDetail || {};
     result[NavTab.BASE] = {
       hasProject: clarificaitonbook.hasProject,
       hasPicture: clarificaitonbook.hasPicture,
@@ -57,19 +63,19 @@ var ContractContainer = React.createClass({
       bookFile: clarificaitonbook.bookFile,
       files: clarificaitonbook.files,
       priority: data.priority,
-      submitCheck: data.contractDetailExt.submitCheck,
-      advancedPublic: data.contractDetailExt.advancedPublic,
-      timeLimit: data.contractDetailExt.timeLimit,
-      isRisk: data.contractDetail.isRisk,
-      cutFee: data.contractDetailExt.cutFee,
-      rightItemNum: data.contractDetailExt.rightItemNum,
-      specificationPageNum: data.contractDetailExt.specificationPageNum,
-      contractDetailRemark: data.contractDetail.remark,
-      isPriority: data.contractDetail.isPriority,
+      submitCheck: contractDetailExt.submitCheck,
+      advancedPublic: contractDetailExt.advancedPublic,
+      timeLimit: contractDetailExt.timeLimit,
+      isRisk: contractDetail.isRisk,
+      cutFee: contractDetailExt.cutFee,
+      rightItemNum: contractDetailExt.rightItemNum,
+      specificationPageNum: contractDetailExt.specificationPageNum,
+      contractDetailRemark: contractDetail.remark,
+      isPriority: contractDetail.isPriority,
     };
     result[NavTab.PRICE] = {
-      isRebate: data.contractDetail.isRebate,
-      partner: data.contractDetail.partner,
+      isRebate: contractDetail.isRebate,
+      partner: contractDetail.partner,
       isStages: undefined,
     };
     result[NavTab.PERSON]= {
@@ -84,19 +90,25 @@ var ContractContainer = React.createClass({
     var currentContract = _.find(contractArray, {id: contract.id});
     currentContract.showExpand = !currentContract.showExpand;
     if (_.isEmpty(currentContract.data)) {
-      axios.post(API.test, '', {
-        headers: {'Content-Type': ' '}
-      })
-        .then(response => {
-          // we need to rebuilt the structure of response data in order to adjust the Front-End's need
-          currentContract.data = this.transData(response.data.body.data);
-          this.props.onChange(contractArray);
-          console.info(currentContract.data);
+      // 如果是用户在前端创建的新合同模板,则无需向服务端发起请求此合同的依赖数据的请求
+      if (currentContract.id.indexOf('create-by-front-end') < 0) {
+        axios.post(API.getItemDetail + '/?id=' + currentContract.id, '', {
+          headers: {'Content-Type': ' '}
         })
-        .catch(function (error) {
-          console.info(error.stack);
-          console.log(error);
-        });
+          .then(response => {
+            // we need to rebuilt the structure of response data in order to adjust the Front-End's need
+            currentContract.data = this.transData(response.data.body.data);
+            this.props.onChange(contractArray);
+            console.info(currentContract.data);
+          })
+          .catch(function (error) {
+            console.info(error.stack);
+            console.log(error);
+          });
+      } else {
+        currentContract.data = this.transData({});
+        this.props.onChange(contractArray);
+      }
     } else {
       /**
        * @author niekai
@@ -146,7 +158,7 @@ var ContractContainer = React.createClass({
                   </div>
                   <div className="col-sm-3">
                   </div>
-                  <div className="col-sm-3">
+                  <div className="col-sm-3" style={{position: 'relative'}}>
                     <div style={{marginTop: '4px'}}/>
                     <button
                       type="button" className="btn btn-default" style={{marginRight: '6px'}}
@@ -154,12 +166,18 @@ var ContractContainer = React.createClass({
                     >
                       <span className="glyphicon glyphicon-plus" aria-hidden="true" style={{marginRight: '4px'}}/>添加
                     </button>
-                    <button type="button" className="btn btn-default" style={{marginRight: '6px'}}>
+                    <button
+                      type="button" className="btn btn-default" style={{marginRight: '6px'}}
+                      onClick={event => this.copyContract(contract, event)}
+                    >
                       <span className="glyphicon glyphicon-duplicate" aria-hidden="true" style={{marginRight: '4px'}}/>复制
                     </button>
-                    <button type="button" className="btn btn-default" onClick={event => {this.removeTemplate(templateInstance, event)}}>
+                    <ButtonConfirm className="btn btn-default" onYes={event => this.removeContract(contract, event)}>
                       <span className="glyphicon glyphicon-trash" aria-hidden="true" style={{marginRight: '4px'}}/>删除
-                    </button>
+                    </ButtonConfirm>
+                    {/*<button type="button" className="btn btn-default" onClick={event => {}}>*/}
+                      {/*<span className="glyphicon glyphicon-trash" aria-hidden="true" style={{marginRight: '4px'}}/>删除*/}
+                    {/*</button>*/}
                   </div>
                   { contract.templateType ? <div className="col-sm-3 toggle-switch-wrapper">
                     <i className="toggle-switcher">

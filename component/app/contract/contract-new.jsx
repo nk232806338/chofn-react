@@ -93,7 +93,7 @@ var ContractNew = React.createClass({
   },
   transContractArray(contractDetail) {
     if (!contractDetail) {
-      return [{templateType: '1', id: 1212, data: {}, showExpand: false}];
+      return [{templateType: '1', id: 'create-by-front-end-x', data: {}, showExpand: false}];
     }
     return contractDetail.itemFinance.items.map(item => {
       return {templateType: item.commitmentId, id: item.detailId, data: {}, showExpand: false};
