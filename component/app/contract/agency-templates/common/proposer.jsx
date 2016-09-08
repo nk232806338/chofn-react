@@ -41,6 +41,7 @@ var Proposer = React.createClass({
   },
   componentDidMount() {
     var { data, proposersArrayMeta } = this.props;
+    // 初始化默认选中第一个委托人
     if (!data.proposerId) {
       this.onProposerChange(_.assign({}, proposersArrayMeta[0]))
     }
@@ -88,7 +89,7 @@ var Proposer = React.createClass({
         <div className="col-sm-6">
           <div className="Form-item clearfix">
             <label>国籍</label>
-            <FormsyItem name="proposerCountryId" required tips="国籍" >
+            <FormsyItem name="proposerCountryId" required tips="国籍" value={data.proposerCountryId || 0}>
               <FormSelectAysc
                 loadOptions={getRegionCallBack} labelKey="name" valueKey="id"
                 value={data.proposerCountryId}

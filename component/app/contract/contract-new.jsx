@@ -200,6 +200,7 @@ var ContractNew = React.createClass({
           data={contractArray} onChange={this.onContractArrayChange}
         /> : null
       }
+      <div style={{marginBottom: '60px'}}></div>
     </div>);
   }
 });

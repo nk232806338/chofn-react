@@ -19,7 +19,7 @@ var Template1Main = React.createClass({
   },
   getInitialState() {
     return {
-      activeNav: NavTab.PERSON
+      activeNav: NavTab.PRICE
     }
   },
   onTabChange(tab) {

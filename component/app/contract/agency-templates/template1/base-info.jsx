@@ -67,9 +67,6 @@ var BaseInfo = React.createClass({
   },
   onSubmitCheckChange(options) {
   },
-  submit(model) {
-
-  },
   onFormChange() {
     var { onChange } = this.props;
     window.clearTimeout(this.timer);
@@ -86,6 +83,12 @@ var BaseInfo = React.createClass({
   componentWillUpdate(nextProps) {
     var { submitForm } = this.props;
     if (submitForm != nextProps.submitForm) {
+      this.refs.form.submit();
+    }
+  },
+  componentDidMount() {
+    var { submitForm } = this.props;
+    if (submitForm) {
       this.refs.form.submit();
     }
   },
@@ -119,7 +122,7 @@ var BaseInfo = React.createClass({
             <div className="Form-item clearfix small">
               <label>交底书名称</label>
               <FormsyItem
-                name="clarificaitonName"
+                name="clarificaitonBookName"
                 required tips="交底书名称"  placeholder="交底书名称" validations="minLength:1"
                 validationErrors="请输入完整的交底书名称" value={clarificaitonBookName}
               />
@@ -169,7 +172,7 @@ var BaseInfo = React.createClass({
               <label>是否提交实审请求</label>
               <FormsyItem name="submitCheck">
                 <Radios
-                  value={submitCheck}
+                  value={submitCheck || '1'}
                   options={
                     [{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]
                   }
@@ -181,7 +184,9 @@ var BaseInfo = React.createClass({
             <div className="Form-item clearfix">
               <label>是否要求提前公开</label>
               <FormsyItem name="advancedPublic">
-                <Radios value={advancedPublic} options={[{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]}/>
+                <Radios
+                  value={advancedPublic || '1'}
+                  options={[{value: "1", label: '是', checked: true}, {value: "0", label: '否'}]}/>
               </FormsyItem>
             </div>
           </div>
@@ -266,27 +271,14 @@ var BaseInfo = React.createClass({
           </div>
         </div>
       </Formsy.Form>
-      <div className="row">
+      { isPriority == '1' ? <div className="row">
         <div className="col-sm-12">
           <Priority onChange={this.onPriorityChange} data={priority}/>
         </div>
-      </div>
+      </div> : null}
+
     </div>);
   }
 });
 
 module.exports = BaseInfo;
-// <div className="row">
-//   <div className="col-sm-6">
-//     <div className="Form-item clearfix">
-//       <label>风险代理</label>
-//       <FormsyItem name="submitCheck">
-//         <div>
-//           <div style={{float: 'left'}}><input type="checkbox" name="" id=""/>是否风险代理</div>
-//           <div style={{float: 'left', width: '150px'}}>
-//             <FormSelect />
-//           </div>
-//         </div>
-//       </FormsyItem>
-//     </div>
-// </div>

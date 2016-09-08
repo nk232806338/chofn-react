@@ -20,6 +20,7 @@ var ContractContainer = React.createClass({
   },
   componentDidMount() {
     var contractArray = this.props.data;
+    // 默认展开第一条合同
     this.toggleExpand(contractArray[0]);
   },
   addContract(a, event) {
@@ -67,7 +68,9 @@ var ContractContainer = React.createClass({
       isPriority: data.contractDetail.isPriority,
     };
     result[NavTab.PRICE] = {
-
+      isRebate: data.contractDetail.isRebate,
+      partner: data.contractDetail.partner,
+      isStages: undefined,
     };
     result[NavTab.PERSON]= {
       contractDetailProposer: data.contractDetailProposer,
@@ -110,9 +113,9 @@ var ContractContainer = React.createClass({
     }
   },
   saveAsDraft() {
-    var contractArray = this.props.data;
-    _.each(contractArray, contract => contract.submitForm = true);
-    this.props.onChange(contractArray);
+    // var contractArray = this.props.data;
+    // _.each(contractArray, contract => contract.submitForm = new Date().getTime());
+    // this.props.onChange(contractArray);
   },
   onContractDataChange(data, contractId) {
     var contractArray = this.props.data;
@@ -172,7 +175,6 @@ var ContractContainer = React.createClass({
                 proposersArray={proposersArray} submitForm={contract.submitForm}
               />
             </div> : null}
-            <div style={{marginBottom: '40px'}} />
             <div className="panel-footer">
               <button type="button" className="btn btn-primary" onClick={this.saveAsDraft}>
                 <span className="glyphicon glyphicon-file" aria-hidden="true" style={{marginRight: '4px'}}/>保存草稿

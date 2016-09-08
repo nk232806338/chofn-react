@@ -13,7 +13,7 @@ var API = {
   'uploadFile': host + 'File/upload/', // 文件上传接口
   'uploadMultipleFile': host + 'file/uploadmany/', // 多文件上传
   'getContractDetail': host + 'Contract/detail',
-  'test': host + 'contract/itemDetail/?id=0', //获取合同测试数据
+  'test': host + 'contract/itemDetail/?id=28', //获取合同测试数据
 };
 
 module.exports = API;

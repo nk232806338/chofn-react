@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Datetime = require('react-datetime');
 var moment = require('moment');
 var FormSelectAysc = require('../../../../select/form-item-select-aysc');
+var getRegionCallBack = require('../../../../select/region/get-region-data');
 var API = require('../../../../api');
 var Formsy = require('formsy-react');
 var FormsyItem = require('../../../../form/Form-item-base');
@@ -83,7 +84,7 @@ var PriorityForm = React.createClass({
               <label>*在先申请国</label>
               <FormsyItem name="countryId" required tips="国籍" value={data.countryId}>
                 <FormSelectAysc
-                  loadOptions={this.getCountry} labelKey="name" valueKey="id"
+                  loadOptions={getRegionCallBack} labelKey="name" valueKey="id"
                   value={data.countryId}
                 />
               </FormsyItem>
